@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - RAVTO GLOBAL LTD</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f1f5f9;
+        }
+
+        /* NAVIGATION */
+        .nav{
+            background:#0f172a;
+            color:white;
+            padding:18px 30px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .nav h2{
+            font-size:26px;
+        }
+
+        .logout{
+            text-decoration:none;
+            color:white;
+            background:#dc2626;
+            padding:10px 18px;
+            border-radius:8px;
+            font-weight:bold;
+        }
+
+        .logout:hover{
+            background:#b91c1c;
+        }
+
+        /* CONTAINER */
+        .container{
+            width:95%;
+            margin:30px auto;
+        }
+
+        /* CARDS */
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+            gap:20px;
+            margin-bottom:40px;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .card h3{
+            color:#2563eb;
+            margin-bottom:10px;
+        }
+
+        .card p{
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        /* SECTION */
+        .section{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom:40px;
+            overflow-x:auto;
+        }
+
+        .section h2{
+            margin-bottom:20px;
+        }
+
+        /* TABLE */
+        table{
+            width:100%;
+            border-collapse:collapse;
+            min-width:900px;
+        }
+
+        th{
+            background:#2563eb;
+            color:white;
+            padding:14px;
+        }
+
+        td{
+            padding:14px;
+            border-bottom:1px solid #ddd;
+            text-align:center;
+        }
+
+        tr:hover{
+            background:#f8fafc;
+        }
+
+        /* DELETE BUTTON */
+        .delete-btn{
+            background:#dc2626;
+            color:white;
+            border:none;
+            padding:8px 12px;
+            border-radius:6px;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        .delete-btn:hover{
+            background:#b91c1c;
+        }
+
+        /* BADGE */
+        .badge{
+            background:#10b981;
+            color:white;
+            padding:6px 12px;
+            border-radius:20px;
+            font-size:12px;
+            font-weight:bold;
+        }
+
+        /* FOOTER */
+        footer{
+            background:#0f172a;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="nav">
+    <h2>RAVTO GLOBAL LTD  COMPANY - Admin Dashboard</h2>
+
+    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+</div>
+
+<div class="container">
+
+    <!-- CARDS -->
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Users</h3>
+            <p>{{ users|length }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Assistant Requests</h3>
+            <p>{{ requests|length }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Orders</h3>
+            <p>{{ orders|length }}</p>
+        </div>
+
+    </div>
+
+    <!-- USERS TABLE -->
+    <div class="section">
+        <h2>Registered Users</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+            </tr>
+
+            {% for u in users %}
+            <tr>
+                <td>{{ u.id }}</td>
+                <td>{{ u.fullname }}</td>
+                <td>{{ u.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- ASSISTANT REQUESTS TABLE -->
+    <div class="section">
+        <h2>Assistant Requests</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Area</th>
+                <th>Location</th>
+                <th>Message</th>
+                <th>Action</th>
+            </tr>
+
+            {% for r in requests %}
+            <tr>
+                <td>{{ r.id }}</td>
+                <td>{{ r.fullname }}</td>
+                <td>{{ r.phone }}</td>
+                <td>{{ r.email }}</td>
+                <td>{{ r.assistant_area }}</td>
+                <td>{{ r.location }}</td>
+                <td>{{ r.message }}</td>
+
+                <td>
+                    <form action="{{ url_for('delete_request', request_id=r.id) }}"
+                          method="POST"
+                          onsubmit="return confirm('Are you sure you want to delete this request?');">
+
+                        <button type="submit" class="delete-btn">Delete</button>
+
+                    </form>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- ORDERS TABLE (NEW SECTION) -->
+    <div class="section">
+        <h2>Customer Orders</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Category</th>
+                <th>Items</th>
+                <th>Quantity</th>
+                <th>Order Date</th>
+                <th>Action</th>
+            </tr>
+
+            {% for o in orders %}
+            <tr>
+                <td>{{ o.id }}</td>
+                <td>{{ o.name }}</td>
+                <td>{{ o.email }}</td>
+                <td>{{ o.phone }}</td>
+                <td>{{ o.category }}</td>
+                <td>{{ o.items }}</td>
+                <td>{{ o.quantity }}</td>
+                <td>{{ o.order_date }}</td>
+
+                <td>
+                    <form action="{{ url_for('delete_order', order_id=o.id) }}"
+                          method="POST"
+                          onsubmit="return confirm('Are you sure you want to delete this order?');">
+
+                        <button type="submit" class="delete-btn">
+                            Delete
+                        </button>
+
+                    </form>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 RAVTO GLOBAL LTD | Admin System
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RAVTO GLOBAL LTD - Dashboard</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f7fb;
+            display:flex;
+        }
+
+        /* Sidebar */
+        .sidebar{
+            width:260px;
+            height:100vh;
+            background:#0f172a;
+            position:fixed;
+            left:0;
+            top:0;
+            padding-top:30px;
+        }
+
+        .logo{
+            text-align:center;
+            color:white;
+            margin-bottom:40px;
+        }
+
+        .logo h2{
+            font-size:24px;
+        }
+
+        .menu{
+            list-style:none;
+            padding:0 20px;
+        }
+
+        .menu li{
+            margin-bottom:12px;
+        }
+
+        .menu li a{
+            display:block;
+            text-decoration:none;
+            color:white;
+            padding:12px 15px;
+            border-radius:8px;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .menu li a:hover{
+            background:#2563eb;
+        }
+
+        .logout{
+            background:#dc2626;
+        }
+
+        .logout:hover{
+            background:#b91c1c;
+        }
+
+        /* Main Content */
+        .main-content{
+            margin-left:260px;
+            width:calc(100% - 260px);
+            padding:30px;
+        }
+
+        .topbar{
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            margin-bottom:25px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .topbar h1{
+            color:#0f172a;
+        }
+
+        .topbar p{
+            color:#555;
+            margin-top:10px;
+        }
+
+        /* Cards */
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+            gap:20px;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+            border-left:5px solid #2563eb;
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
+        }
+
+        .card h3{
+            margin-bottom:10px;
+            color:#1e3a8a;
+        }
+
+        .card p{
+            color:#555;
+        }
+
+        footer{
+            margin-top:30px;
+            text-align:center;
+            color:#666;
+        }
+
+        /* Mobile */
+        @media(max-width:768px){
+
+            body{
+                flex-direction:column;
+            }
+
+            .sidebar{
+                position:relative;
+                width:100%;
+                height:auto;
+            }
+
+            .main-content{
+                margin-left:0;
+                width:100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <div class="logo">
+            <h2>RAVTO GLOBAL LTD  COMPANY </h2>
+        </div>
+
+        <ul class="menu">
+
+            
+
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+             <li><a href="{{ url_for('assistant') }}">Need Assistant</a></li>
+            <li><a href="{{ url_for('orders') }}">Make Order</a></li>
+            <li><a href="{{ url_for('location') }}">Location</a></li>
+
+            <li><a href="{{ url_for('blog') }}">Blog</a></li>
+
+            <!-- FIXED NAME -->
+            <li><a href="{{ url_for('admin_login') }}">Admin Login</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <!-- FIXED NAME -->
+
+            <li><a href="{{ url_for('logout') }}" class="logout">Logout</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-content">
+
+        <div class="topbar">
+            <h1>Welcome to Dashboard</h1>
+            <p>
+                Manage your company operations, services, clients, and system activities here.
+            </p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>About Company</h3>
+                <p>View company profile, mission, vision, and engineering services.</p>
+            </div>
+
+            <div class="card">
+                <h3>Services</h3>
+                <p>Solar systems, electrical installations, CCTV and security solutions.</p>
+            </div>
+
+            <div class="card">
+                <h3>Blog</h3>
+                <p>Read latest ICT, electrical engineering and global technology trends.</p>
+            </div>
+
+            <div class="card">
+                <h3>Location</h3>
+                <p>View company location and navigation using Google Maps.</p>
+            </div>
+
+            <div class="card">
+                <h3>Need Assistant</h3>
+                <p>Send technical support requests or service inquiries.</p>
+            </div>
+
+            <div class="card">
+                <h3>Admin Panel</h3>
+                <p>Manage system users, reports and administrative settings.</p>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>&copy; 2026 RAVTO GLOBAL LTD COMPANY. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAVTO GLOBAL LTD - Admin Login</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+
+            height:100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            background:
+            linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop')
+            no-repeat center center/cover;
+
+            overflow:hidden;
+        }
+
+        /* GLOWING CIRCLES */
+
+        .circle1,
+        .circle2{
+            position:absolute;
+            border-radius:50%;
+            background:rgba(37,99,235,0.2);
+            backdrop-filter:blur(5px);
+        }
+
+        .circle1{
+            width:240px;
+            height:240px;
+            top:40px;
+            left:70px;
+        }
+
+        .circle2{
+            width:180px;
+            height:180px;
+            bottom:50px;
+            right:90px;
+        }
+
+        /* LOGIN CARD */
+
+        .container{
+
+            width:420px;
+
+            background:rgba(255,255,255,0.12);
+
+            backdrop-filter:blur(14px);
+
+            border:1px solid rgba(255,255,255,0.2);
+
+            padding:40px;
+
+            border-radius:25px;
+
+            box-shadow:0 10px 35px rgba(0,0,0,0.5);
+
+            color:white;
+
+            position:relative;
+            z-index:2;
+        }
+
+        /* LOGO */
+
+        .logo{
+
+            width:95px;
+            height:95px;
+
+            border-radius:50%;
+
+            overflow:hidden;
+
+            margin:0 auto 20px;
+
+            border:4px solid white;
+
+            box-shadow:0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        .logo img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        h2{
+            text-align:center;
+            font-size:34px;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#d1d5db;
+            margin-bottom:30px;
+            font-size:15px;
+        }
+
+        /* FORM */
+
+        .form-group{
+            margin-bottom:22px;
+        }
+
+        .form-group label{
+            display:block;
+            margin-bottom:8px;
+            font-size:14px;
+            color:#f1f5f9;
+        }
+
+        input{
+
+            width:100%;
+
+            padding:14px;
+
+            border:none;
+
+            border-radius:12px;
+
+            outline:none;
+
+            background:rgba(255,255,255,0.15);
+
+            color:white;
+
+            font-size:15px;
+
+            transition:0.3s;
+        }
+
+        input::placeholder{
+            color:#d1d5db;
+        }
+
+        input:focus{
+            border:2px solid #60a5fa;
+            background:rgba(255,255,255,0.2);
+        }
+
+        /* BUTTON */
+
+        button{
+
+            width:100%;
+
+            padding:14px;
+
+            border:none;
+
+            border-radius:12px;
+
+            background:#2563eb;
+
+            color:white;
+
+            font-size:16px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+
+            transition:0.3s ease;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+            transform:translateY(-3px);
+        }
+
+        /* FLASH MESSAGE */
+
+        .message{
+            background:rgba(239,68,68,0.25);
+            padding:12px;
+            border-radius:10px;
+            margin-bottom:20px;
+            text-align:center;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:500px){
+
+            .container{
+                width:90%;
+                padding:30px;
+            }
+
+            h2{
+                font-size:28px;
+            }
+
+            .circle1{
+                width:150px;
+                height:150px;
+                left:-30px;
+            }
+
+            .circle2{
+                width:120px;
+                height:120px;
+                right:-20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- DECORATION -->
+
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+    <!-- LOGIN CARD -->
+
+    <div class="container">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <img src="/static/images/logo1.png" alt="Logo">
+
+        </div>
+
+        <h2>Admin Login</h2>
+
+        <p class="subtitle">
+            Electronics • Solar • ICT • Security Systems
+        </p>
+
+        <!-- FLASH MESSAGES -->
+
+     
+
+        <!-- LOGIN FORM -->
+
+        <form method="POST" action="{{ url_for('admin_login') }}">
+
+            <div class="form-group">
+
+                <label>Username</label>
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Enter admin username"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter admin password"
+                    required
+                >
+
+            </div>
+
+            <button type="submit">
+                Access Dashboard
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

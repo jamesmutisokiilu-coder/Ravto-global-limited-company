@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RAVTO GLOBAL LTD | Location</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f7fb;
+            color:#222;
+        }
+
+        /* HEADER */
+
+        header{
+            background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=1600&auto=format&fit=crop')
+            no-repeat center center/cover;
+
+            height:45vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            color:white;
+            padding:20px;
+        }
+
+        .hero h1{
+            font-size:50px;
+            margin-bottom:15px;
+        }
+
+        .hero p{
+            font-size:18px;
+            max-width:700px;
+            margin:auto;
+        }
+
+        /* NAVBAR */
+
+        nav{
+            background:#0f172a;
+            padding:15px 40px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
+        nav h2{
+            color:white;
+        }
+
+        nav ul{
+            list-style:none;
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        nav ul li a{
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        nav ul li a:hover{
+            color:#60a5fa;
+        }
+
+        /* CONTAINER */
+
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:50px auto;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        .section-title h2{
+            font-size:40px;
+            color:#0f172a;
+            margin-bottom:10px;
+        }
+
+        .section-title p{
+            color:#555;
+            font-size:17px;
+        }
+
+        /* MAP CARD */
+
+        .map-card{
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .map-card h3{
+            margin-bottom:20px;
+            color:#1e3a8a;
+            font-size:28px;
+        }
+
+        .map-card p{
+            margin-bottom:25px;
+            color:#555;
+        }
+
+        /* MAP */
+
+        .map-container{
+            width:100%;
+            height:550px;
+            overflow:hidden;
+            border-radius:15px;
+        }
+
+        .map-container iframe{
+            width:100%;
+            height:100%;
+            border:none;
+        }
+
+        /* INFO SECTION */
+
+        .info-grid{
+            margin-top:50px;
+
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+            gap:25px;
+        }
+
+        .info-box{
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+            border-left:5px solid #2563eb;
+        }
+
+        .info-box h3{
+            margin-bottom:15px;
+            color:#1e3a8a;
+        }
+
+        .info-box p{
+            color:#555;
+            line-height:1.7;
+        }
+
+        /* FOOTER */
+
+        footer{
+            background:#0f172a;
+            color:white;
+            text-align:center;
+            padding:30px;
+            margin-top:60px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:768px){
+
+            .hero h1{
+                font-size:35px;
+            }
+
+            .hero p{
+                font-size:16px;
+            }
+
+            nav{
+                justify-content:center;
+                gap:15px;
+            }
+
+            nav ul{
+                justify-content:center;
+            }
+
+            .map-container{
+                height:400px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <h2>RAVTO GLOBAL LTD</h2>
+
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- HERO SECTION -->
+
+    <header>
+
+        <div class="hero">
+
+            <h1>Our Location</h1>
+
+            <p>
+                Explore our location and search for nearby places directly using Google Maps.
+            </p>
+
+        </div>
+
+    </header>
+
+    <!-- MAIN CONTAINER -->
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Google Maps Location</h2>
+
+            <p>
+                Use the interactive Google Map below to search locations,
+                get directions, and explore nearby places worldwide.
+            </p>
+
+        </div>
+
+        <!-- MAP SECTION -->
+
+        <div class="map-card">
+
+            <h3>Interactive Google Map</h3>
+
+            <p>
+                You can zoom in, search places, switch to satellite view,
+                and navigate directly from the map.
+            </p>
+
+            <div class="map-container">
+
+                <!-- GOOGLE MAP -->
+
+                <iframe
+                    src="https://maps.google.com/maps?q=Nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+
+            </div>
+
+        </div>
+
+        <!-- INFO SECTION -->
+
+        <div class="info-grid">
+
+            <div class="info-box">
+
+                <h3>Office Location</h3>
+
+                <p>
+                    Our offices are strategically located to provide reliable
+                    electrical engineering, ICT, and renewable energy services.
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <h3>Google Maps Navigation</h3>
+
+                <p>
+                    Use Google Maps to search roads, buildings, institutions,
+                    and businesses from anywhere around the world.
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <h3>Global Connectivity</h3>
+
+                <p>
+                    We embrace smart mapping and digital technologies
+                    to improve accessibility and customer experience.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 RAVTO GLOBAL LTD | Smart Engineering & ICT Solutions
+        </p>
+
+    </footer>
+
+</body>
+</html>

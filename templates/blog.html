@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RAVTO GLOBAL LTD | Blog</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f7fb;
+            color:#222;
+            line-height:1.7;
+        }
+
+        /* HEADER */
+
+        header{
+            background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop')
+            no-repeat center center/cover;
+
+            height:60vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            color:white;
+            padding:20px;
+        }
+
+        .hero h1{
+            font-size:55px;
+            margin-bottom:20px;
+        }
+
+        .hero p{
+            font-size:20px;
+            max-width:800px;
+            margin:auto;
+        }
+
+        /* NAVBAR */
+
+        nav{
+            background:#0f172a;
+            padding:15px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
+        nav h2{
+            color:white;
+        }
+
+        nav ul{
+            list-style:none;
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        nav ul li a{
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        nav ul li a:hover{
+            color:#60a5fa;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:50px auto;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        .section-title h2{
+            font-size:40px;
+            color:#0f172a;
+            margin-bottom:10px;
+        }
+
+        .section-title p{
+            color:#555;
+        }
+
+        /* BLOG GRID */
+
+        .blog-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+            gap:30px;
+        }
+
+        .blog-card{
+            background:white;
+            border-radius:15px;
+            overflow:hidden;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+            transition:0.3s ease;
+        }
+
+        .blog-card:hover{
+            transform:translateY(-8px);
+        }
+
+        .blog-card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+        }
+
+        .blog-content{
+            padding:25px;
+        }
+
+        .blog-content h3{
+            color:#1e3a8a;
+            margin-bottom:15px;
+            font-size:24px;
+        }
+
+        .blog-content p{
+            color:#555;
+            margin-bottom:20px;
+        }
+
+        .read-more{
+            display:inline-block;
+            padding:10px 18px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+            transition:0.3s;
+        }
+
+        .read-more:hover{
+            background:#1d4ed8;
+        }
+
+        /* TREND SECTION */
+
+        .trends{
+            margin-top:70px;
+            background:white;
+            padding:50px;
+            border-radius:15px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .trends h2{
+            text-align:center;
+            margin-bottom:30px;
+            color:#0f172a;
+            font-size:38px;
+        }
+
+        .trend-list{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+            gap:25px;
+        }
+
+        .trend-box{
+            background:#f8fafc;
+            padding:25px;
+            border-radius:12px;
+            border-left:5px solid #2563eb;
+        }
+
+        .trend-box h3{
+            margin-bottom:15px;
+            color:#1e3a8a;
+        }
+
+        .trend-box p{
+            color:#555;
+        }
+
+        /* FOOTER */
+
+        footer{
+            background:#0f172a;
+            color:white;
+            text-align:center;
+            padding:30px;
+            margin-top:70px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:768px){
+
+            .hero h1{
+                font-size:38px;
+            }
+
+            .hero p{
+                font-size:16px;
+            }
+
+            nav{
+                justify-content:center;
+                gap:15px;
+            }
+
+            nav ul{
+                justify-content:center;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <h2>RAVTO GLOBAL LTD</h2>
+
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- HERO SECTION -->
+
+    <header>
+
+        <div class="hero">
+
+            <h1>Technology & Engineering Blog</h1>
+
+            <p>
+                Discover the latest innovations in Electrical Engineering,
+                ICT, Renewable Energy, Artificial Intelligence,
+                Smart Security Systems, and Global Technology Trends.
+            </p>
+
+        </div>
+
+    </header>
+
+    <!-- BLOG SECTION -->
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Latest Articles</h2>
+
+            <p>
+                Stay updated with worldwide engineering and ICT advancements.
+            </p>
+
+        </div>
+
+        <div class="blog-grid">
+
+            <!-- BLOG 1 -->
+
+            <div class="blog-card">
+
+                <img src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?q=80&w=1600&auto=format&fit=crop">
+
+                <div class="blog-content">
+
+                    <h3>Solar Energy Revolution</h3>
+
+                    <p>
+                        Solar energy is transforming power generation worldwide.
+                        Modern high-efficiency panels, lithium batteries,
+                        and hybrid inverters are helping homes and industries
+                        reduce electricity costs and dependence on unstable grids.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- BLOG 2 -->
+
+            <div class="blog-card">
+
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop">
+
+                <div class="blog-content">
+
+                    <h3>Artificial Intelligence in ICT</h3>
+
+                    <p>
+                        AI technologies are reshaping the ICT sector through
+                        automation, machine learning, cybersecurity,
+                        smart assistants, and intelligent data analysis.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- BLOG 3 -->
+
+            <div class="blog-card">
+
+                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1600&auto=format&fit=crop">
+
+                <div class="blog-content">
+
+                    <h3>Smart Electrical Systems</h3>
+
+                    <p>
+                        Smart homes and smart buildings now use IoT-enabled
+                        electrical systems for energy management,
+                        automation, remote monitoring, and safety control.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- BLOG 4 -->
+
+            <div class="blog-card">
+
+                <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1600&auto=format&fit=crop">
+
+                <div class="blog-content">
+
+                    <h3>Cybersecurity Worldwide</h3>
+
+                    <p>
+                        Businesses globally are investing heavily in
+                        cybersecurity solutions to protect systems,
+                        networks, financial data, and cloud infrastructure
+                        from cyber attacks.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- BLOG 5 -->
+
+            <div class="blog-card">
+
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600&auto=format&fit=crop">
+
+                <div class="blog-content">
+
+                    <h3>Electric Vehicles & Charging</h3>
+
+                    <p>
+                        Electric vehicles are becoming more popular globally.
+                        EV charging infrastructure and renewable-powered
+                        transport systems are rapidly expanding.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- BLOG 6 -->
+
+            <div class="blog-card">
+
+                <img src="https://images.unsplash.com/photo-1516321310764-8d15b9b73c68?q=80&w=1600&auto=format&fit=crop">
+
+                <div class="blog-content">
+
+                    <h3>Cloud Computing & Networking</h3>
+
+                    <p>
+                        Cloud computing, fiber networking, and 5G technologies
+                        are driving faster communication, remote work,
+                        digital transformation, and smart businesses worldwide.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TRENDS SECTION -->
+
+        <div class="trends">
+
+            <h2>Current Global Technology Trends</h2>
+
+            <div class="trend-list">
+
+                <div class="trend-box">
+
+                    <h3>Artificial Intelligence</h3>
+
+                    <p>
+                        AI automation and machine learning are transforming
+                        industries such as healthcare, banking,
+                        engineering, and education.
+                    </p>
+
+                </div>
+
+                <div class="trend-box">
+
+                    <h3>Renewable Energy</h3>
+
+                    <p>
+                        Countries are investing heavily in solar,
+                        wind, and green energy technologies to
+                        reduce carbon emissions.
+                    </p>
+
+                </div>
+
+                <div class="trend-box">
+
+                    <h3>5G Technology</h3>
+
+                    <p>
+                        Faster internet speeds and low-latency communication
+                        are enabling smart cities and connected devices.
+                    </p>
+
+                </div>
+
+                <div class="trend-box">
+
+                    <h3>Cybersecurity</h3>
+
+                    <p>
+                        Modern cybersecurity solutions are essential
+                        for protecting digital infrastructure worldwide.
+                    </p>
+
+                </div>
+
+                <div class="trend-box">
+
+                    <h3>Internet of Things (IoT)</h3>
+
+                    <p>
+                        IoT devices are improving automation in homes,
+                        industries, agriculture, and transport systems.
+                    </p>
+
+                </div>
+
+                <div class="trend-box">
+
+                    <h3>Smart Security Systems</h3>
+
+                    <p>
+                        CCTV surveillance, biometrics, and cloud monitoring
+                        are becoming standard security technologies globally.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 RAVTO GLOBAL LTD | Engineering Innovation & ICT Solutions
+        </p>
+
+    </footer>
+
+</body>
+</html>

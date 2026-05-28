@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Need Assistant - RAVTO GLOBAL LTD</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f7fb;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            background:#0f172a;
+            padding:15px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            position:sticky;
+            top:0;
+            z-index:1000;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar h2{
+            color:white;
+            font-size:24px;
+        }
+
+        /* NAV BUTTONS */
+
+        .nav-buttons{
+            display:flex;
+            gap:15px;
+        }
+
+        /* DASHBOARD BUTTON */
+
+        .dashboard-btn{
+            text-decoration:none;
+            background:#2563eb;
+            color:white;
+            padding:10px 18px;
+            border-radius:8px;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .dashboard-btn:hover{
+            background:#1d4ed8;
+            transform:translateY(-2px);
+        }
+
+        /* LOGOUT BUTTON */
+
+        .logout-btn{
+            text-decoration:none;
+            background:#dc2626;
+            color:white;
+            padding:10px 18px;
+            border-radius:8px;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .logout-btn:hover{
+            background:#b91c1c;
+            transform:translateY(-2px);
+        }
+
+        /* HEADER */
+
+        .header{
+            background:
+            linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop')
+            no-repeat center center/cover;
+
+            height:40vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            color:white;
+            padding:20px;
+        }
+
+        .header h1{
+            font-size:50px;
+            margin-bottom:15px;
+        }
+
+        .header p{
+            font-size:18px;
+            max-width:700px;
+            margin:auto;
+        }
+
+        /* FORM CONTAINER */
+
+        .container{
+            width:90%;
+            max-width:750px;
+            margin:50px auto;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .container h2{
+            text-align:center;
+            margin-bottom:30px;
+            color:#0f172a;
+            font-size:35px;
+        }
+
+        /* FORM GROUP */
+
+        .form-group{
+            margin-bottom:20px;
+        }
+
+        .form-group label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+            color:#1e3a8a;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select{
+            width:100%;
+            padding:14px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            font-size:16px;
+            outline:none;
+            transition:0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus{
+            border-color:#2563eb;
+            box-shadow:0 0 5px rgba(37,99,235,0.3);
+        }
+
+        textarea{
+            resize:none;
+            height:120px;
+        }
+
+        /* BUTTON */
+
+        .btn{
+            width:100%;
+            padding:15px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:10px;
+            font-size:18px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#1d4ed8;
+            transform:translateY(-2px);
+        }
+
+        /* FOOTER */
+
+        footer{
+            background:#0f172a;
+            color:white;
+            text-align:center;
+            padding:25px;
+            margin-top:40px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:768px){
+
+            .navbar{
+                padding:15px 20px;
+                flex-direction:column;
+                gap:15px;
+            }
+
+            .navbar h2{
+                font-size:20px;
+            }
+
+            .header h1{
+                font-size:35px;
+            }
+
+            .header p{
+                font-size:16px;
+            }
+
+            .container{
+                padding:25px;
+            }
+
+            .container h2{
+                font-size:28px;
+            }
+
+            .nav-buttons{
+                width:100%;
+                justify-content:center;
+                flex-wrap:wrap;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <h2>RAVTO GLOBAL LTD</h2>
+
+        <div class="nav-buttons">
+
+            <!-- DASHBOARD -->
+            <a href="{{ url_for('dashboard') }}" class="dashboard-btn">
+                Dashboard
+            </a>
+
+            <!-- LOGOUT -->
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>Need Assistant</h1>
+
+            <p>
+                Request professional support and assistance from
+                RAVTO GLOBAL LTD technical and customer support team.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- FORM SECTION -->
+
+    <div class="container">
+
+        <h2>Assistant Request Form</h2>
+
+        <form method="POST" action="/assistant">
+
+            <!-- FULL NAME -->
+
+            <div class="form-group">
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    name="fullname"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+                <label>Phone Number</label>
+
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Enter your phone number"
+                    required
+                >
+
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+            <!-- AREA OF ASSISTANCE -->
+
+            <div class="form-group">
+
+                <label>Area of Assistance</label>
+
+                <select name="assistant_area" required>
+
+                    <option value="">-- Select Assistance Area --</option>
+
+                    <option>Solar Installation</option>
+
+                    <option>Electrical Engineering</option>
+
+                    <option>CCTV & Security Systems</option>
+
+                    <option>ICT & Networking</option>
+
+                    <option>Maintenance & Repairs</option>
+
+                    <option>Technical Consultation</option>
+
+                    <option>Customer Support</option>
+
+                </select>
+
+            </div>
+
+            <!-- LOCATION -->
+
+            <div class="form-group">
+
+                <label>Location</label>
+
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="Enter your location"
+                    required
+                >
+
+            </div>
+
+            <!-- MESSAGE -->
+
+            <div class="form-group">
+
+                <label>Describe Your Request</label>
+
+                <textarea
+                    name="message"
+                    placeholder="Describe the assistance you need..."
+                    required
+                ></textarea>
+
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+
+            <button type="submit" class="btn">
+                Submit Request
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 RAVTO GLOBAL LTD | Smart Engineering & ICT Solutions
+        </p>
+
+    </footer>
+
+</body>
+</html>

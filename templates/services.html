@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAVTO GLOBAL LTD - Services</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#222;
+    line-height:1.6;
+}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    background:#0f172a;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:12px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:8px;
+    color:white;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.dashboard-btn{ background:#2563eb; }
+.assistant-btn{ background:#10b981; }
+.logout-btn{ background:#dc2626; }
+
+/* HERO */
+.hero{
+    display:flex;
+    min-height:75vh;
+}
+
+.hero-image{
+    flex:1;
+    background:url('/static/images/img1.jpeg') no-repeat center center;
+    background-size:cover;
+}
+
+.hero-text{
+    flex:1;
+    background:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+    text-align:center;
+}
+
+.hero-text h1{
+    font-size:48px;
+    color:#0f172a;
+    margin-bottom:15px;
+}
+
+.hero-text p{
+    font-size:18px;
+    color:#555;
+}
+
+/* CONTAINER */
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:50px 0;
+}
+
+/* TITLE */
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.section-title h2{
+    font-size:36px;
+    color:#0f172a;
+}
+
+/* GRID LAYOUT (ROWS) */
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr); /* 2 columns = rows */
+    gap:25px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    transition:0.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.12);
+}
+
+/* SMALLER IMAGES */
+.card img{
+    width:100%;
+    height:160px;   /* 🔥 reduced size */
+    object-fit:cover;
+    object-position:center;
+}
+
+/* CONTENT */
+.card-content{
+    padding:18px;
+}
+
+.card h3{
+    color:#1e3a8a;
+    margin-bottom:8px;
+    font-size:20px;
+}
+
+.card p{
+    margin-bottom:10px;
+    color:#444;
+    font-size:14px;
+}
+
+.card ul{
+    padding-left:18px;
+}
+
+.card ul li{
+    margin-bottom:6px;
+    color:#333;
+    font-size:14px;
+}
+
+/* FOOTER */
+footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:50px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .hero{
+        flex-direction:column;
+    }
+
+    .hero-text{
+        padding:30px 20px;
+    }
+
+    .hero-text h1{
+        font-size:32px;
+    }
+
+    /* stack cards on mobile */
+    .services-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card img{
+        height:180px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">RAVTO GLOBAL LTD COMPANY</div>
+
+    <div class="nav-links">
+        <a href="{{ url_for('dashboard') }}" class="dashboard-btn">Dashboard</a>
+        <a href="{{ url_for('assistant') }}" class="assistant-btn">Need Assistant</a>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-image"></div>
+
+    <div class="hero-text">
+        <h1>Our Services</h1>
+        <p>Solar • Electrical • ICT Systems • Security Solutions</p>
+    </div>
+</div>
+
+<!-- SERVICES -->
+<div class="container">
+
+    <div class="section-title">
+        <h2>What We Offer</h2>
+    </div>
+
+    <!-- GRID START -->
+    <div class="services-grid">
+
+        <!-- SOLAR -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80">
+            <div class="card-content">
+                <h3>Solar Energy</h3>
+                <p>Reliable renewable energy solutions.</p>
+                <ul>
+                    <li>Solar PV Systems</li>
+                    <li>Water Heating</li>
+                    <li>Pumping Systems</li>
+                    <li>Street Lighting</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ELECTRICAL -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1200&q=80">
+            <div class="card-content">
+                <h3>Electrical Engineering</h3>
+                <p>Professional installation services.</p>
+                <ul>
+                    <li>Building Wiring</li>
+                    <li>Power Distribution</li>
+                    <li>UPS Systems</li>
+                    <li>Energy Audits</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECURITY -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80">
+            <div class="card-content">
+                <h3>Security Systems</h3>
+                <p>Smart surveillance solutions.</p>
+                <ul>
+                    <li>CCTV Installation</li>
+                    <li>Electric Fencing</li>
+                    <li>Access Control</li>
+                    <li>Networking</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COMPLIANCE -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80">
+            <div class="card-content">
+                <h3>Compliance</h3>
+                <p>Fully certified company.</p>
+                <ul>
+                    <li>EPRA Licensed</li>
+                    <li>NCA Registered</li>
+                    <li>KRA Compliant</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- GRID END -->
+
+</div>
+
+<footer>
+    © 2026 RAVTO GLOBAL LTD | All Rights Reserved
+</footer>
+
+</body>
+</html>

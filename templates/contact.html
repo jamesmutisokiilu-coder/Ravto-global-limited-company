@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact Us - RAVTO GLOBAL LTD</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop')
+    no-repeat center center/cover;
+
+    min-height:100vh;
+}
+
+/* NAVBAR */
+
+.navbar{
+
+    background:#0f172a;
+
+    padding:18px 40px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+}
+
+.logo{
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+}
+
+.nav-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+    margin-left:15px;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+
+    background:#2563eb;
+}
+
+.logout{
+
+    background:#dc2626;
+}
+
+.logout:hover{
+
+    background:#b91c1c !important;
+}
+
+/* MAIN CONTAINER */
+
+.container{
+
+    width:90%;
+
+    max-width:1000px;
+
+    margin:50px auto;
+}
+
+/* TITLE */
+
+.page-title{
+
+    text-align:center;
+
+    color:white;
+
+    margin-bottom:40px;
+}
+
+.page-title h1{
+
+    font-size:50px;
+
+    margin-bottom:15px;
+}
+
+.page-title p{
+
+    font-size:18px;
+
+    opacity:0.9;
+}
+
+/* CONTACT GRID */
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+
+    gap:30px;
+}
+
+/* CARD */
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+    transition:0.4s ease;
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+}
+
+/* PROFILE IMAGE */
+
+.profile-img{
+
+    width:130px;
+
+    height:130px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid #2563eb;
+
+    margin-bottom:20px;
+}
+
+/* TEXT */
+
+.card h3{
+
+    color:#1e3a8a;
+
+    margin-bottom:10px;
+
+    font-size:28px;
+}
+
+.position{
+
+    color:#666;
+
+    margin-bottom:20px;
+
+    font-weight:bold;
+}
+
+.contact-link{
+
+    display:block;
+
+    text-decoration:none;
+
+    background:#f1f5f9;
+
+    margin:10px 0;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    color:#2563eb;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.contact-link:hover{
+
+    background:#2563eb;
+
+    color:white;
+}
+
+/* EMAIL CARD */
+
+.email-card{
+
+    margin-top:40px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.email-card h2{
+
+    color:#1e3a8a;
+
+    margin-bottom:20px;
+}
+
+/* FOOTER */
+
+footer{
+
+    margin-top:50px;
+
+    background:#0f172a;
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .navbar{
+
+        flex-direction:column;
+
+        gap:15px;
+    }
+
+    .page-title h1{
+
+        font-size:36px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        RAVTO GLOBAL LTD
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/services">
+            Services
+        </a>
+
+        <a href="/logout" class="logout">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="container">
+
+    <!-- TITLE -->
+
+    <div class="page-title">
+
+        <h1>Contact Us</h1>
+
+        <p>
+            Reach out to our management and support team for professional assistance.
+        </p>
+
+    </div>
+
+    <!-- CONTACTS -->
+
+    <div class="contact-grid">
+
+        <!-- CONTACT 1 -->
+
+        <div class="card">
+
+            <!-- CHANGE IMAGE HERE -->
+            <img
+                src="/static/images/img2.jpeg"
+                alt="David Karanja"
+                class="profile-img"
+            >
+
+            <h3>David Karanja</h3>
+
+            <p class="position">
+                Managing Director
+            </p>
+
+            <a class="contact-link" href="tel:0748759469">
+                📞 0748759469
+            </a>
+
+        </div>
+
+        <!-- CONTACT 2 -->
+
+        <div class="card">
+
+            <!-- CHANGE IMAGE HERE -->
+            <img
+                src="/static/images/img3.jpeg"
+                alt="Kutosi Peter"
+                class="profile-img"
+            >
+
+            <h3>Kutosi Peter</h3>
+
+            <p class="position">
+                Organising Secretary
+            </p>
+
+            <a class="contact-link" href="tel:0713222543">
+                📞 0713222543
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- EMAIL SUPPORT -->
+
+    <div class="email-card">
+
+        <h2>📧 Email Support</h2>
+
+        <a class="contact-link"
+           href="mailto:ravtoglobal@gmail.com">
+
+           ravtoglobal@gmail.com
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 RAVTO GLOBAL LTD | Smart Engineering & ICT Solutions
+    </p>
+
+</footer>
+
+</body>
+</html>

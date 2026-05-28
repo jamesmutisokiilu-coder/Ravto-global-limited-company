@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | RAVTO GLOBAL LTD</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+            url('https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
+        }
+
+        .container{
+            width:400px;
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(10px);
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.3);
+            color:white;
+        }
+
+        .container h1{
+            text-align:center;
+            margin-bottom:10px;
+            font-size:35px;
+        }
+
+        .container p{
+            text-align:center;
+            margin-bottom:30px;
+            color:#ddd;
+        }
+
+        .input-group{
+            margin-bottom:20px;
+        }
+
+        .input-group label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+        }
+
+        .input-group input{
+            width:100%;
+            padding:14px;
+            border:none;
+            outline:none;
+            border-radius:10px;
+            font-size:15px;
+        }
+
+        .btn{
+            width:100%;
+            padding:14px;
+            border:none;
+            background:#2563eb;
+            color:white;
+            font-size:16px;
+            border-radius:10px;
+            cursor:pointer;
+            transition:0.3s;
+            font-weight:bold;
+        }
+
+        .btn:hover{
+            background:#1d4ed8;
+        }
+
+        .bottom-text{
+            margin-top:20px;
+            text-align:center;
+        }
+
+        .bottom-text a{
+            color:#60a5fa;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .bottom-text a:hover{
+            text-decoration:underline;
+        }
+
+        @media(max-width:450px){
+
+            .container{
+                width:90%;
+                padding:30px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Create Account</h1>
+
+        <p>Register to access the dashboard</p>
+
+        <form method="POST" action="/register">
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" name="fullname" placeholder="Enter Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Enter Email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter Password" required>
+            </div>
+
+            <button type="submit" class="btn">
+                Register
+            </button>
+
+        </form>
+
+        <div class="bottom-text">
+            Already have an account?
+            <a href="/login">Login</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
