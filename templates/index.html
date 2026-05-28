@@ -1,1 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAVTO GLOBAL LTD COMPANY</title>
 
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            height:100vh;
+
+            background:
+            linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+            url('https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1600&auto=format&fit=crop')
+            no-repeat center center/cover;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            position:relative;
+        }
+
+        /* LOGO */
+
+        .logo{
+            position:absolute;
+            top:20px;
+            left:20px;
+
+            width:90px;
+            height:90px;
+
+            border-radius:50%;
+
+            overflow:hidden;
+
+            border:4px solid white;
+
+            box-shadow:0 5px 15px rgba(0,0,0,0.4);
+
+            background:white;
+        }
+
+        .logo img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        /* CONTAINER */
+
+        .container{
+
+            background:rgba(255,255,255,0.1);
+
+            backdrop-filter:blur(10px);
+
+            padding:50px;
+
+            border-radius:20px;
+
+            text-align:center;
+
+            width:90%;
+            max-width:450px;
+
+            box-shadow:0 10px 25px rgba(0,0,0,0.3);
+
+            color:white;
+        }
+
+        .container h1{
+            font-size:40px;
+            margin-bottom:15px;
+        }
+
+        .container p{
+            font-size:16px;
+            margin-bottom:35px;
+            line-height:1.6;
+        }
+
+        /* BUTTONS */
+
+        .buttons{
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            text-decoration:none;
+            padding:14px 35px;
+            border-radius:8px;
+            font-size:16px;
+            font-weight:bold;
+            transition:0.3s ease;
+        }
+
+        .register{
+            background:#2563eb;
+            color:white;
+        }
+
+        .register:hover{
+            background:#1d4ed8;
+            transform:translateY(-3px);
+        }
+
+        .login{
+            background:white;
+            color:#111827;
+        }
+
+        .login:hover{
+            background:#e5e7eb;
+            transform:translateY(-3px);
+        }
+
+        /* MOBILE */
+
+        @media(max-width:500px){
+
+            .container h1{
+                font-size:30px;
+            }
+
+            .buttons{
+                flex-direction:column;
+            }
+
+            .btn{
+                width:100%;
+            }
+
+            .logo{
+                width:70px;
+                height:70px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <!-- CHANGE IMAGE PATH -->
+        <img src="/static/images/logo1.png" alt="Logo">
+
+    </div>
+
+    <!-- MAIN CONTAINER -->
+
+    <div class="container">
+
+        <h1>RAVTO GLOBAL LTD COMPANY </h1>
+
+        <p>
+            Welcome to our Solar, Electrical Engineering &
+            Security Solutions Platform.
+            Please register or login to continue.
+        </p>
+
+        <div class="buttons">
+
+            <a href="/register" class="btn register">
+                Register
+            </a>
+
+            <a href="/login" class="btn login">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
