@@ -92,6 +92,7 @@ def home():
 # ==========================================
 @app.route('/about')
 def about():
+
     if 'user_id' not in session:
         return redirect(url_for('login'))
 
@@ -102,6 +103,7 @@ def about():
 # ==========================================
 @app.route('/services')
 def services():
+
     if 'user_id' not in session:
         return redirect(url_for('login'))
 
@@ -112,6 +114,7 @@ def services():
 # ==========================================
 @app.route('/blog')
 def blog():
+
     if 'user_id' not in session:
         return redirect(url_for('login'))
 
@@ -122,6 +125,7 @@ def blog():
 # ==========================================
 @app.route('/contact')
 def contact():
+
     if 'user_id' not in session:
         return redirect(url_for('login'))
 
@@ -132,6 +136,7 @@ def contact():
 # ==========================================
 @app.route('/location')
 def location():
+
     if 'user_id' not in session:
         return redirect(url_for('login'))
 
@@ -167,6 +172,7 @@ def register():
         db.session.commit()
 
         flash('Registration Successful')
+
         return redirect(url_for('login'))
 
     return render_template('register.html')
@@ -288,9 +294,23 @@ def admin_login():
         username = request.form['username']
         password = request.form['password']
 
-        if username == "kutosi" and password == "extravaganza":
+        # ADMIN 1
+        admin1_username = "kutosi"
+        admin1_password = "extravaganza"
+
+        # ADMIN 2
+        admin2_username = "karanja"
+        admin2_password = "extraordinary"
+
+        # CHECK ADMINS
+        if (
+            (username == admin1_username and password == admin1_password)
+            or
+            (username == admin2_username and password == admin2_password)
+        ):
 
             session['admin'] = True
+            session['admin_name'] = username
 
             flash('Admin Login Successful')
 
