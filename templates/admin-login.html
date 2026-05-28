@@ -16,74 +16,98 @@
 
         body{
 
-            height:100vh;
+            min-height:100vh;
 
             display:flex;
             justify-content:center;
             align-items:center;
 
             background:
-            linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
             url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop')
             no-repeat center center/cover;
 
             overflow:hidden;
+            position:relative;
         }
 
         /* GLOWING CIRCLES */
 
         .circle1,
-        .circle2{
+        .circle2,
+        .circle3{
             position:absolute;
             border-radius:50%;
-            background:rgba(37,99,235,0.2);
             backdrop-filter:blur(5px);
         }
 
         .circle1{
-            width:240px;
-            height:240px;
+            width:260px;
+            height:260px;
             top:40px;
             left:70px;
+            background:rgba(37,99,235,0.25);
         }
 
         .circle2{
-            width:180px;
-            height:180px;
+            width:190px;
+            height:190px;
             bottom:50px;
             right:90px;
+            background:rgba(16,185,129,0.25);
+        }
+
+        .circle3{
+            width:130px;
+            height:130px;
+            top:120px;
+            right:250px;
+            background:rgba(220,38,38,0.20);
         }
 
         /* LOGIN CARD */
 
         .container{
 
-            width:420px;
+            width:430px;
 
-            background:rgba(255,255,255,0.12);
+            background:rgba(255,255,255,0.10);
 
-            backdrop-filter:blur(14px);
+            backdrop-filter:blur(18px);
 
-            border:1px solid rgba(255,255,255,0.2);
+            border:1px solid rgba(255,255,255,0.18);
 
             padding:40px;
 
-            border-radius:25px;
+            border-radius:28px;
 
-            box-shadow:0 10px 35px rgba(0,0,0,0.5);
+            box-shadow:0 10px 40px rgba(0,0,0,0.55);
 
             color:white;
 
             position:relative;
             z-index:2;
+
+            animation:fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(20px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
         }
 
         /* LOGO */
 
         .logo{
 
-            width:95px;
-            height:95px;
+            width:100px;
+            height:100px;
 
             border-radius:50%;
 
@@ -93,7 +117,7 @@
 
             border:4px solid white;
 
-            box-shadow:0 5px 15px rgba(0,0,0,0.4);
+            box-shadow:0 5px 20px rgba(0,0,0,0.5);
         }
 
         .logo img{
@@ -106,6 +130,7 @@
             text-align:center;
             font-size:34px;
             margin-bottom:10px;
+            letter-spacing:1px;
         }
 
         .subtitle{
@@ -113,6 +138,20 @@
             color:#d1d5db;
             margin-bottom:30px;
             font-size:15px;
+            line-height:1.6;
+        }
+
+        /* FLASH MESSAGE */
+
+        .flash-message{
+            background:rgba(239,68,68,0.25);
+            border:1px solid rgba(255,255,255,0.1);
+            padding:12px;
+            border-radius:12px;
+            margin-bottom:20px;
+            text-align:center;
+            color:white;
+            font-size:14px;
         }
 
         /* FORM */
@@ -126,17 +165,18 @@
             margin-bottom:8px;
             font-size:14px;
             color:#f1f5f9;
+            font-weight:bold;
         }
 
         input{
 
             width:100%;
 
-            padding:14px;
+            padding:15px;
 
             border:none;
 
-            border-radius:12px;
+            border-radius:14px;
 
             outline:none;
 
@@ -155,7 +195,8 @@
 
         input:focus{
             border:2px solid #60a5fa;
-            background:rgba(255,255,255,0.2);
+            background:rgba(255,255,255,0.22);
+            transform:scale(1.02);
         }
 
         /* BUTTON */
@@ -164,13 +205,13 @@
 
             width:100%;
 
-            padding:14px;
+            padding:15px;
 
             border:none;
 
-            border-radius:12px;
+            border-radius:14px;
 
-            background:#2563eb;
+            background:linear-gradient(135deg, #2563eb, #1d4ed8);
 
             color:white;
 
@@ -181,21 +222,22 @@
             cursor:pointer;
 
             transition:0.3s ease;
+
+            box-shadow:0 5px 15px rgba(37,99,235,0.4);
         }
 
         button:hover{
-            background:#1d4ed8;
             transform:translateY(-3px);
+            box-shadow:0 8px 20px rgba(37,99,235,0.6);
         }
 
-        /* FLASH MESSAGE */
+        /* EXTRA INFO */
 
-        .message{
-            background:rgba(239,68,68,0.25);
-            padding:12px;
-            border-radius:10px;
-            margin-bottom:20px;
+        .bottom-text{
             text-align:center;
+            margin-top:22px;
+            color:#d1d5db;
+            font-size:13px;
         }
 
         /* MOBILE */
@@ -203,8 +245,8 @@
         @media(max-width:500px){
 
             .container{
-                width:90%;
-                padding:30px;
+                width:92%;
+                padding:30px 25px;
             }
 
             h2{
@@ -212,15 +254,19 @@
             }
 
             .circle1{
-                width:150px;
-                height:150px;
-                left:-30px;
+                width:160px;
+                height:160px;
+                left:-40px;
             }
 
             .circle2{
-                width:120px;
-                height:120px;
-                right:-20px;
+                width:130px;
+                height:130px;
+                right:-30px;
+            }
+
+            .circle3{
+                display:none;
             }
         }
 
@@ -229,10 +275,11 @@
 
 <body>
 
-    <!-- DECORATION -->
+    <!-- BACKGROUND DECORATION -->
 
     <div class="circle1"></div>
     <div class="circle2"></div>
+    <div class="circle3"></div>
 
     <!-- LOGIN CARD -->
 
@@ -241,20 +288,18 @@
         <!-- LOGO -->
 
         <div class="logo">
-
             <img src="/static/images/logo1.png" alt="Logo">
-
         </div>
 
         <h2>Admin Login</h2>
 
         <p class="subtitle">
-            Electronics • Solar • ICT • Security Systems
+            Solar Energy • Electrical Engineering • ICT Solutions • Security Systems
         </p>
 
         <!-- FLASH MESSAGES -->
 
-     
+      
 
         <!-- LOGIN FORM -->
 
@@ -262,7 +307,7 @@
 
             <div class="form-group">
 
-                <label>Username</label>
+                <label>Admin Username</label>
 
                 <input
                     type="text"
@@ -275,7 +320,7 @@
 
             <div class="form-group">
 
-                <label>Password</label>
+                <label>Admin Password</label>
 
                 <input
                     type="password"
@@ -291,6 +336,10 @@
             </button>
 
         </form>
+
+        <div class="bottom-text">
+            © 2026 RAVTO GLOBAL LTD | Secure Admin System
+        </div>
 
     </div>
 
