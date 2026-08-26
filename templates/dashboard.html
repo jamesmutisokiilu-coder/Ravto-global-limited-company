@@ -1,243 +1,1868 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>RAVTO GLOBAL LTD - Dashboard</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        RAVTO GLOBAL LTD | Dashboard
+    </title>
+
+    <meta
+        name="description"
+        content="RAVTO GLOBAL LTD professional business dashboard."
+    >
 
     <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
         *{
             margin:0;
             padding:0;
             box-sizing:border-box;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
         }
 
         body{
-            background:#f4f7fb;
-            display:flex;
+
+            background:#f5f7fb;
+
+            color:#172033;
+
+            min-height:100vh;
+
         }
 
-        /* Sidebar */
-        .sidebar{
-            width:260px;
-            height:100vh;
-            background:#0f172a;
-            position:fixed;
-            left:0;
-            top:0;
-            padding-top:30px;
-        }
+        a{
 
-        .logo{
-            text-align:center;
-            color:white;
-            margin-bottom:40px;
-        }
-
-        .logo h2{
-            font-size:24px;
-        }
-
-        .menu{
-            list-style:none;
-            padding:0 20px;
-        }
-
-        .menu li{
-            margin-bottom:12px;
-        }
-
-        .menu li a{
-            display:block;
             text-decoration:none;
-            color:white;
-            padding:12px 15px;
-            border-radius:8px;
-            font-weight:bold;
-            transition:0.3s;
+
         }
 
-        .menu li a:hover{
-            background:#2563eb;
+
+        /* =====================================================
+           TOP NAVIGATION
+        ===================================================== */
+
+        .navbar{
+
+            width:100%;
+
+            height:74px;
+
+            background:#ffffff;
+
+            border-bottom:1px solid #e5e7eb;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            padding:0 5%;
+
+            position:sticky;
+
+            top:0;
+
+            z-index:1000;
+
+            box-shadow:
+                0 3px 15px
+                rgba(15,23,42,0.06);
+
         }
 
-        .logout{
-            background:#dc2626;
-        }
 
-        .logout:hover{
-            background:#b91c1c;
-        }
+        /* =====================================================
+           BRAND
+        ===================================================== */
 
-        /* Main Content */
-        .main-content{
-            margin-left:260px;
-            width:calc(100% - 260px);
-            padding:30px;
-        }
+        .brand{
 
-        .topbar{
-            background:white;
-            padding:25px;
-            border-radius:12px;
-            margin-bottom:25px;
-            box-shadow:0 5px 15px rgba(0,0,0,0.08);
-        }
+            display:flex;
 
-        .topbar h1{
+            align-items:center;
+
+            gap:12px;
+
             color:#0f172a;
+
         }
 
-        .topbar p{
-            color:#555;
-            margin-top:10px;
+        .brand-icon{
+
+            width:45px;
+
+            height:45px;
+
+            border-radius:10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0f3fa8
+                );
+
+            color:white;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            font-size:19px;
+
+            font-weight:bold;
+
+            box-shadow:
+                0 5px 15px
+                rgba(37,99,235,0.25);
+
         }
 
-        /* Cards */
-        .cards{
-            display:grid;
-            grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-            gap:20px;
+        .brand-text h2{
+
+            font-size:19px;
+
+            font-weight:800;
+
+            letter-spacing:.3px;
+
         }
 
-        .card{
+        .brand-text span{
+
+            display:block;
+
+            font-size:10px;
+
+            color:#64748b;
+
+            margin-top:2px;
+
+            letter-spacing:.7px;
+
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .nav-links{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:4px;
+
+            list-style:none;
+
+        }
+
+        .nav-links > li{
+
+            position:relative;
+
+        }
+
+        .nav-links > li > a{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:6px;
+
+            padding:11px 14px;
+
+            border-radius:8px;
+
+            color:#334155;
+
+            font-size:14px;
+
+            font-weight:600;
+
+            transition:.25s;
+
+        }
+
+        .nav-links > li > a:hover{
+
+            background:#eff6ff;
+
+            color:#2563eb;
+
+        }
+
+
+        /* =====================================================
+           DROPDOWN
+        ===================================================== */
+
+        .dropdown-menu{
+
+            position:absolute;
+
+            top:calc(100% + 8px);
+
+            left:0;
+
+            min-width:220px;
+
             background:white;
-            padding:25px;
-            border-radius:12px;
-            box-shadow:0 5px 15px rgba(0,0,0,0.08);
-            border-left:5px solid #2563eb;
-            transition:0.3s;
+
+            border:1px solid #e5e7eb;
+
+            border-radius:10px;
+
+            padding:8px;
+
+            box-shadow:
+                0 15px 35px
+                rgba(15,23,42,.14);
+
+            opacity:0;
+
+            visibility:hidden;
+
+            transform:
+                translateY(8px);
+
+            transition:.25s;
+
         }
 
-        .card:hover{
-            transform:translateY(-5px);
+        .dropdown:hover .dropdown-menu{
+
+            opacity:1;
+
+            visibility:visible;
+
+            transform:
+                translateY(0);
+
         }
 
-        .card h3{
-            margin-bottom:10px;
-            color:#1e3a8a;
+        .dropdown-menu a{
+
+            display:block;
+
+            padding:11px 13px;
+
+            border-radius:7px;
+
+            color:#334155;
+
+            font-size:13px;
+
+            font-weight:600;
+
+            transition:.2s;
+
         }
 
-        .card p{
-            color:#555;
+        .dropdown-menu a:hover{
+
+            background:#eff6ff;
+
+            color:#2563eb;
+
         }
+
+        .arrow{
+
+            font-size:10px;
+
+        }
+
+
+        /* =====================================================
+           USER AREA
+        ===================================================== */
+
+        .user-area{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:12px;
+
+        }
+
+        .user-info{
+
+            text-align:right;
+
+        }
+
+        .user-info strong{
+
+            display:block;
+
+            font-size:13px;
+
+            color:#0f172a;
+
+        }
+
+        .user-info span{
+
+            font-size:11px;
+
+            color:#64748b;
+
+        }
+
+        .user-avatar{
+
+            width:40px;
+
+            height:40px;
+
+            border-radius:50%;
+
+            background:#2563eb;
+
+            color:white;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            font-weight:bold;
+
+        }
+
+
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+        .menu-toggle{
+
+            display:none;
+
+            border:none;
+
+            background:#eff6ff;
+
+            color:#2563eb;
+
+            width:42px;
+
+            height:42px;
+
+            border-radius:8px;
+
+            font-size:20px;
+
+            cursor:pointer;
+
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main{
+
+            width:90%;
+
+            max-width:1400px;
+
+            margin:auto;
+
+            padding:35px 0 50px;
+
+        }
+
+
+        /* =====================================================
+           WELCOME SECTION
+        ===================================================== */
+
+        .welcome{
+
+            background:
+
+                linear-gradient(
+                    120deg,
+                    #0f172a,
+                    #1e40af
+                );
+
+            border-radius:18px;
+
+            padding:35px;
+
+            color:white;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:30px;
+
+            margin-bottom:25px;
+
+            position:relative;
+
+            overflow:hidden;
+
+        }
+
+        .welcome::after{
+
+            content:"";
+
+            position:absolute;
+
+            width:300px;
+
+            height:300px;
+
+            border-radius:50%;
+
+            background:
+                rgba(255,255,255,.06);
+
+            right:-100px;
+
+            top:-130px;
+
+        }
+
+        .welcome-text{
+
+            position:relative;
+
+            z-index:2;
+
+        }
+
+        .welcome small{
+
+            color:#bfdbfe;
+
+            font-weight:bold;
+
+            text-transform:uppercase;
+
+            letter-spacing:1px;
+
+        }
+
+        .welcome h1{
+
+            font-size:30px;
+
+            margin:8px 0;
+
+        }
+
+        .welcome p{
+
+            color:#dbeafe;
+
+            font-size:14px;
+
+            max-width:650px;
+
+            line-height:1.7;
+
+        }
+
+        .welcome-action{
+
+            position:relative;
+
+            z-index:2;
+
+        }
+
+        .primary-button{
+
+            display:inline-flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            background:white;
+
+            color:#1d4ed8;
+
+            padding:13px 20px;
+
+            border-radius:9px;
+
+            font-weight:bold;
+
+            font-size:13px;
+
+            transition:.25s;
+
+        }
+
+        .primary-button:hover{
+
+            transform:translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,.18);
+
+        }
+
+
+        /* =====================================================
+           SECTION HEADER
+        ===================================================== */
+
+        .section-header{
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            margin:30px 0 15px;
+
+        }
+
+        .section-header h2{
+
+            font-size:20px;
+
+            color:#0f172a;
+
+        }
+
+        .section-header p{
+
+            font-size:12px;
+
+            color:#64748b;
+
+        }
+
+
+        /* =====================================================
+           STATISTICS
+        ===================================================== */
+
+        .stats{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap:18px;
+
+        }
+
+        .stat-card{
+
+            background:white;
+
+            border:1px solid #e5e7eb;
+
+            border-radius:14px;
+
+            padding:21px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:15px;
+
+            transition:.25s;
+
+        }
+
+        .stat-card:hover{
+
+            transform:translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(15,23,42,.08);
+
+        }
+
+        .stat-icon{
+
+            width:48px;
+
+            height:48px;
+
+            border-radius:11px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            background:#eff6ff;
+
+            color:#2563eb;
+
+            font-weight:bold;
+
+            font-size:18px;
+
+        }
+
+        .stat-card h3{
+
+            font-size:23px;
+
+            color:#0f172a;
+
+        }
+
+        .stat-card p{
+
+            font-size:12px;
+
+            color:#64748b;
+
+            margin-top:3px;
+
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+        ===================================================== */
+
+        .quick-grid{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap:18px;
+
+        }
+
+        .quick-card{
+
+            background:white;
+
+            border:1px solid #e5e7eb;
+
+            padding:23px;
+
+            border-radius:14px;
+
+            transition:.25s;
+
+        }
+
+        .quick-card:hover{
+
+            border-color:#bfdbfe;
+
+            transform:translateY(-4px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(15,23,42,.08);
+
+        }
+
+        .quick-icon{
+
+            width:45px;
+
+            height:45px;
+
+            border-radius:10px;
+
+            background:#eff6ff;
+
+            color:#2563eb;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            margin-bottom:15px;
+
+            font-weight:bold;
+
+        }
+
+        .quick-card h3{
+
+            font-size:15px;
+
+            margin-bottom:7px;
+
+        }
+
+        .quick-card p{
+
+            color:#64748b;
+
+            font-size:12px;
+
+            line-height:1.6;
+
+            margin-bottom:15px;
+
+        }
+
+        .quick-card a{
+
+            color:#2563eb;
+
+            font-size:12px;
+
+            font-weight:bold;
+
+        }
+
+
+        /* =====================================================
+           SERVICES
+        ===================================================== */
+
+        .services-grid{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:18px;
+
+        }
+
+        .service-card{
+
+            background:white;
+
+            border-radius:14px;
+
+            padding:23px;
+
+            border:1px solid #e5e7eb;
+
+            transition:.25s;
+
+        }
+
+        .service-card:hover{
+
+            transform:translateY(-4px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(15,23,42,.08);
+
+        }
+
+        .service-card h3{
+
+            font-size:15px;
+
+            margin-bottom:8px;
+
+            color:#0f172a;
+
+        }
+
+        .service-card p{
+
+            color:#64748b;
+
+            font-size:12px;
+
+            line-height:1.7;
+
+        }
+
+        .service-number{
+
+            color:#2563eb;
+
+            font-size:11px;
+
+            font-weight:bold;
+
+            margin-bottom:12px;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
 
         footer{
-            margin-top:30px;
+
+            margin-top:45px;
+
+            border-top:1px solid #e5e7eb;
+
+            padding:25px 0;
+
             text-align:center;
-            color:#666;
+
+            color:#64748b;
+
+            font-size:12px;
+
         }
 
-        /* Mobile */
-        @media(max-width:768px){
 
-            body{
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width:1100px){
+
+            .nav-links{
+
+                gap:0;
+
+            }
+
+            .nav-links > li > a{
+
+                padding:
+                    10px 8px;
+
+            }
+
+            .user-info{
+
+                display:none;
+
+            }
+
+            .stats{
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+            .quick-grid{
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+        }
+
+
+        @media(max-width:850px){
+
+            .menu-toggle{
+
+                display:block;
+
+            }
+
+            .nav-links{
+
+                position:absolute;
+
+                top:74px;
+
+                left:0;
+
+                width:100%;
+
+                background:white;
+
+                display:none;
+
                 flex-direction:column;
+
+                align-items:stretch;
+
+                padding:12px 5%;
+
+                border-bottom:1px solid #e5e7eb;
+
+                box-shadow:
+                    0 10px 20px
+                    rgba(0,0,0,.08);
+
             }
 
-            .sidebar{
-                position:relative;
-                width:100%;
-                height:auto;
+            .nav-links.active{
+
+                display:flex;
+
             }
 
-            .main-content{
-                margin-left:0;
-                width:100%;
+            .nav-links > li > a{
+
+                padding:13px;
+
             }
+
+            .dropdown-menu{
+
+                position:static;
+
+                box-shadow:none;
+
+                border:none;
+
+                display:none;
+
+                opacity:1;
+
+                visibility:visible;
+
+                transform:none;
+
+                padding-left:15px;
+
+            }
+
+            .dropdown.open
+            .dropdown-menu{
+
+                display:block;
+
+            }
+
+            .dropdown:hover
+            .dropdown-menu{
+
+                display:none;
+
+            }
+
+            .dropdown.open:hover
+            .dropdown-menu{
+
+                display:block;
+
+            }
+
+            .welcome{
+
+                flex-direction:column;
+
+                align-items:flex-start;
+
+            }
+
+            .services-grid{
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
         }
+
+
+        @media(max-width:600px){
+
+            .navbar{
+
+                padding:0 4%;
+
+            }
+
+            .brand-text h2{
+
+                font-size:16px;
+
+            }
+
+            .brand-text span{
+
+                display:none;
+
+            }
+
+            .main{
+
+                width:92%;
+
+                padding-top:25px;
+
+            }
+
+            .welcome{
+
+                padding:25px;
+
+            }
+
+            .welcome h1{
+
+                font-size:24px;
+
+            }
+
+            .stats,
+            .quick-grid,
+            .services-grid{
+
+                grid-template-columns:1fr;
+
+            }
+
+            .section-header{
+
+                align-items:flex-start;
+
+                flex-direction:column;
+
+                gap:5px;
+
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
 
-        <div class="logo">
-            <h2>RAVTO GLOBAL LTD  COMPANY </h2>
+<!-- =========================================================
+     NAVIGATION BAR
+========================================================= -->
+
+<header class="navbar">
+
+
+    <!-- BRAND -->
+
+    <a
+        href="{{ url_for('dashboard') }}"
+        class="brand"
+    >
+
+        <div class="brand-icon">
+            RG
         </div>
 
-        <ul class="menu">
+        <div class="brand-text">
 
-            
+            <h2>
+                RAVTO GLOBAL LTD
+            </h2>
 
-            <li><a href="{{ url_for('services') }}">Services</a></li>
-             <li><a href="{{ url_for('assistant') }}">Need Assistant</a></li>
-            <li><a href="{{ url_for('orders') }}">Make Order</a></li>
-            <li><a href="{{ url_for('location') }}">Location</a></li>
+            <span>
+                ENGINEERING • ENERGY • WATER • ELECTRICAL
+            </span>
 
-            <li><a href="{{ url_for('blog') }}">Blog</a></li>
+        </div>
 
-            <li><a href="{{ url_for('receipts') }}">Receipts generation</a></li>
+    </a>
 
-            <!-- FIXED NAME -->
-            <li><a href="{{ url_for('admin_login') }}">Admin Login</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <!-- FIXED NAME -->
 
-            <li><a href="{{ url_for('logout') }}" class="logout">Logout</a></li>
+    <!-- MOBILE MENU BUTTON -->
 
-        </ul>
+    <button
+        class="menu-toggle"
+        onclick="toggleMenu()"
+        aria-label="Open menu"
+    >
+        ☰
+    </button>
+
+
+    <!-- NAVIGATION -->
+
+    <ul
+        class="nav-links"
+        id="navLinks"
+    >
+
+
+        <li>
+
+            <a
+                href="{{ url_for('dashboard') }}"
+            >
+                Dashboard
+            </a>
+
+        </li>
+
+
+        <!-- SERVICES -->
+
+        <li class="dropdown">
+
+            <a href="#">
+                Services
+                <span class="arrow">▼</span>
+            </a>
+
+            <div class="dropdown-menu">
+
+                <a
+                    href="{{ url_for('services') }}"
+                >
+                    All Services
+                </a>
+
+                <a href="{{ url_for('services') }}">
+                    Borehole Drilling & Equipping
+                </a>
+
+                <a href="{{ url_for('services') }}">
+                    Solarisation & Solar Systems
+                </a>
+
+                <a href="{{ url_for('services') }}">
+                    Electrical Installation
+                </a>
+
+                <a href="{{ url_for('services') }}">
+                    Water Pumping Systems
+                </a>
+
+                <a href="{{ url_for('services') }}">
+                    Tank & Tower Installation
+                </a>
+
+            </div>
+
+        </li>
+
+
+        <!-- OPERATIONS -->
+
+        <li class="dropdown">
+
+            <a href="#">
+                Operations
+                <span class="arrow">▼</span>
+            </a>
+
+            <div class="dropdown-menu">
+
+                <a
+                    href="{{ url_for('orders') }}"
+                >
+                    Make an Order
+                </a>
+
+                <a
+                    href="{{ url_for('receipts') }}"
+                >
+                    Receipt Generator
+                </a>
+
+                <a
+                    href="{{ url_for('assistant') }}"
+                >
+                    Request Assistance
+                </a>
+
+            </div>
+
+        </li>
+
+
+        <!-- COMPANY -->
+
+        <li class="dropdown">
+
+            <a href="#">
+                Company
+                <span class="arrow">▼</span>
+            </a>
+
+            <div class="dropdown-menu">
+
+                <a
+                    href="{{ url_for('about') }}"
+                >
+                    About Us
+                </a>
+
+                <a
+                    href="{{ url_for('blog') }}"
+                >
+                    Blog
+                </a>
+
+                <a
+                    href="{{ url_for('location') }}"
+                >
+                    Location
+                </a>
+
+                <a
+                    href="{{ url_for('contact') }}"
+                >
+                    Contact
+                </a>
+
+            </div>
+
+        </li>
+
+
+        <!-- ADMIN -->
+
+        <li class="dropdown">
+
+            <a href="#">
+                Administration
+                <span class="arrow">▼</span>
+            </a>
+
+            <div class="dropdown-menu">
+
+                <a
+                    href="{{ url_for('admin_login') }}"
+                >
+                    Admin Login
+                </a>
+
+                <a
+                    href="{{ url_for('admin_dashboard') }}"
+                >
+                    Admin Dashboard
+                </a>
+
+            </div>
+
+        </li>
+
+
+    </ul>
+
+
+    <!-- USER -->
+
+    <div class="user-area">
+
+        <div class="user-info">
+
+            <strong>
+                {{ session.get("user_name", "User") }}
+            </strong>
+
+            <span>
+                {{ session.get("user_email", "") }}
+            </span>
+
+        </div>
+
+        <div class="user-avatar">
+
+            {{ session.get("user_name", "U")[0]|upper }}
+
+        </div>
 
     </div>
 
-    <!-- MAIN -->
-    <div class="main-content">
 
-        <div class="topbar">
-            <h1>Welcome to Dashboard</h1>
+</header>
+
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="main">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome">
+
+        <div class="welcome-text">
+
+            <small>
+                RAVTO GLOBAL LTD
+            </small>
+
+            <h1>
+                Welcome to Your Dashboard
+            </h1>
+
             <p>
-                Manage your company operations, services, clients, and system activities here.
+
+                Manage your orders, technical assistance,
+                receipts and company services from one
+                professional platform.
+
             </p>
-        </div>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>About Company</h3>
-                <p>View company profile, mission, vision, and engineering services.</p>
-            </div>
-
-            <div class="card">
-                <h3>Services</h3>
-                <p>Solar systems, electrical installations, CCTV and security solutions.</p>
-            </div>
-
-            <div class="card">
-                <h3>Blog</h3>
-                <p>Read latest ICT, electrical engineering and global technology trends.</p>
-            </div>
-
-            <div class="card">
-                <h3>Location</h3>
-                <p>View company location and navigation using Google Maps.</p>
-            </div>
-
-            <div class="card">
-                <h3>Need Assistant</h3>
-                <p>Send technical support requests or service inquiries.</p>
-            </div>
-
-              <div class="card">
-                <h3>Receipts Generation</h3>
-                <p>Generating purchase receipts .</p>
-            </div>
-
-            <div class="card">
-                <h3>Admin Panel</h3>
-                <p>Manage system users, reports and administrative settings.</p>
-            </div>
 
         </div>
 
-        <footer>
-            <p>&copy; 2026 RAVTO GLOBAL LTD COMPANY. All Rights Reserved.</p>
-        </footer>
+
+        <div class="welcome-action">
+
+            <a
+                href="{{ url_for('receipts') }}"
+                class="primary-button"
+            >
+
+                Generate Receipt →
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STATISTICS
+    ====================================================== -->
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+                Your Activity
+            </h2>
+
+            <p>
+                Overview of your account activity
+            </p>
+
+        </div>
 
     </div>
+
+
+    <section class="stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                O
+            </div>
+
+            <div>
+
+                <h3>
+                    {{ total_orders|default(0) }}
+                </h3>
+
+                <p>
+                    Total Orders
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                P
+            </div>
+
+            <div>
+
+                <h3>
+                    {{ pending_orders|default(0) }}
+                </h3>
+
+                <p>
+                    Pending Orders
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                A
+            </div>
+
+            <div>
+
+                <h3>
+                    {{ total_requests|default(0) }}
+                </h3>
+
+                <p>
+                    Assistance Requests
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                R
+            </div>
+
+            <div>
+
+                <h3>
+                    {{ pending_requests|default(0) }}
+                </h3>
+
+                <p>
+                    Pending Requests
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         QUICK ACTIONS
+    ====================================================== -->
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+                Quick Actions
+            </h2>
+
+            <p>
+                Frequently used system functions
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <section class="quick-grid">
+
+
+        <div class="quick-card">
+
+            <div class="quick-icon">
+                +
+            </div>
+
+            <h3>
+                Make an Order
+            </h3>
+
+            <p>
+                Browse available products and services
+                and submit a new order.
+            </p>
+
+            <a
+                href="{{ url_for('orders') }}"
+            >
+                Create Order →
+            </a>
+
+        </div>
+
+
+        <div class="quick-card">
+
+            <div class="quick-icon">
+                R
+            </div>
+
+            <h3>
+                Generate Receipt
+            </h3>
+
+            <p>
+                Enter customer and purchase details
+                and generate a professional PDF receipt.
+            </p>
+
+            <a
+                href="{{ url_for('receipts') }}"
+            >
+                Generate Receipt →
+            </a>
+
+        </div>
+
+
+        <div class="quick-card">
+
+            <div class="quick-icon">
+                ?
+            </div>
+
+            <h3>
+                Need Assistant
+            </h3>
+
+            <p>
+                Request technical assistance for
+                electrical, water or solar projects.
+            </p>
+
+            <a
+                href="{{ url_for('assistant') }}"
+            >
+                Request Assistance →
+            </a>
+
+        </div>
+
+
+        <div class="quick-card">
+
+            <div class="quick-icon">
+                C
+            </div>
+
+            <h3>
+                Contact Company
+            </h3>
+
+            <p>
+                Contact RAVTO GLOBAL LTD for project
+                consultations and enquiries.
+            </p>
+
+            <a
+                href="{{ url_for('contact') }}"
+            >
+                Contact Us →
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+                Our Core Services
+            </h2>
+
+            <p>
+                Engineering and infrastructure solutions
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('services') }}"
+            style="
+                color:#2563eb;
+                font-size:12px;
+                font-weight:bold;
+            "
+        >
+            View All →
+        </a>
+
+    </div>
+
+
+    <section class="services-grid">
+
+
+        <div class="service-card">
+
+            <div class="service-number">
+                01
+            </div>
+
+            <h3>
+                Borehole Drilling & Equipping
+            </h3>
+
+            <p>
+                Professional borehole drilling,
+                development, equipping and water
+                infrastructure solutions.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-number">
+                02
+            </div>
+
+            <h3>
+                Solarisation & Solar Systems
+            </h3>
+
+            <p>
+                Solar-powered water pumping,
+                renewable energy systems and
+                solar installations.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-number">
+                03
+            </div>
+
+            <h3>
+                Electrical Installation
+            </h3>
+
+            <p>
+                Reliable electrical installation,
+                maintenance and power distribution
+                solutions.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-number">
+                04
+            </div>
+
+            <h3>
+                Water Pumping Systems
+            </h3>
+
+            <p>
+                Design and installation of efficient
+                water pumping and distribution systems.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-number">
+                05
+            </div>
+
+            <h3>
+                Tank & Tower Installation
+            </h3>
+
+            <p>
+                Water storage tank, tower fabrication,
+                installation and supporting infrastructure.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-number">
+                06
+            </div>
+
+            <h3>
+                Technical Consultation
+            </h3>
+
+            <p>
+                Professional technical guidance,
+                project planning and engineering
+                consultation.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 RAVTO GLOBAL LTD.
+            All Rights Reserved.
+        </p>
+
+        <p style="margin-top:7px;">
+
+            Engineering • Energy • Water • Electrical
+
+        </p>
+
+    </footer>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    function toggleMenu(){
+
+        const menu =
+            document.getElementById(
+                "navLinks"
+            );
+
+        menu.classList.toggle(
+            "active"
+        );
+
+    }
+
+
+    /* Mobile dropdown handling */
+
+    document
+        .querySelectorAll(
+            ".dropdown > a"
+        )
+        .forEach(
+            function(link){
+
+                link.addEventListener(
+                    "click",
+                    function(event){
+
+                        if(
+                            window.innerWidth <= 850
+                        ){
+
+                            event.preventDefault();
+
+                            const parent =
+                                this.parentElement;
+
+                            parent.classList.toggle(
+                                "open"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* Close mobile menu when clicking outside */
+
+    document.addEventListener(
+        "click",
+        function(event){
+
+            const navbar =
+                document.querySelector(
+                    ".navbar"
+                );
+
+            const menu =
+                document.getElementById(
+                    "navLinks"
+                );
+
+            if(
+                !navbar.contains(event.target)
+            ){
+
+                menu.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
 
 </body>
+
 </html>
