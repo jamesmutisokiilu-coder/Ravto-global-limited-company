@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Receipt Generator | RAVTO GLOBAL LTD</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f6f9;
+            color: #17202a;
+        }
+
+        .page {
+            max-width: 1150px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #123c66,
+                #1f6aa5
+            );
+
+            color: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.10);
+        }
+
+        .header h1 {
+            margin: 0 0 7px;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.92;
+        }
+
+
+        /* =====================================================
+           MAIN GRID
+        ===================================================== */
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+
+            box-shadow:
+                0 5px 22px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #123c66;
+            font-size: 21px;
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 13px;
+
+            border: 1px solid #ccd6df;
+            border-radius: 8px;
+
+            font-size: 15px;
+            font-family: inherit;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #1f6aa5;
+
+            box-shadow:
+                0 0 0 3px rgba(
+                    31,
+                    106,
+                    165,
+                    0.10
+                );
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 13px;
+        }
+
+
+        /* =====================================================
+           TOTAL BOX
+        ===================================================== */
+
+        .total-box {
+            margin-top: 18px;
+
+            padding: 17px;
+
+            background: #eef6fc;
+
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            font-size: 20px;
+            font-weight: 700;
+
+            color: #123c66;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+
+            margin-top: 20px;
+        }
+
+        button {
+            border: 0;
+            border-radius: 9px;
+
+            padding: 13px 20px;
+
+            cursor: pointer;
+
+            font-weight: 700;
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            opacity: 0.94;
+        }
+
+        .pdf {
+            background: #123c66;
+            color: white;
+        }
+
+        .print {
+            background: #198754;
+            color: white;
+        }
+
+        .clear {
+            background: #e9ecef;
+            color: #222;
+        }
+
+
+        /* =====================================================
+           RECEIPT
+        ===================================================== */
+
+        .receipt {
+            border: 2px solid #123c66;
+
+            padding: 28px;
+
+            min-height: 620px;
+
+            background: white;
+        }
+
+        .receipt-head {
+            text-align: center;
+
+            border-bottom: 2px solid #123c66;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 15px;
+        }
+
+        .receipt-head h2 {
+            margin: 0;
+
+            color: #123c66;
+
+            font-size: 24px;
+        }
+
+        .receipt-head p {
+            font-size: 11px;
+
+            margin: 5px 0;
+
+            line-height: 1.5;
+        }
+
+        .receipt-type {
+            text-align: center;
+
+            font-weight: 800;
+
+            font-size: 18px;
+
+            margin: 18px 0;
+
+            color: #123c66;
+        }
+
+        .receipt-info {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            font-size: 13px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =====================================================
+           CUSTOMER
+        ===================================================== */
+
+        .customer {
+            border: 1px solid #bbb;
+
+            padding: 12px;
+
+            margin-bottom: 15px;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .customer strong {
+            display: inline-block;
+
+            width: 85px;
+        }
+
+
+        /* =====================================================
+           ITEM TABLE
+        ===================================================== */
+
+        .item-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            font-size: 13px;
+        }
+
+        .item-table th,
+        .item-table td {
+            border: 1px solid #aaa;
+
+            padding: 9px;
+        }
+
+        .item-table th {
+            background: #123c66;
+
+            color: white;
+
+            font-weight: 700;
+        }
+
+        .item-table td:nth-child(n+2),
+        .item-table th:nth-child(n+2) {
+            text-align: right;
+        }
+
+        .item-table td:first-child,
+        .item-table th:first-child {
+            text-align: left;
+        }
+
+
+        /* =====================================================
+           TOTAL
+        ===================================================== */
+
+        .grand-total {
+            text-align: right;
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+            margin-top: 17px;
+
+            color: #123c66;
+        }
+
+
+        /* =====================================================
+           NOTES
+        ===================================================== */
+
+        .notes {
+            margin-top: 20px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            white-space: pre-wrap;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .thank {
+            text-align: center;
+
+            margin-top: 40px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #ddd;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #123c66;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .row {
+                grid-template-columns: 1fr;
+            }
+
+            .receipt-info {
+                flex-direction: column;
+            }
+
+            .page {
+                margin: 10px auto;
+                padding: 10px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+        }
+
+
+        /* =====================================================
+           PRINT ONLY RECEIPT
+        ===================================================== */
+
+        @media print {
+
+            html,
+            body {
+                background: white !important;
+
+                margin: 0 !important;
+                padding: 0 !important;
+
+                width: 100%;
+            }
+
+            /*
+               Hide EVERYTHING on the page.
+            */
+
+            body * {
+                visibility: hidden !important;
+            }
+
+            /*
+               Make ONLY the receipt visible.
+            */
+
+            #printReceipt,
+            #printReceipt * {
+                visibility: visible !important;
+            }
+
+            /*
+               Put receipt at the top-left
+               of the printed page.
+            */
+
+            #printReceipt {
+
+                position: absolute;
+
+                left: 0;
+                top: 0;
+
+                width: 100%;
+
+                min-height: auto;
+
+                border: 0 !important;
+
+                margin: 0 !important;
+
+                padding: 15px !important;
+
+                box-shadow: none !important;
+
+                background: white !important;
+            }
+
+            @page {
+
+                size: A4;
+
+                margin: 10mm;
+
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="header">
+
+        <h1>
+            RAVTO GLOBAL LTD
+        </h1>
+
+        <p>
+            Receipt & Purchase Document Generator
+        </p>
+
+    </div>
+
+
+
+    <div class="grid">
+
+
+        <!-- =================================================
+             RECEIPT FORM
+        ================================================== -->
+
+        <div class="card">
+
+            <h2>
+                Enter Receipt Details
+            </h2>
+
+
+            <form
+                id="receiptForm"
+                method="POST"
+                action="{{ url_for('receipt_pdf') }}"
+            >
+
+
+                <!-- RECEIPT TYPE -->
+
+                <div class="field">
+
+                    <label>
+                        Receipt Type
+                    </label>
+
+                    <select
+                        name="receipt_type"
+                        id="receipt_type"
+                        onchange="updatePreview()"
+                    >
+
+                        <option value="Electrical Receipt">
+                            Electrical Receipt
+                        </option>
+
+                        <option value="Purchase Receipt">
+                            Purchase Receipt
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- RECEIPT NUMBER + DATE -->
+
+                <div class="row">
+
+
+                    <div class="field">
+
+                        <label>
+                            Receipt Number
+                        </label>
+
+                        <input
+                            type="text"
+                            name="receipt_number"
+                            id="receipt_number"
+                            placeholder="RAVTO-001"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="date"
+                            id="date"
+                            onchange="updatePreview()"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- CUSTOMER NAME -->
+
+                <div class="field">
+
+                    <label>
+                        Customer Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="customer_name"
+                        id="customer_name"
+                        placeholder="Enter customer name"
+                        oninput="updatePreview()"
+                    >
+
+                </div>
+
+
+
+                <!-- PHONE + EMAIL -->
+
+                <div class="row">
+
+
+                    <div class="field">
+
+                        <label>
+                            Customer Phone
+                        </label>
+
+                        <input
+                            type="text"
+                            name="customer_phone"
+                            id="customer_phone"
+                            placeholder="+254 7XX XXX XXX"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Customer Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="customer_email"
+                            id="customer_email"
+                            placeholder="customer@email.com"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ITEM -->
+
+                <div class="field">
+
+                    <label>
+                        Item / Electrical Service
+                    </label>
+
+                    <textarea
+                        name="item_description"
+                        id="item_description"
+                        placeholder="Example: Electrical cable, solar installation, electrical installation service..."
+                        oninput="updatePreview()"
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- QUANTITY + PRICE -->
+
+                <div class="row">
+
+
+                    <div class="field">
+
+                        <label>
+                            Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            name="quantity"
+                            id="quantity"
+                            value="1"
+                            min="1"
+                            step="0.01"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Unit Price (KES)
+                        </label>
+
+                        <input
+                            type="number"
+                            name="unit_price"
+                            id="unit_price"
+                            value="0"
+                            min="0"
+                            step="0.01"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- NOTES -->
+
+                <div class="field">
+
+                    <label>
+                        Additional Notes
+                    </label>
+
+                    <textarea
+                        name="notes"
+                        id="notes"
+                        placeholder="Optional notes, payment information, installation details, etc."
+                        oninput="updatePreview()"
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- TOTAL -->
+
+                <div class="total-box">
+
+                    <span>
+                        TOTAL
+                    </span>
+
+                    <span id="formTotal">
+                        KES 0.00
+                    </span>
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="buttons">
+
+
+                    <button
+                        type="submit"
+                        class="pdf"
+                    >
+                        Download PDF
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="print"
+                        onclick="printReceipt()"
+                    >
+                        Print Receipt
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="clear"
+                        onclick="clearForm()"
+                    >
+                        Clear
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RECEIPT PREVIEW
+        ================================================== -->
+
+        <div class="card">
+
+            <h2>
+                Receipt Preview
+            </h2>
+
+
+            <!--
+                IMPORTANT:
+                This is the ONLY element that will print.
+            -->
+
+            <div
+                id="printReceipt"
+                class="receipt"
+            >
+
+
+                <!-- COMPANY -->
+
+                <div class="receipt-head">
+
+                    <h2>
+                        RAVTO GLOBAL LTD
+                    </h2>
+
+                    <p>
+                        Borehole Drilling & Equipping
+                        |
+                        Solarisation & Solar Systems
+                    </p>
+
+                    <p>
+                        Electrical Installation
+                        |
+                        Water Pumping Systems
+                    </p>
+
+                    <p>
+                        Tank & Tower Installation
+                    </p>
+
+                </div>
+
+
+
+                <!-- RECEIPT TYPE -->
+
+                <div
+                    class="receipt-type"
+                    id="previewType"
+                >
+                    ELECTRICAL RECEIPT
+                </div>
+
+
+
+                <!-- RECEIPT INFORMATION -->
+
+                <div class="receipt-info">
+
+
+                    <span>
+
+                        <strong>
+                            Receipt No:
+                        </strong>
+
+                        <span id="previewNumber">
+                            RAVTO-001
+                        </span>
+
+                    </span>
+
+
+                    <span>
+
+                        <strong>
+                            Date:
+                        </strong>
+
+                        <span id="previewDate">
+                        </span>
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- CUSTOMER -->
+
+                <div class="customer">
+
+
+                    <div>
+
+                        <strong>
+                            Customer:
+                        </strong>
+
+                        <span id="previewCustomer">
+                            N/A
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Phone:
+                        </strong>
+
+                        <span id="previewPhone">
+                            N/A
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Email:
+                        </strong>
+
+                        <span id="previewEmail">
+                            N/A
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ITEMS -->
+
+                <table class="item-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Description
+                            </th>
+
+                            <th>
+                                Qty
+                            </th>
+
+                            <th>
+                                Unit Price
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td id="previewItem">
+                                Item / Service
+                            </td>
+
+                            <td id="previewQty">
+                                1
+                            </td>
+
+                            <td id="previewUnit">
+                                KES 0.00
+                            </td>
+
+                            <td id="previewAmount">
+                                KES 0.00
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                </table>
+
+
+
+                <!-- TOTAL -->
+
+                <div class="grand-total">
+
+                    TOTAL:
+
+                    <span id="previewTotal">
+                        KES 0.00
+                    </span>
+
+                </div>
+
+
+
+                <!-- NOTES -->
+
+                <div
+                    class="notes"
+                    id="previewNotes"
+                ></div>
+
+
+
+                <!-- FOOTER -->
+
+                <div class="thank">
+
+                    Thank you for choosing
+                    RAVTO GLOBAL LTD.
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ============================================================
+   MONEY FORMAT
+============================================================ */
+
+function money(value) {
+
+    return "KES " + Number(value || 0).toLocaleString(
+        "en-KE",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+
+}
+
+
+
+/* ============================================================
+   UPDATE RECEIPT PREVIEW
+============================================================ */
+
+function updatePreview() {
+
+
+    const type =
+        document.getElementById(
+            "receipt_type"
+        ).value;
+
+
+    const number =
+        document.getElementById(
+            "receipt_number"
+        ).value
+        || "RAVTO-001";
+
+
+    const date =
+        document.getElementById(
+            "date"
+        ).value
+        || new Date()
+            .toISOString()
+            .slice(0, 10);
+
+
+    const customer =
+        document.getElementById(
+            "customer_name"
+        ).value
+        || "N/A";
+
+
+    const phone =
+        document.getElementById(
+            "customer_phone"
+        ).value
+        || "N/A";
+
+
+    const email =
+        document.getElementById(
+            "customer_email"
+        ).value
+        || "N/A";
+
+
+    const item =
+        document.getElementById(
+            "item_description"
+        ).value
+        || "Item / Service";
+
+
+    const quantity =
+        Number(
+            document.getElementById(
+                "quantity"
+            ).value
+        ) || 1;
+
+
+    const unitPrice =
+        Number(
+            document.getElementById(
+                "unit_price"
+            ).value
+        ) || 0;
+
+
+    const total =
+        quantity * unitPrice;
+
+
+    const notes =
+        document.getElementById(
+            "notes"
+        ).value;
+
+
+
+    /* TYPE */
+
+    document.getElementById(
+        "previewType"
+    ).textContent =
+        type.toUpperCase();
+
+
+
+    /* NUMBER */
+
+    document.getElementById(
+        "previewNumber"
+    ).textContent =
+        number;
+
+
+
+    /* DATE */
+
+    document.getElementById(
+        "previewDate"
+    ).textContent =
+        date;
+
+
+
+    /* CUSTOMER */
+
+    document.getElementById(
+        "previewCustomer"
+    ).textContent =
+        customer;
+
+
+
+    /* PHONE */
+
+    document.getElementById(
+        "previewPhone"
+    ).textContent =
+        phone;
+
+
+
+    /* EMAIL */
+
+    document.getElementById(
+        "previewEmail"
+    ).textContent =
+        email;
+
+
+
+    /* ITEM */
+
+    document.getElementById(
+        "previewItem"
+    ).textContent =
+        item;
+
+
+
+    /* QUANTITY */
+
+    document.getElementById(
+        "previewQty"
+    ).textContent =
+        quantity;
+
+
+
+    /* UNIT PRICE */
+
+    document.getElementById(
+        "previewUnit"
+    ).textContent =
+        money(unitPrice);
+
+
+
+    /* AMOUNT */
+
+    document.getElementById(
+        "previewAmount"
+    ).textContent =
+        money(total);
+
+
+
+    /* TOTAL */
+
+    document.getElementById(
+        "previewTotal"
+    ).textContent =
+        money(total);
+
+
+
+    /* FORM TOTAL */
+
+    document.getElementById(
+        "formTotal"
+    ).textContent =
+        money(total);
+
+
+
+    /* NOTES */
+
+    document.getElementById(
+        "previewNotes"
+    ).textContent =
+        notes
+        ? "Notes: " + notes
+        : "";
+
+}
+
+
+
+/* ============================================================
+   PRINT ONLY RECEIPT
+============================================================ */
+
+function printReceipt() {
+
+    updatePreview();
+
+    window.print();
+
+}
+
+
+
+/* ============================================================
+   CLEAR FORM
+============================================================ */
+
+function clearForm() {
+
+
+    document.getElementById(
+        "receiptForm"
+    ).reset();
+
+
+    document.getElementById(
+        "receipt_number"
+    ).value =
+        "RAVTO-001";
+
+
+    document.getElementById(
+        "quantity"
+    ).value =
+        "1";
+
+
+    document.getElementById(
+        "unit_price"
+    ).value =
+        "0";
+
+
+    setToday();
+
+    updatePreview();
+
+}
+
+
+
+/* ============================================================
+   SET TODAY'S DATE
+============================================================ */
+
+function setToday() {
+
+
+    const dateInput =
+        document.getElementById(
+            "date"
+        );
+
+
+    if (!dateInput.value) {
+
+        dateInput.value =
+            new Date()
+            .toISOString()
+            .slice(0, 10);
+
+    }
+
+}
+
+
+
+/* ============================================================
+   INITIALIZE
+============================================================ */
+
+setToday();
+
+updatePreview();
+
+
+</script>
+
+
+</body>
+</html>
