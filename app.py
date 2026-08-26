@@ -232,20 +232,12 @@ class NeedAssistant(db.Model):
 # ============================================================
 # RECEIPT GENERATOR
 # ============================================================
+# ============================================================
+# RECEIPT GENERATOR
+# ============================================================
 
 @app.route("/receipts")
 def receipts():
-
-    # Only logged-in administrators can create receipts
-    if not admin_required():
-
-        flash(
-            "Admin login required."
-        )
-
-        return redirect(
-            url_for("admin_login")
-        )
 
     return render_template(
         "receipts.html"
@@ -261,21 +253,6 @@ def receipts():
     methods=["POST"]
 )
 def receipt_pdf():
-
-    # --------------------------------------------------------
-    # ADMIN SECURITY
-    # --------------------------------------------------------
-
-    if not admin_required():
-
-        flash(
-            "Admin login required."
-        )
-
-        return redirect(
-            url_for("admin_login")
-        )
-
 
     # --------------------------------------------------------
     # GET FORM DATA
@@ -429,8 +406,7 @@ def receipt_pdf():
 
     total = (
         quantity
-        *
-        unit_price
+        * unit_price
     )
 
 
@@ -793,41 +769,27 @@ def receipt_pdf():
         [
 
             [
-
                 "Description",
-
                 "Qty",
-
                 "Unit Price",
-
                 "Amount"
-
             ],
 
             [
-
-                item_description
-                or
-                "Item / Service",
+                item_description or "Item / Service",
 
                 f"{quantity:g}",
 
                 f"KES {unit_price:,.2f}",
 
                 f"KES {total:,.2f}"
-
             ],
 
             [
-
                 "",
-
                 "",
-
                 "TOTAL",
-
                 f"KES {total:,.2f}"
-
             ]
 
         ],
@@ -835,11 +797,8 @@ def receipt_pdf():
         colWidths=[
 
             260,
-
             55,
-
             75,
-
             80
 
         ]
