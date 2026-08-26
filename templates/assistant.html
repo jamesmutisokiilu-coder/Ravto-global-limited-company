@@ -1,408 +1,2852 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Need Assistant - RAVTO GLOBAL LTD</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Need Assistant | RAVTO GLOBAL LTD
+    </title>
+
+    <meta name="description"
+          content="Request professional solar, electrical, ICT, electronics, CCTV, networking and technical assistance from RAVTO GLOBAL LTD.">
+
+    <meta name="keywords"
+          content="RAVTO GLOBAL LTD, technical support, solar installation, electrical engineering, CCTV, ICT networking, Kenya">
 
     <style>
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        body{
-            background:#f4f7fb;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* NAVBAR */
-
-        .navbar{
-            background:#0f172a;
-            padding:15px 40px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            position:sticky;
-            top:0;
-            z-index:1000;
-            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.6;
         }
 
-        .navbar h2{
-            color:white;
-            font-size:24px;
+        a {
+            text-decoration: none;
         }
 
-        /* NAV BUTTONS */
-
-        .nav-buttons{
-            display:flex;
-            gap:15px;
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
         }
 
-        /* DASHBOARD BUTTON */
 
-        .dashboard-btn{
-            text-decoration:none;
-            background:#2563eb;
-            color:white;
-            padding:10px 18px;
-            border-radius:8px;
-            font-weight:bold;
-            transition:0.3s;
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+
+            background: #0f172a;
+
+            min-height: 72px;
+
+            padding: 13px 5%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 4px 18px rgba(0,0,0,.15);
+
         }
 
-        .dashboard-btn:hover{
-            background:#1d4ed8;
-            transform:translateY(-2px);
+
+        .brand-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
         }
 
-        /* LOGOUT BUTTON */
 
-        .logout-btn{
-            text-decoration:none;
-            background:#dc2626;
-            color:white;
-            padding:10px 18px;
-            border-radius:8px;
-            font-weight:bold;
-            transition:0.3s;
-        }
+        .brand-icon {
 
-        .logout-btn:hover{
-            background:#b91c1c;
-            transform:translateY(-2px);
-        }
+            width: 43px;
 
-        /* HEADER */
+            height: 43px;
 
-        .header{
+            border-radius: 10px;
+
             background:
-            linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-            url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop')
-            no-repeat center center/cover;
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #10b981
+                );
 
-            height:40vh;
+            display: flex;
 
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            color:white;
-            padding:20px;
+            justify-content: center;
+
+            align-items: center;
+
+            color: white;
+
+            font-weight: bold;
+
         }
 
-        .header h1{
-            font-size:50px;
-            margin-bottom:15px;
+
+        .brand {
+
+            color: white;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
         }
 
-        .header p{
-            font-size:18px;
-            max-width:700px;
-            margin:auto;
+
+        .brand small {
+
+            display: block;
+
+            color: #94a3b8;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            margin-top: 2px;
+
         }
 
-        /* FORM CONTAINER */
 
-        .container{
-            width:90%;
-            max-width:750px;
-            margin:50px auto;
-            background:white;
-            padding:40px;
-            border-radius:20px;
-            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+        .nav-buttons {
+
+            display: flex;
+
+            gap: 9px;
+
+            align-items: center;
+
         }
 
-        .container h2{
-            text-align:center;
-            margin-bottom:30px;
-            color:#0f172a;
-            font-size:35px;
+
+        .nav-btn {
+
+            color: white;
+
+            padding: 9px 15px;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            transition: .3s;
+
         }
 
-        /* FORM GROUP */
 
-        .form-group{
-            margin-bottom:20px;
+        .dashboard-btn {
+
+            background: #2563eb;
+
         }
 
-        .form-group label{
-            display:block;
-            margin-bottom:8px;
-            font-weight:bold;
-            color:#1e3a8a;
+
+        .order-btn {
+
+            background: #10b981;
+
         }
+
+
+        .logout-btn {
+
+            background: #dc2626;
+
+        }
+
+
+        .nav-btn:hover {
+
+            transform: translateY(-2px);
+
+            opacity: .92;
+
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+
+            min-height: 470px;
+
+            background:
+
+                linear-gradient(
+                    rgba(15,23,42,.82),
+                    rgba(15,23,42,.88)
+                ),
+
+                url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1800&auto=format&fit=crop')
+                center / cover no-repeat;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 70px 5%;
+
+        }
+
+
+        .hero-content {
+
+            max-width: 850px;
+
+        }
+
+
+        .hero-badge {
+
+            display: inline-block;
+
+            background:
+                rgba(37,99,235,.25);
+
+            border:
+                1px solid
+                rgba(96,165,250,.4);
+
+            color: #93c5fd;
+
+            padding: 7px 15px;
+
+            border-radius: 30px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .hero h1 {
+
+            font-size:
+                clamp(38px, 6vw, 62px);
+
+            line-height: 1.1;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .hero h1 span {
+
+            color: #60a5fa;
+
+        }
+
+
+        .hero p {
+
+            color: #cbd5e1;
+
+            font-size: 18px;
+
+            max-width: 730px;
+
+            margin: auto;
+
+        }
+
+
+        .hero-actions {
+
+            margin-top: 27px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .hero-btn {
+
+            padding: 12px 21px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: .3s;
+
+        }
+
+
+        .hero-primary {
+
+            background: #2563eb;
+
+            color: white;
+
+        }
+
+
+        .hero-secondary {
+
+            background: white;
+
+            color: #0f172a;
+
+        }
+
+
+        .hero-btn:hover {
+
+            transform: translateY(-3px);
+
+        }
+
+
+        /* =========================================================
+           TRUST BAR
+        ========================================================= */
+
+        .trust-bar {
+
+            background: white;
+
+            border-bottom:
+                1px solid #e2e8f0;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            padding: 20px 5%;
+
+        }
+
+
+        .trust-item {
+
+            text-align: center;
+
+            border-right:
+                1px solid #e2e8f0;
+
+        }
+
+
+        .trust-item:last-child {
+
+            border-right: none;
+
+        }
+
+
+        .trust-item strong {
+
+            display: block;
+
+            color: #0f172a;
+
+            font-size: 16px;
+
+        }
+
+
+        .trust-item span {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        .main-container {
+
+            width: 92%;
+
+            max-width: 1250px;
+
+            margin: 55px auto;
+
+            display: grid;
+
+            grid-template-columns:
+                .75fr 1.25fr;
+
+            gap: 30px;
+
+            align-items: start;
+
+        }
+
+
+        /* =========================================================
+           INFORMATION PANEL
+        ========================================================= */
+
+        .info-panel {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0f172a,
+                    #1e3a8a
+                );
+
+            color: white;
+
+            padding: 35px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(15,23,42,.12);
+
+            position: sticky;
+
+            top: 95px;
+
+        }
+
+
+        .info-panel .small-title {
+
+            color: #93c5fd;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        .info-panel h2 {
+
+            font-size: 32px;
+
+            line-height: 1.2;
+
+            margin:
+                10px 0 15px;
+
+        }
+
+
+        .info-panel > p {
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        /* SERVICE MINI CARDS */
+
+        .service-mini {
+
+            display: flex;
+
+            gap: 13px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .service-mini-icon {
+
+            min-width: 40px;
+
+            height: 40px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,.1);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+
+        }
+
+
+        .service-mini h4 {
+
+            font-size: 14px;
+
+            margin-bottom: 2px;
+
+        }
+
+
+        .service-mini p {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+        }
+
+
+        /* CONTACT BOX */
+
+        .contact-box {
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.15);
+
+            margin-top: 25px;
+
+            padding-top: 22px;
+
+        }
+
+
+        .contact-box h3 {
+
+            font-size: 16px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .contact-line {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 9px;
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+
+        }
+
+
+        .contact-line strong {
+
+            color: white;
+
+        }
+
+
+        /* =========================================================
+           FORM CARD
+        ========================================================= */
+
+        .form-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 8px 28px
+                rgba(15,23,42,.07);
+
+            border:
+                1px solid #e2e8f0;
+
+        }
+
+
+        .form-heading {
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .form-heading span {
+
+            color: #2563eb;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 1.5px;
+
+        }
+
+
+        .form-heading h2 {
+
+            color: #0f172a;
+
+            font-size: 30px;
+
+            margin:
+                5px 0 5px;
+
+        }
+
+
+        .form-heading p {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================================
+           FORM
+        ========================================================= */
+
+        .form-section {
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .form-section-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+            padding-bottom: 9px;
+
+            border-bottom:
+                1px solid #e2e8f0;
+
+        }
+
+
+        .section-number {
+
+            width: 28px;
+
+            height: 28px;
+
+            border-radius: 50%;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+        }
+
+
+        .form-section-title h3 {
+
+            color: #0f172a;
+
+            font-size: 17px;
+
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 16px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #334155;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .required {
+
+            color: #dc2626;
+
+        }
+
 
         .form-group input,
-        .form-group textarea,
-        .form-group select{
-            width:100%;
-            padding:14px;
-            border:1px solid #ccc;
-            border-radius:10px;
-            font-size:16px;
-            outline:none;
-            transition:0.3s;
+        .form-group select,
+        .form-group textarea {
+
+            width: 100%;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            padding: 12px;
+
+            font-size: 13px;
+
+            outline: none;
+
+            transition: .25s;
+
+            background: white;
+
         }
+
 
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus{
-            border-color:#2563eb;
-            box-shadow:0 0 5px rgba(37,99,235,0.3);
+        .form-group select:focus,
+        .form-group textarea:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37,99,235,.09);
+
         }
 
-        textarea{
-            resize:none;
-            height:120px;
+
+        .form-group textarea {
+
+            min-height: 125px;
+
+            resize: vertical;
+
         }
 
-        /* BUTTON */
 
-        .btn{
-            width:100%;
-            padding:15px;
-            background:#2563eb;
-            color:white;
-            border:none;
-            border-radius:10px;
-            font-size:18px;
-            font-weight:bold;
-            cursor:pointer;
-            transition:0.3s;
+        .hint {
+
+            color: #94a3b8;
+
+            font-size: 10px;
+
+            margin-top: 4px;
+
         }
 
-        .btn:hover{
-            background:#1d4ed8;
-            transform:translateY(-2px);
+
+        /* =========================================================
+           SERVICE SELECTION
+        ========================================================= */
+
+        .service-options {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+
         }
 
-        /* FOOTER */
 
-        footer{
-            background:#0f172a;
-            color:white;
-            text-align:center;
-            padding:25px;
-            margin-top:40px;
+        .service-option {
+
+            position: relative;
+
         }
 
-        /* MOBILE */
 
-        @media(max-width:768px){
+        .service-option input {
 
-            .navbar{
-                padding:15px 20px;
-                flex-direction:column;
-                gap:15px;
+            position: absolute;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+        }
+
+
+        .service-option label {
+
+            display: block;
+
+            padding: 13px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            color: #475569;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            transition: .25s;
+
+        }
+
+
+        .service-option label:hover {
+
+            border-color: #2563eb;
+
+        }
+
+
+        .service-option input:checked
+        + label {
+
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            border-color: #2563eb;
+
+        }
+
+
+        /* =========================================================
+           PRIORITY
+        ========================================================= */
+
+        .priority-options {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+        }
+
+
+        .priority {
+
+            position: relative;
+
+        }
+
+
+        .priority input {
+
+            position: absolute;
+
+            opacity: 0;
+
+        }
+
+
+        .priority label {
+
+            display: block;
+
+            text-align: center;
+
+            padding: 11px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+        }
+
+
+        .priority input:checked
+        + label {
+
+            background: #2563eb;
+
+            color: white;
+
+            border-color: #2563eb;
+
+        }
+
+
+        /* =========================================================
+           CONTACT METHOD
+        ========================================================= */
+
+        .contact-options {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+        }
+
+
+        .contact-option {
+
+            position: relative;
+
+        }
+
+
+        .contact-option input {
+
+            position: absolute;
+
+            opacity: 0;
+
+        }
+
+
+        .contact-option label {
+
+            display: block;
+
+            text-align: center;
+
+            padding: 11px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+        }
+
+
+        .contact-option input:checked
+        + label {
+
+            background: #ecfdf5;
+
+            color: #047857;
+
+            border-color: #10b981;
+
+        }
+
+
+        /* =========================================================
+           SUBMIT AREA
+        ========================================================= */
+
+        .submit-area {
+
+            padding-top: 10px;
+
+        }
+
+
+        .submit-btn {
+
+            width: 100%;
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #1d4ed8
+                );
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 9px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: .3s;
+
+        }
+
+
+        .submit-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(37,99,235,.25);
+
+        }
+
+
+        .submit-note {
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+            margin-top: 9px;
+
+        }
+
+
+        /* =========================================================
+           HOW IT WORKS
+        ========================================================= */
+
+        .process-section {
+
+            background: white;
+
+            padding: 75px 5%;
+
+        }
+
+
+        .section-title {
+
+            text-align: center;
+
+            max-width: 700px;
+
+            margin:
+                0 auto 40px;
+
+        }
+
+
+        .section-title span {
+
+            color: #2563eb;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        .section-title h2 {
+
+            color: #0f172a;
+
+            font-size: 34px;
+
+            margin:
+                7px 0;
+
+        }
+
+
+        .section-title p {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+        }
+
+
+        .process-grid {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .process-card {
+
+            text-align: center;
+
+            padding: 25px 18px;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius: 13px;
+
+        }
+
+
+        .process-icon {
+
+            width: 50px;
+
+            height: 50px;
+
+            margin:
+                0 auto 13px;
+
+            border-radius: 50%;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+
+        }
+
+
+        .process-card h3 {
+
+            color: #0f172a;
+
+            font-size: 16px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .process-card p {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+
+            background: #020617;
+
+            color: #94a3b8;
+
+            padding:
+                40px 5% 20px;
+
+        }
+
+
+        .footer-grid {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr;
+
+            gap: 40px;
+
+        }
+
+
+        .footer-column h3 {
+
+            color: white;
+
+            font-size: 16px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .footer-column p,
+        .footer-column li {
+
+            font-size: 13px;
+
+            color: #94a3b8;
+
+        }
+
+
+        .footer-column ul {
+
+            list-style: none;
+
+        }
+
+
+        .footer-column li {
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .footer-column a {
+
+            color: #94a3b8;
+
+        }
+
+
+        .footer-column a:hover {
+
+            color: white;
+
+        }
+
+
+        .footer-bottom {
+
+            max-width: 1100px;
+
+            margin:
+                30px auto 0;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid #1e293b;
+
+            text-align: center;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media(max-width: 950px) {
+
+            .main-container {
+
+                grid-template-columns: 1fr;
+
             }
 
-            .navbar h2{
-                font-size:20px;
+            .info-panel {
+
+                position: static;
+
             }
 
-            .header h1{
-                font-size:35px;
+            .process-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
             }
 
-            .header p{
-                font-size:16px;
+        }
+
+
+        @media(max-width: 700px) {
+
+            .navbar {
+
+                flex-direction: column;
+
+                gap: 12px;
+
+                padding:
+                    14px 20px;
+
             }
 
-            .container{
-                padding:25px;
+            .nav-buttons {
+
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+
             }
 
-            .container h2{
-                font-size:28px;
+            .hero {
+
+                min-height: 430px;
+
             }
 
-            .nav-buttons{
-                width:100%;
-                justify-content:center;
-                flex-wrap:wrap;
+            .form-card {
+
+                padding: 23px;
+
             }
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .form-group.full {
+
+                grid-column: auto;
+
+            }
+
+            .service-options {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .priority-options {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .contact-options {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .trust-bar {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 15px;
+
+            }
+
+            .trust-item {
+
+                border-right: none;
+
+            }
+
+            .process-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .footer-grid {
+
+                grid-template-columns: 1fr;
+
+                text-align: center;
+
+            }
+
         }
 
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- NAVBAR -->
 
-    <div class="navbar">
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
 
-        <h2>RAVTO GLOBAL LTD</h2>
+<nav class="navbar">
 
-        <div class="nav-buttons">
+    <div class="brand-area">
 
-            <!-- DASHBOARD -->
-            <a href="{{ url_for('dashboard') }}" class="dashboard-btn">
-                Dashboard
+        <div class="brand-icon">
+            RG
+        </div>
+
+        <div class="brand">
+
+            RAVTO GLOBAL LTD
+
+            <small>
+                ENGINEERING • ENERGY • ICT • SECURITY
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="nav-buttons">
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-btn dashboard-btn">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('orders') }}"
+           class="nav-btn order-btn">
+            Place Order
+        </a>
+
+        <a href="{{ url_for('logout') }}"
+           class="nav-btn logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+            PROFESSIONAL SUPPORT & CONSULTATION
+        </span>
+
+        <h1>
+            How Can We <span>Help You?</span>
+        </h1>
+
+        <p>
+            Tell us what you need and our technical team will
+            help you identify the right solution for your
+            solar, electrical, ICT, electronics, networking
+            or security project.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="#assistant-form"
+               class="hero-btn hero-primary">
+                Request Assistance
             </a>
 
-            <!-- LOGOUT -->
-            <a href="{{ url_for('logout') }}" class="logout-btn">
-                Logout
+            <a href="{{ url_for('orders') }}"
+               class="hero-btn hero-secondary">
+                Place an Order
             </a>
 
         </div>
 
     </div>
 
-    <!-- HEADER -->
+</section>
 
-    <div class="header">
 
-        <div>
+<!-- =========================================================
+     TRUST BAR
+========================================================= -->
 
-            <h1>Need Assistant</h1>
+<section class="trust-bar">
+
+    <div class="trust-item">
+
+        <strong>
+            Technical Expertise
+        </strong>
+
+        <span>
+            Professional solutions
+        </span>
+
+    </div>
+
+
+    <div class="trust-item">
+
+        <strong>
+            Fast Response
+        </strong>
+
+        <span>
+            Prompt customer support
+        </span>
+
+    </div>
+
+
+    <div class="trust-item">
+
+        <strong>
+            End-to-End Support
+        </strong>
+
+        <span>
+            From consultation to maintenance
+        </span>
+
+    </div>
+
+
+    <div class="trust-item">
+
+        <strong>
+            Customer Focused
+        </strong>
+
+        <span>
+            Solutions for your needs
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="main-container">
+
+
+    <!-- =====================================================
+         INFORMATION PANEL
+    ====================================================== -->
+
+    <aside class="info-panel">
+
+        <span class="small-title">
+            RAVTO GLOBAL LTD
+        </span>
+
+        <h2>
+            Professional Technical Assistance
+        </h2>
+
+        <p>
+            Whether you need a new installation, system repair,
+            technical consultation or product recommendation,
+            our team is ready to assist.
+        </p>
+
+
+        <!-- SERVICE 1 -->
+
+        <div class="service-mini">
+
+            <div class="service-mini-icon">
+                ☀
+            </div>
+
+            <div>
+
+                <h4>
+                    Solar Solutions
+                </h4>
+
+                <p>
+                    Solar PV, batteries, inverters and pumping.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SERVICE 2 -->
+
+        <div class="service-mini">
+
+            <div class="service-mini-icon">
+                ⚡
+            </div>
+
+            <div>
+
+                <h4>
+                    Electrical Services
+                </h4>
+
+                <p>
+                    Wiring, power systems and maintenance.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SERVICE 3 -->
+
+        <div class="service-mini">
+
+            <div class="service-mini-icon">
+                ◉
+            </div>
+
+            <div>
+
+                <h4>
+                    Security Systems
+                </h4>
+
+                <p>
+                    CCTV, access control and electric fencing.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SERVICE 4 -->
+
+        <div class="service-mini">
+
+            <div class="service-mini-icon">
+                ⌘
+            </div>
+
+            <div>
+
+                <h4>
+                    ICT & Networking
+                </h4>
+
+                <p>
+                    Networks, Wi-Fi, cabling and ICT support.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div class="contact-box">
+
+            <h3>
+                Need Immediate Information?
+            </h3>
+
+            <div class="contact-line">
+                <span>☎</span>
+                <span>
+                    <strong>Phone:</strong>
+                    +254 700 000 000
+                </span>
+            </div>
+
+            <div class="contact-line">
+                <span>✉</span>
+                <span>
+                    <strong>Email:</strong>
+                    info@ravtoglobal.co.ke
+                </span>
+            </div>
+
+            <div class="contact-line">
+                <span>⌖</span>
+                <span>
+                    <strong>Location:</strong>
+                    Kenya
+                </span>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         ASSISTANT FORM
+    ====================================================== -->
+
+    <section class="form-card"
+             id="assistant-form">
+
+        <div class="form-heading">
+
+            <span>
+                REQUEST SUPPORT
+            </span>
+
+            <h2>
+                Assistant Request Form
+            </h2>
 
             <p>
-                Request professional support and assistance from
-                RAVTO GLOBAL LTD technical and customer support team.
+                Provide a few details about your request so our
+                team can understand your needs and respond
+                appropriately.
             </p>
 
         </div>
 
-    </div>
 
-    <!-- FORM SECTION -->
+        <form method="POST"
+              action="{{ url_for('assistant') }}"
+              enctype="multipart/form-data"
+              id="assistantForm">
 
-    <div class="container">
 
-        <h2>Assistant Request Form</h2>
+            <!-- Hidden request type -->
 
-        <form method="POST" action="/assistant">
+            <input type="hidden"
+                   name="request_type"
+                   value="Technical Assistance">
 
-            <!-- FULL NAME -->
 
-            <div class="form-group">
+            <!-- =================================================
+                 SECTION 1
+            ================================================== -->
 
-                <label>Full Name</label>
+            <div class="form-section">
 
-                <input
-                    type="text"
-                    name="fullname"
-                    placeholder="Enter your full name"
-                    required
-                >
+                <div class="form-section-title">
+
+                    <div class="section-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Personal Information
+                    </h3>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="fullname">
+                            Full Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullname"
+                            name="fullname"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="+254 7XX XXX XXX"
+                            autocomplete="tel"
+                            required>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="example@email.com"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="form-group">
+
+                        <label for="location">
+                            Project / Service Location
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="e.g. Meru, Nairobi, Mombasa"
+                            required>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <!-- PHONE -->
 
-            <div class="form-group">
+            <!-- =================================================
+                 SECTION 2
+            ================================================== -->
 
-                <label>Phone Number</label>
+            <div class="form-section">
 
-                <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Enter your phone number"
-                    required
-                >
+                <div class="form-section-title">
+
+                    <div class="section-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Service Required
+                    </h3>
+
+                </div>
+
+
+                <div class="service-options">
+
+
+                    <div class="service-option">
+
+                        <input
+                            type="radio"
+                            id="solar"
+                            name="assistant_area"
+                            value="Solar Installation"
+                            required>
+
+                        <label for="solar">
+                            ☀ Solar Installation
+                        </label>
+
+                    </div>
+
+
+                    <div class="service-option">
+
+                        <input
+                            type="radio"
+                            id="electrical"
+                            name="assistant_area"
+                            value="Electrical Engineering">
+
+                        <label for="electrical">
+                            ⚡ Electrical Engineering
+                        </label>
+
+                    </div>
+
+
+                    <div class="service-option">
+
+                        <input
+                            type="radio"
+                            id="security"
+                            name="assistant_area"
+                            value="CCTV & Security Systems">
+
+                        <label for="security">
+                            ◉ CCTV & Security
+                        </label>
+
+                    </div>
+
+
+                    <div class="service-option">
+
+                        <input
+                            type="radio"
+                            id="ict"
+                            name="assistant_area"
+                            value="ICT & Networking">
+
+                        <label for="ict">
+                            ⌘ ICT & Networking
+                        </label>
+
+                    </div>
+
+
+                    <div class="service-option">
+
+                        <input
+                            type="radio"
+                            id="electronics"
+                            name="assistant_area"
+                            value="Electronics">
+
+                        <label for="electronics">
+                            ▣ Electronics
+                        </label>
+
+                    </div>
+
+
+                    <div class="service-option">
+
+                        <input
+                            type="radio"
+                            id="maintenance"
+                            name="assistant_area"
+                            value="Maintenance & Repairs">
+
+                        <label for="maintenance">
+                            🔧 Maintenance & Repairs
+                        </label>
+
+                    </div>
+
+
+                    <div class="service-option">
+
+                        <input
+                            type="radio"
+                            id="consultation"
+                            name="assistant_area"
+                            value="Technical Consultation">
+
+                        <label for="consultation">
+                            💡 Technical Consultation
+                        </label>
+
+                    </div>
+
+
+                    <div class="service-option">
+
+                        <input
+                            type="radio"
+                            id="support"
+                            name="assistant_area"
+                            value="Customer Support">
+
+                        <label for="support">
+                            ♟ Customer Support
+                        </label>
+
+                    </div>
+
+
+                </div>
 
             </div>
 
-            <!-- EMAIL -->
 
-            <div class="form-group">
+            <!-- =================================================
+                 SECTION 3
+            ================================================== -->
 
-                <label>Email Address</label>
+            <div class="form-section">
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required
-                >
+                <div class="form-section-title">
+
+                    <div class="section-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Request Priority
+                    </h3>
+
+                </div>
+
+
+                <div class="priority-options">
+
+
+                    <div class="priority">
+
+                        <input
+                            type="radio"
+                            id="normal"
+                            name="priority"
+                            value="Normal"
+                            checked>
+
+                        <label for="normal">
+                            Normal
+                        </label>
+
+                    </div>
+
+
+                    <div class="priority">
+
+                        <input
+                            type="radio"
+                            id="urgent"
+                            name="priority"
+                            value="Urgent">
+
+                        <label for="urgent">
+                            Urgent
+                        </label>
+
+                    </div>
+
+
+                    <div class="priority">
+
+                        <input
+                            type="radio"
+                            id="emergency"
+                            name="priority"
+                            value="Emergency">
+
+                        <label for="emergency">
+                            Emergency
+                        </label>
+
+                    </div>
+
+
+                </div>
 
             </div>
 
-            <!-- AREA OF ASSISTANCE -->
 
-            <div class="form-group">
+            <!-- =================================================
+                 SECTION 4
+            ================================================== -->
 
-                <label>Area of Assistance</label>
+            <div class="form-section">
 
-                <select name="assistant_area" required>
+                <div class="form-section-title">
 
-                    <option value="">-- Select Assistance Area --</option>
+                    <div class="section-number">
+                        04
+                    </div>
 
-                    <option>Solar Installation</option>
+                    <h3>
+                        Project Information
+                    </h3>
 
-                    <option>Electrical Engineering</option>
+                </div>
 
-                    <option>CCTV & Security Systems</option>
 
-                    <option>ICT & Networking</option>
+                <div class="form-grid">
 
-                    <option>Maintenance & Repairs</option>
 
-                    <option>Technical Consultation</option>
+                    <!-- BUDGET -->
 
-                    <option>Customer Support</option>
+                    <div class="form-group">
 
-                </select>
+                        <label for="budget">
+                            Estimated Budget
+                        </label>
+
+                        <select
+                            name="budget"
+                            id="budget">
+
+                            <option value="">
+                                Prefer not to say
+                            </option>
+
+                            <option value="Below KSh 10,000">
+                                Below KSh 10,000
+                            </option>
+
+                            <option value="KSh 10,000 - 50,000">
+                                KSh 10,000 - 50,000
+                            </option>
+
+                            <option value="KSh 50,000 - 100,000">
+                                KSh 50,000 - 100,000
+                            </option>
+
+                            <option value="KSh 100,000 - 500,000">
+                                KSh 100,000 - 500,000
+                            </option>
+
+                            <option value="Above KSh 500,000">
+                                Above KSh 500,000
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PROJECT TYPE -->
+
+                    <div class="form-group">
+
+                        <label for="project_type">
+                            Project Type
+                        </label>
+
+                        <select
+                            name="project_type"
+                            id="project_type">
+
+                            <option value="">
+                                Select project type
+                            </option>
+
+                            <option value="Residential">
+                                Residential
+                            </option>
+
+                            <option value="Commercial">
+                                Commercial
+                            </option>
+
+                            <option value="Industrial">
+                                Industrial
+                            </option>
+
+                            <option value="Institutional">
+                                Institutional
+                            </option>
+
+                            <option value="Government">
+                                Government
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DATE -->
+
+                    <div class="form-group">
+
+                        <label for="preferred_date">
+                            Preferred Service Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="preferred_date"
+                            id="preferred_date">
+
+                    </div>
+
+
+                    <!-- TIME -->
+
+                    <div class="form-group">
+
+                        <label for="preferred_time">
+                            Preferred Time
+                        </label>
+
+                        <select
+                            name="preferred_time"
+                            id="preferred_time">
+
+                            <option value="">
+                                Select preferred time
+                            </option>
+
+                            <option value="Morning">
+                                Morning
+                            </option>
+
+                            <option value="Afternoon">
+                                Afternoon
+                            </option>
+
+                            <option value="Evening">
+                                Evening
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- FULL WIDTH DETAILS -->
+
+                    <div class="form-group full">
+
+                        <label for="message">
+                            Describe Your Request
+                            <span class="required">*</span>
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Explain the problem, project requirements, equipment involved, number of rooms/devices, system size or any other useful information..."
+                            required></textarea>
+
+                        <div class="hint">
+                            The more information you provide, the easier
+                            it will be for our team to understand your
+                            requirements.
+                        </div>
+
+                    </div>
+
+
+                    <!-- ADDITIONAL DETAILS -->
+
+                    <div class="form-group full">
+
+                        <label for="additional_details">
+                            Additional Requirements
+                        </label>
+
+                        <textarea
+                            id="additional_details"
+                            name="additional_details"
+                            placeholder="Add any additional specifications, preferred equipment, delivery requirements or special instructions..."></textarea>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <!-- LOCATION -->
 
-            <div class="form-group">
+            <!-- =================================================
+                 SECTION 5
+            ================================================== -->
 
-                <label>Location</label>
+            <div class="form-section">
 
-                <input
-                    type="text"
-                    name="location"
-                    placeholder="Enter your location"
-                    required
-                >
+                <div class="form-section-title">
+
+                    <div class="section-number">
+                        05
+                    </div>
+
+                    <h3>
+                        Preferred Contact Method
+                    </h3>
+
+                </div>
+
+
+                <div class="contact-options">
+
+
+                    <div class="contact-option">
+
+                        <input
+                            type="radio"
+                            id="contact_phone"
+                            name="contact_method"
+                            value="Phone"
+                            checked>
+
+                        <label for="contact_phone">
+                            ☎ Phone Call
+                        </label>
+
+                    </div>
+
+
+                    <div class="contact-option">
+
+                        <input
+                            type="radio"
+                            id="contact_whatsapp"
+                            name="contact_method"
+                            value="WhatsApp">
+
+                        <label for="contact_whatsapp">
+                            WhatsApp
+                        </label>
+
+                    </div>
+
+
+                    <div class="contact-option">
+
+                        <input
+                            type="radio"
+                            id="contact_email"
+                            name="contact_method"
+                            value="Email">
+
+                        <label for="contact_email">
+                            ✉ Email
+                        </label>
+
+                    </div>
+
+
+                </div>
 
             </div>
 
-            <!-- MESSAGE -->
 
-            <div class="form-group">
+            <!-- =================================================
+                 SECTION 6
+            ================================================== -->
 
-                <label>Describe Your Request</label>
+            <div class="form-section">
 
-                <textarea
-                    name="message"
-                    placeholder="Describe the assistance you need..."
-                    required
-                ></textarea>
+                <div class="form-section-title">
+
+                    <div class="section-number">
+                        06
+                    </div>
+
+                    <h3>
+                        Additional Attachment
+                    </h3>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="attachment">
+                        Upload Project Image / Document
+                    </label>
+
+                    <input
+                        type="file"
+                        id="attachment"
+                        name="attachment"
+                        accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+
+                    <div class="hint">
+                        Optional. You may attach a photo, quotation,
+                        technical document or other file that helps
+                        us understand your request.
+                    </div>
+
+                </div>
 
             </div>
 
-            <!-- SUBMIT BUTTON -->
 
-            <button type="submit" class="btn">
-                Submit Request
-            </button>
+            <!-- =================================================
+                 SUBMIT
+            ================================================== -->
+
+            <div class="submit-area">
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    id="submitBtn">
+
+                    Submit Assistance Request
+
+                </button>
+
+                <p class="submit-note">
+                    By submitting this form, you are requesting
+                    assistance from RAVTO GLOBAL LTD. Our team
+                    may contact you for clarification.
+                </p>
+
+            </div>
+
 
         </form>
 
-    </div>
+    </section>
 
-    <!-- FOOTER -->
+</main>
 
-    <footer>
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section class="process-section">
+
+    <div class="section-title">
+
+        <span>
+            HOW IT WORKS
+        </span>
+
+        <h2>
+            From Request to Solution
+        </h2>
 
         <p>
-            © 2026 RAVTO GLOBAL LTD | Smart Engineering & ICT Solutions
+            Our support process is designed to make it easy
+            for you to get the right technical assistance.
         </p>
 
-    </footer>
+    </div>
+
+
+    <div class="process-grid">
+
+
+        <div class="process-card">
+
+            <div class="process-icon">
+                01
+            </div>
+
+            <h3>
+                Submit Request
+            </h3>
+
+            <p>
+                Tell us about your project, problem or
+                technical requirement.
+            </p>
+
+        </div>
+
+
+        <div class="process-card">
+
+            <div class="process-icon">
+                02
+            </div>
+
+            <h3>
+                Assessment
+            </h3>
+
+            <p>
+                Our team reviews the information and
+                determines the appropriate approach.
+            </p>
+
+        </div>
+
+
+        <div class="process-card">
+
+            <div class="process-icon">
+                03
+            </div>
+
+            <h3>
+                Consultation
+            </h3>
+
+            <p>
+                We contact you to discuss specifications,
+                costs and possible solutions.
+            </p>
+
+        </div>
+
+
+        <div class="process-card">
+
+            <div class="process-icon">
+                04
+            </div>
+
+            <h3>
+                Solution
+            </h3>
+
+            <p>
+                We proceed with the agreed service,
+                installation, repair or consultation.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="footer-grid">
+
+
+        <div class="footer-column">
+
+            <h3>
+                RAVTO GLOBAL LTD
+            </h3>
+
+            <p>
+                Professional solar, electrical, ICT,
+                electronics, networking and security
+                solutions for homes, businesses and
+                institutions.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Services
+            </h3>
+
+            <ul>
+
+                <li>
+                    Solar Systems
+                </li>
+
+                <li>
+                    Electrical Engineering
+                </li>
+
+                <li>
+                    CCTV & Security
+                </li>
+
+                <li>
+                    ICT & Networking
+                </li>
+
+                <li>
+                    Maintenance & Repairs
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a href="{{ url_for('dashboard') }}">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('orders') }}">
+                        Place Order
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('assistant') }}">
+                        Need Assistant
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('logout') }}">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 RAVTO GLOBAL LTD |
+        Smart Engineering & ICT Solutions |
+        All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /* =========================================================
+       SET MINIMUM DATE TO TODAY
+    ========================================================= */
+
+    const dateInput =
+        document.getElementById(
+            "preferred_date"
+        );
+
+
+    const today =
+        new Date();
+
+
+    const year =
+        today.getFullYear();
+
+
+    const month =
+        String(
+            today.getMonth() + 1
+        ).padStart(2, "0");
+
+
+    const day =
+        String(
+            today.getDate()
+        ).padStart(2, "0");
+
+
+    const todayString =
+        `${year}-${month}-${day}`;
+
+
+    dateInput.min =
+        todayString;
+
+
+    /* =========================================================
+       FORM SUBMISSION
+    ========================================================= */
+
+    const form =
+        document.getElementById(
+            "assistantForm"
+        );
+
+
+    const submitBtn =
+        document.getElementById(
+            "submitBtn"
+        );
+
+
+    form.addEventListener(
+        "submit",
+        function(event) {
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                ).value.trim();
+
+
+            /*
+                Basic phone validation.
+            */
+
+            const phonePattern =
+                /^[0-9+\-\s()]{8,20}$/;
+
+
+            if (
+                !phonePattern.test(phone)
+            ) {
+
+                event.preventDefault();
+
+                alert(
+                    "Please enter a valid phone number."
+                );
+
+                return;
+
+            }
+
+
+            /*
+                Make sure the message is meaningful.
+            */
+
+            if (
+                message.length < 10
+            ) {
+
+                event.preventDefault();
+
+                alert(
+                    "Please provide more details about the assistance you need."
+                );
+
+                return;
+
+            }
+
+
+            /*
+                Prevent accidental double submission.
+            */
+
+            submitBtn.disabled =
+                true;
+
+            submitBtn.textContent =
+                "Submitting Request...";
+
+        }
+    );
+
+
+</script>
+
 
 </body>
+
 </html>
+
