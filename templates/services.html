@@ -1,305 +1,1577 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAVTO GLOBAL LTD - Services</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
+    <title>RAVTO GLOBAL LTD | Our Services</title>
 
-body{
-    background:#f1f5f9;
-    color:#222;
-    line-height:1.6;
-}
+    <meta name="description" content="RAVTO GLOBAL LTD provides professional solar energy, electrical engineering, ICT, security, networking and technical solutions in Kenya.">
 
-/* NAVBAR */
-.navbar{
-    width:100%;
-    background:#0f172a;
-    padding:15px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
+    <meta name="keywords" content="RAVTO GLOBAL LTD, solar systems Kenya, electrical engineering Kenya, CCTV installation, networking, security systems, ICT solutions">
 
-.logo{
-    color:white;
-    font-size:22px;
-    font-weight:bold;
-}
-
-.nav-links{
-    display:flex;
-    gap:12px;
-}
-
-.nav-links a{
-    text-decoration:none;
-    padding:10px 16px;
-    border-radius:8px;
-    color:white;
-    font-weight:bold;
-    font-size:14px;
-}
-
-.dashboard-btn{ background:#2563eb; }
-.assistant-btn{ background:#10b981; }
-.logout-btn{ background:#dc2626; }
-
-/* HERO */
-.hero{
-    display:flex;
-    min-height:75vh;
-}
-
-.hero-image{
-    flex:1;
-    background:url('/static/images/img1.jpeg') no-repeat center center;
-    background-size:cover;
-}
-
-.hero-text{
-    flex:1;
-    background:white;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:40px;
-    text-align:center;
-}
-
-.hero-text h1{
-    font-size:48px;
-    color:#0f172a;
-    margin-bottom:15px;
-}
-
-.hero-text p{
-    font-size:18px;
-    color:#555;
-}
-
-/* CONTAINER */
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-    padding:50px 0;
-}
-
-/* TITLE */
-.section-title{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.section-title h2{
-    font-size:36px;
-    color:#0f172a;
-}
-
-/* GRID LAYOUT (ROWS) */
-.services-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr); /* 2 columns = rows */
-    gap:25px;
-}
-
-/* CARD */
-.card{
-    background:white;
-    border-radius:14px;
-    overflow:hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    transition:0.3s ease;
-}
-
-.card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 30px rgba(0,0,0,0.12);
-}
-
-/* SMALLER IMAGES */
-.card img{
-    width:100%;
-    height:160px;   /* 🔥 reduced size */
-    object-fit:cover;
-    object-position:center;
-}
-
-/* CONTENT */
-.card-content{
-    padding:18px;
-}
-
-.card h3{
-    color:#1e3a8a;
-    margin-bottom:8px;
-    font-size:20px;
-}
-
-.card p{
-    margin-bottom:10px;
-    color:#444;
-    font-size:14px;
-}
-
-.card ul{
-    padding-left:18px;
-}
-
-.card ul li{
-    margin-bottom:6px;
-    color:#333;
-    font-size:14px;
-}
-
-/* FOOTER */
-footer{
-    background:#0f172a;
-    color:white;
-    text-align:center;
-    padding:20px;
-    margin-top:50px;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-    .hero{
-        flex-direction:column;
-    }
-
-    .hero-text{
-        padding:30px 20px;
-    }
-
-    .hero-text h1{
-        font-size:32px;
-    }
-
-    /* stack cards on mobile */
-    .services-grid{
-        grid-template-columns:1fr;
-    }
-
-    .card img{
-        height:180px;
-    }
-}
-</style>
+    <style>
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: #f5f7fb;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+        
+        .navbar {
+            width: 100%;
+            background: #0f172a;
+            min-height: 72px;
+            padding: 14px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: .3px;
+        }
+        
+        .logo small {
+            display: block;
+            color: #94a3b8;
+            font-size: 10px;
+            font-weight: normal;
+            letter-spacing: 1.2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-links a {
+            padding: 9px 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            transition: .3s ease;
+        }
+        
+        .dashboard-btn {
+            background: #2563eb;
+        }
+        
+        .assistant-btn {
+            background: #10b981;
+        }
+        
+        .logout-btn {
+            background: #dc2626;
+        }
+        
+        .nav-links a:hover {
+            transform: translateY(-2px);
+            opacity: .9;
+        }
+        /* =========================================================
+           HERO
+        ========================================================= */
+        
+        .hero {
+            min-height: 560px;
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            background: white;
+        }
+        
+        .hero-image {
+            min-height: 560px;
+            background: linear-gradient( rgba(15, 23, 42, .35), rgba(15, 23, 42, .35)), url('/static/images/img1.jpeg') center center / cover no-repeat;
+        }
+        
+        .hero-text {
+            padding: 70px 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            width: fit-content;
+            padding: 7px 15px;
+            border-radius: 30px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+        
+        .hero-text h1 {
+            font-size: clamp(38px, 5vw, 62px);
+            line-height: 1.1;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+        
+        .hero-text h1 span {
+            color: #2563eb;
+        }
+        
+        .hero-text p {
+            max-width: 600px;
+            color: #64748b;
+            font-size: 18px;
+            margin-bottom: 28px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-btn {
+            padding: 13px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: .3s;
+        }
+        
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .secondary-btn {
+            border: 1px solid #cbd5e1;
+            color: #0f172a;
+            background: white;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-3px);
+        }
+        /* =========================================================
+           TRUST / STATS
+        ========================================================= */
+        
+        .stats {
+            background: #0f172a;
+            color: white;
+            padding: 28px 5%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .stat {
+            border-right: 1px solid rgba(255, 255, 255, .12);
+        }
+        
+        .stat:last-child {
+            border-right: none;
+        }
+        
+        .stat h3 {
+            font-size: 28px;
+            color: #60a5fa;
+        }
+        
+        .stat p {
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+        /* =========================================================
+           MAIN CONTAINER
+        ========================================================= */
+        
+        .container {
+            width: 90%;
+            max-width: 1250px;
+            margin: auto;
+            padding: 75px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 45px;
+        }
+        
+        .section-title span {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        
+        .section-title h2 {
+            font-size: clamp(30px, 4vw, 42px);
+            color: #0f172a;
+            margin: 8px 0 12px;
+        }
+        
+        .section-title p {
+            color: #64748b;
+            font-size: 16px;
+        }
+        /* =========================================================
+           SERVICES GRID
+        ========================================================= */
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, .07);
+            border: 1px solid #e2e8f0;
+            transition: .35s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, .13);
+        }
+        
+        .card-image {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: .5s ease;
+        }
+        
+        .card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .service-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card h3 {
+            color: #1e3a8a;
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+        
+        .card-intro {
+            color: #64748b;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+        
+        .service-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+        }
+        
+        .service-list li {
+            font-size: 14px;
+            color: #334155;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .service-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .service-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        /* =========================================================
+           WHY CHOOSE US
+        ========================================================= */
+        
+        .why-section {
+            background: white;
+            padding: 80px 5%;
+        }
+        
+        .why-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .why-image {
+            min-height: 430px;
+            border-radius: 18px;
+            background: linear-gradient( rgba(15, 23, 42, .25), rgba(15, 23, 42, .25)), url('/static/images/img1.jpeg') center / cover no-repeat;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, .12);
+        }
+        
+        .why-content span {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .why-content h2 {
+            color: #0f172a;
+            font-size: 38px;
+            line-height: 1.2;
+            margin: 10px 0 15px;
+        }
+        
+        .why-content>p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+        
+        .benefit {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-icon {
+            min-width: 42px;
+            height: 42px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .benefit h4 {
+            color: #0f172a;
+            margin-bottom: 3px;
+        }
+        
+        .benefit p {
+            color: #64748b;
+            font-size: 14px;
+        }
+        /* =========================================================
+           PROCESS
+        ========================================================= */
+        
+        .process-section {
+            background: #f1f5f9;
+            padding: 75px 5%;
+        }
+        
+        .process-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .process-card {
+            background: white;
+            padding: 28px 22px;
+            text-align: center;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .process-icon {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 19px;
+        }
+        
+        .process-card h3 {
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        
+        .process-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+        /* =========================================================
+           COMPLIANCE
+        ========================================================= */
+        
+        .compliance {
+            padding: 65px 5%;
+            background: white;
+        }
+        
+        .compliance-grid {
+            max-width: 1050px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .compliance-card {
+            text-align: center;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+        
+        .compliance-card .check {
+            color: #10b981;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        
+        .compliance-card h3 {
+            color: #0f172a;
+            margin: 5px 0;
+        }
+        
+        .compliance-card p {
+            color: #64748b;
+            font-size: 13px;
+        }
+        /* =========================================================
+           CTA
+        ========================================================= */
+        
+        .cta {
+            width: 90%;
+            max-width: 1200px;
+            margin: 70px auto;
+            padding: 55px 7%;
+            border-radius: 20px;
+            background: linear-gradient( 120deg, #0f172a, #1e3a8a);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .cta h2 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+        
+        .cta p {
+            color: #cbd5e1;
+            max-width: 650px;
+        }
+        
+        .cta-btn {
+            white-space: nowrap;
+            padding: 14px 25px;
+            border-radius: 9px;
+            background: #10b981;
+            color: white;
+            font-weight: bold;
+            transition: .3s;
+        }
+        
+        .cta-btn:hover {
+            background: #059669;
+            transform: translateY(-3px);
+        }
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+        
+        footer {
+            background: #020617;
+            color: white;
+            padding: 50px 5% 20px;
+        }
+        
+        .footer-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 45px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-column p,
+        .footer-column li {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 7px;
+        }
+        
+        .footer-column a {
+            color: #94a3b8;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 35px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+        
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 12px 20px;
+            }
+            .logo {
+                font-size: 16px;
+            }
+            .nav-links {
+                gap: 5px;
+            }
+            .nav-links a {
+                padding: 8px 9px;
+                font-size: 11px;
+            }
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .hero-image {
+                min-height: 350px;
+            }
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stat:nth-child(2) {
+                border-right: none;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .why-container {
+                grid-template-columns: 1fr;
+            }
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .compliance-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .hero-text {
+                padding: 45px 25px;
+            }
+            .hero-text h1 {
+                font-size: 38px;
+            }
+            .service-list {
+                grid-template-columns: 1fr;
+            }
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .container {
+                padding: 55px 0;
+            }
+            .why-section {
+                padding: 55px 5%;
+            }
+            .why-content h2 {
+                font-size: 30px;
+            }
+            .cta {
+                padding: 40px 25px;
+            }
+            .cta h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <div class="logo">RAVTO GLOBAL LTD COMPANY</div>
 
-    <div class="nav-links">
-        <a href="{{ url_for('dashboard') }}" class="dashboard-btn">Dashboard</a>
-        <a href="{{ url_for('assistant') }}" class="assistant-btn">Need Assistant</a>
-        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
-    </div>
-</div>
+    <!-- =========================================================
+     NAVIGATION
+========================================================= -->
 
-<!-- HERO -->
-<div class="hero">
-    <div class="hero-image"></div>
+    <nav class="navbar">
 
-    <div class="hero-text">
-        <h1>Our Services</h1>
-        <p>Solar • Electrical • ICT Systems • Security Solutions</p>
-    </div>
-</div>
+        <div class="logo-area">
 
-<!-- SERVICES -->
-<div class="container">
-
-    <div class="section-title">
-        <h2>What We Offer</h2>
-    </div>
-
-    <!-- GRID START -->
-    <div class="services-grid">
-
-        <!-- SOLAR -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80">
-            <div class="card-content">
-                <h3>Solar Energy</h3>
-                <p>Reliable renewable energy solutions.</p>
-                <ul>
-                    <li>Solar PV Systems</li>
-                    <li>Water Heating</li>
-                    <li>Pumping Systems</li>
-                    <li>Street Lighting</li>
-                </ul>
+            <div class="logo-icon">
+                RG
             </div>
+
+            <div class="logo">
+                RAVTO GLOBAL LTD
+                <small>TECHNICAL & ENGINEERING SOLUTIONS</small>
+            </div>
+
         </div>
 
-        <!-- ELECTRICAL -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1200&q=80">
-            <div class="card-content">
-                <h3>Electrical Engineering</h3>
-                <p>Professional installation services.</p>
-                <ul>
-                    <li>Building Wiring</li>
-                    <li>Power Distribution</li>
-                    <li>UPS Systems</li>
-                    <li>Energy Audits</li>
-                </ul>
-            </div>
+        <div class="nav-links">
+
+            <a href="{{ url_for('dashboard') }}" class="dashboard-btn">
+            Dashboard
+        </a>
+
+            <a href="{{ url_for('assistant') }}" class="assistant-btn">
+            Need Assistant
+        </a>
+
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+            Logout
+        </a>
+
         </div>
 
-        <!-- SECURITY -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80">
-            <div class="card-content">
-                <h3>Security Systems</h3>
-                <p>Smart surveillance solutions.</p>
-                <ul>
-                    <li>CCTV Installation</li>
-                    <li>Electric Fencing</li>
-                    <li>Access Control</li>
-                    <li>Networking</li>
-                </ul>
+    </nav>
+
+
+    <!-- =========================================================
+     HERO
+========================================================= -->
+
+    <section class="hero">
+
+        <div class="hero-image"></div>
+
+        <div class="hero-text">
+
+            <span class="hero-badge">
+            PROFESSIONAL TECHNICAL SOLUTIONS
+        </span>
+
+            <h1>
+                Our <span>Services</span>
+            </h1>
+
+            <p>
+                RAVTO GLOBAL LTD provides reliable solar energy, electrical engineering, ICT infrastructure and security solutions designed for homes, businesses, institutions and industrial environments.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#services" class="hero-btn primary-btn">
+                Explore Services
+            </a>
+
+                <a href="#contact" class="hero-btn secondary-btn">
+                Get in Touch
+            </a>
+
             </div>
+
         </div>
 
-        <!-- COMPLIANCE -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80">
-            <div class="card-content">
-                <h3>Compliance</h3>
-                <p>Fully certified company.</p>
-                <ul>
-                    <li>EPRA Licensed</li>
-                    <li>NCA Registered</li>
-                    <li>KRA Compliant</li>
-                </ul>
-            </div>
+    </section>
+
+
+    <!-- =========================================================
+     STATS
+========================================================= -->
+
+    <section class="stats">
+
+        <div class="stat">
+            <h3>4+</h3>
+            <p>Core Service Areas</p>
         </div>
 
-    </div>
-    <!-- GRID END -->
+        <div class="stat">
+            <h3>100%</h3>
+            <p>Professional Approach</p>
+        </div>
 
-</div>
+        <div class="stat">
+            <h3>24/7</h3>
+            <p>Technical Support</p>
+        </div>
 
-<footer>
-    © 2026 RAVTO GLOBAL LTD | All Rights Reserved
-</footer>
+        <div class="stat">
+            <h3>360°</h3>
+            <p>End-to-End Solutions</p>
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+     SERVICES
+========================================================= -->
+
+    <section class="container" id="services">
+
+        <div class="section-title">
+
+            <span>OUR EXPERTISE</span>
+
+            <h2>
+                Complete Technical Solutions
+            </h2>
+
+            <p>
+                From energy and electrical installations to security and ICT infrastructure, we provide integrated solutions focused on quality, reliability, safety and long-term performance.
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+            <!-- =================================================
+             SOLAR ENERGY
+        ================================================== -->
+
+            <article class="card">
+
+                <div class="card-image">
+
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80" alt="Solar energy installation">
+
+                    <div class="service-number">
+                        01
+                    </div>
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Solar Energy Solutions
+                    </h3>
+
+                    <p class="card-intro">
+                        We design and implement efficient renewable energy systems that help homes, businesses and institutions reduce energy costs and improve power reliability.
+                    </p>
+
+                    <ul class="service-list">
+
+                        <li>Solar PV Systems</li>
+                        <li>Solar Water Heating</li>
+                        <li>Solar Pumping Systems</li>
+                        <li>Solar Street Lighting</li>
+                        <li>Battery Backup Systems</li>
+                        <li>Hybrid Solar Systems</li>
+                        <li>System Maintenance</li>
+                        <li>Solar System Assessment</li>
+
+                    </ul>
+
+                    <a href="#contact" class="service-link">
+                    Request Solar Service →
+                </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             ELECTRICAL ENGINEERING
+        ================================================== -->
+
+            <article class="card">
+
+                <div class="card-image">
+
+                    <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1200&q=80" alt="Electrical engineering">
+
+                    <div class="service-number">
+                        02
+                    </div>
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Electrical Engineering
+                    </h3>
+
+                    <p class="card-intro">
+                        Our electrical services cover installation, maintenance and optimization of electrical systems for residential, commercial and institutional projects.
+                    </p>
+
+                    <ul class="service-list">
+
+                        <li>Building Wiring</li>
+                        <li>Power Distribution</li>
+                        <li>Lighting Installation</li>
+                        <li>UPS Systems</li>
+                        <li>Generator Integration</li>
+                        <li>Energy Audits</li>
+                        <li>Electrical Maintenance</li>
+                        <li>Fault Diagnosis</li>
+
+                    </ul>
+
+                    <a href="#contact" class="service-link">
+                    Request Electrical Service →
+                </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             SECURITY SYSTEMS
+        ================================================== -->
+
+            <article class="card">
+
+                <div class="card-image">
+
+                    <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80" alt="Security and surveillance systems">
+
+                    <div class="service-number">
+                        03
+                    </div>
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Security Systems
+                    </h3>
+
+                    <p class="card-intro">
+                        Protect your property, people and assets with modern security technologies designed for monitoring, access management and perimeter protection.
+                    </p>
+
+                    <ul class="service-list">
+
+                        <li>CCTV Installation</li>
+                        <li>IP Camera Systems</li>
+                        <li>Electric Fencing</li>
+                        <li>Access Control</li>
+                        <li>Alarm Systems</li>
+                        <li>Intercom Systems</li>
+                        <li>Remote Monitoring</li>
+                        <li>Security Maintenance</li>
+
+                    </ul>
+
+                    <a href="#contact" class="service-link">
+                    Request Security Service →
+                </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             ICT & NETWORKING
+        ================================================== -->
+
+            <article class="card">
+
+                <div class="card-image">
+
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" alt="ICT networking infrastructure">
+
+                    <div class="service-number">
+                        04
+                    </div>
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        ICT & Networking Solutions
+                    </h3>
+
+                    <p class="card-intro">
+                        We provide reliable ICT infrastructure that enables organizations to communicate, share information and operate efficiently.
+                    </p>
+
+                    <ul class="service-list">
+
+                        <li>LAN Installation</li>
+                        <li>Wi-Fi Networks</li>
+                        <li>Structured Cabling</li>
+                        <li>Network Configuration</li>
+                        <li>Server Setup</li>
+                        <li>Network Maintenance</li>
+                        <li>Router Configuration</li>
+                        <li>ICT Consultancy</li>
+
+                    </ul>
+
+                    <a href="#contact" class="service-link">
+                    Request ICT Service →
+                </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             COMMUNICATION & SOUND
+        ================================================== -->
+
+            <article class="card">
+
+                <div class="card-image">
+
+                    <img src="https://images.unsplash.com/photo-1598387993281-cecf8b71a8f8?auto=format&fit=crop&w=1200&q=80" alt="Audio and communication systems">
+
+                    <div class="service-number">
+                        05
+                    </div>
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Communication & Sound Systems
+                    </h3>
+
+                    <p class="card-intro">
+                        Professional audio and communication solutions for offices, institutions, events, commercial premises and public environments.
+                    </p>
+
+                    <ul class="service-list">
+
+                        <li>PA Systems</li>
+                        <li>Public Address Systems</li>
+                        <li>Conference Systems</li>
+                        <li>Intercom Solutions</li>
+                        <li>Sound Installation</li>
+                        <li>Audio Equipment</li>
+                        <li>System Configuration</li>
+                        <li>Maintenance Services</li>
+
+                    </ul>
+
+                    <a href="#contact" class="service-link">
+                    Request Audio Service →
+                </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             MAINTENANCE
+        ================================================== -->
+
+            <article class="card">
+
+                <div class="card-image">
+
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80" alt="Technical maintenance services">
+
+                    <div class="service-number">
+                        06
+                    </div>
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Maintenance & Technical Support
+                    </h3>
+
+                    <p class="card-intro">
+                        Keep your technical systems operating safely and efficiently through preventive maintenance, troubleshooting and professional technical support.
+                    </p>
+
+                    <ul class="service-list">
+
+                        <li>Preventive Maintenance</li>
+                        <li>System Inspection</li>
+                        <li>Fault Diagnosis</li>
+                        <li>Equipment Servicing</li>
+                        <li>Emergency Support</li>
+                        <li>System Upgrades</li>
+                        <li>Performance Testing</li>
+                        <li>Technical Consultancy</li>
+
+                    </ul>
+
+                    <a href="#contact" class="service-link">
+                    Request Support →
+                </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+     WHY CHOOSE US
+========================================================= -->
+
+    <section class="why-section">
+
+        <div class="why-container">
+
+            <div class="why-image"></div>
+
+            <div class="why-content">
+
+                <span>WHY RAVTO GLOBAL LTD</span>
+
+                <h2>
+                    Solutions Built Around Your Needs
+                </h2>
+
+                <p>
+                    We combine technical expertise, modern technology and customer-focused service to deliver solutions that are practical, scalable and reliable.
+                </p>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        01
+                    </div>
+
+                    <div>
+                        <h4>Professional Expertise</h4>
+
+                        <p>
+                            Our solutions are planned and implemented with attention to technical requirements, safety and performance.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        02
+                    </div>
+
+                    <div>
+                        <h4>Quality Solutions</h4>
+
+                        <p>
+                            We focus on dependable equipment, professional installation and quality workmanship.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        03
+                    </div>
+
+                    <div>
+                        <h4>Customer Focused</h4>
+
+                        <p>
+                            We understand your requirements before recommending a solution that matches your budget and objectives.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        04
+                    </div>
+
+                    <div>
+                        <h4>After-Sales Support</h4>
+
+                        <p>
+                            Our relationship continues after installation through maintenance and technical support.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+     HOW WE WORK
+========================================================= -->
+
+    <section class="process-section">
+
+        <div class="process-container">
+
+            <div class="section-title">
+
+                <span>OUR PROCESS</span>
+
+                <h2>
+                    How We Deliver Our Services
+                </h2>
+
+                <p>
+                    A simple and professional approach from initial consultation to installation and support.
+                </p>
+
+            </div>
+
+
+            <div class="process-grid">
+
+
+                <div class="process-card">
+
+                    <div class="process-icon">
+                        01
+                    </div>
+
+                    <h3>
+                        Consultation
+                    </h3>
+
+                    <p>
+                        We listen to your requirements and understand your project objectives.
+                    </p>
+
+                </div>
+
+
+                <div class="process-card">
+
+                    <div class="process-icon">
+                        02
+                    </div>
+
+                    <h3>
+                        Assessment
+                    </h3>
+
+                    <p>
+                        Our team evaluates the site, technical requirements and appropriate solution.
+                    </p>
+
+                </div>
+
+
+                <div class="process-card">
+
+                    <div class="process-icon">
+                        03
+                    </div>
+
+                    <h3>
+                        Implementation
+                    </h3>
+
+                    <p>
+                        The selected system is installed and configured according to project requirements.
+                    </p>
+
+                </div>
+
+
+                <div class="process-card">
+
+                    <div class="process-icon">
+                        04
+                    </div>
+
+                    <h3>
+                        Support
+                    </h3>
+
+                    <p>
+                        We provide maintenance, technical support and system improvement where required.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+     COMPLIANCE
+========================================================= -->
+
+    <section class="compliance">
+
+        <div class="section-title">
+
+            <span>TRUST & COMPLIANCE</span>
+
+            <h2>
+                Professional Standards
+            </h2>
+
+            <p>
+                We aim to maintain professional standards and compliance across our technical operations.
+            </p>
+
+        </div>
+
+
+        <div class="compliance-grid">
+
+
+            <div class="compliance-card">
+
+                <div class="check">
+                    ✓
+                </div>
+
+                <h3>
+                    EPRA
+                </h3>
+
+                <p>
+                    Energy sector compliance and professional standards where applicable.
+                </p>
+
+            </div>
+
+
+            <div class="compliance-card">
+
+                <div class="check">
+                    ✓
+                </div>
+
+                <h3>
+                    NCA
+                </h3>
+
+                <p>
+                    Construction and technical project requirements where applicable.
+                </p>
+
+            </div>
+
+
+            <div class="compliance-card">
+
+                <div class="check">
+                    ✓
+                </div>
+
+                <h3>
+                    KRA
+                </h3>
+
+                <p>
+                    Commitment to applicable business and tax compliance requirements.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+     CALL TO ACTION
+========================================================= -->
+
+    <section class="cta" id="contact">
+
+        <div>
+
+            <h2>
+                Have a Project in Mind?
+            </h2>
+
+            <p>
+                Talk to RAVTO GLOBAL LTD today. Our team can help you identify the right solar, electrical, ICT or security solution for your home, business or institution.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('assistant') }}" class="cta-btn">
+        Talk to an Assistant →
+    </a>
+
+    </section>
+
+
+    <!-- =========================================================
+     FOOTER
+========================================================= -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div class="footer-column">
+
+                <h3>
+                    RAVTO GLOBAL LTD
+                </h3>
+
+                <p>
+                    RAVTO GLOBAL LTD provides integrated solar, electrical, ICT, networking, security and technical solutions designed to improve reliability, efficiency and safety.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Our Services
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#services">
+                        Solar Energy
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#services">
+                        Electrical Engineering
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#services">
+                        Security Systems
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#services">
+                        ICT & Networking
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#services">
+                        Technical Support
+                    </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Quick Access
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="{{ url_for('dashboard') }}">
+                        Dashboard
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('assistant') }}">
+                        Need Assistant
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#services">
+                        Services
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact">
+                        Contact Us
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('logout') }}">
+                        Logout
+                    </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 RAVTO GLOBAL LTD. All Rights Reserved.
+
+        </div>
+
+    </footer>
+
 
 </body>
+
 </html>
