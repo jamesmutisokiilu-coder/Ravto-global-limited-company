@@ -1,139 +1,2186 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Place Order - RAVTO GLOBAL LTD</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
+    <meta charset="UTF-8">
 
-body{
-    background:#f1f5f9;
-}
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-/* NAVBAR */
-.navbar{
-    background:#0f172a;
-    padding:15px 40px;
-    color:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+    <title>
+        Place Order | RAVTO GLOBAL LTD
+    </title>
 
-.navbar a{
-    color:white;
-    text-decoration:none;
-    margin-left:15px;
-    padding:8px 14px;
-    border-radius:6px;
-    background:#2563eb;
-}
+    <meta name="description"
+          content="Order electrical, solar, ICT, electronics and security components from RAVTO GLOBAL LTD.">
 
-/* FORM CONTAINER */
-.container{
-    width:90%;
-    max-width:700px;
-    margin:40px auto;
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.1);
-}
+    <style>
 
-h2{
-    text-align:center;
-    margin-bottom:20px;
-    color:#0f172a;
-}
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
 
-/* INPUTS */
-input, select, textarea{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:8px;
-    outline:none;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-button{
-    width:100%;
-    padding:12px;
-    background:#10b981;
-    border:none;
-    color:white;
-    font-size:16px;
-    border-radius:8px;
-    cursor:pointer;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-button:hover{
-    background:#059669;
-}
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.6;
+        }
 
-label{
-    font-weight:bold;
-    margin-top:10px;
-    display:block;
-}
-</style>
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+            background: #0f172a;
+            min-height: 70px;
+            padding: 12px 5%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            box-shadow: 0 4px 18px rgba(0,0,0,.15);
+        }
+
+        .brand {
+            color: white;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .brand small {
+            display: block;
+            color: #94a3b8;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            color: white;
+            text-decoration: none;
+            padding: 9px 15px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+            background: #2563eb;
+        }
+
+        .nav-btn.cart-nav {
+            background: #10b981;
+        }
+
+
+        /* =========================================================
+           PAGE HEADER
+        ========================================================= */
+
+        .page-header {
+            background:
+                linear-gradient(
+                    rgba(15,23,42,.9),
+                    rgba(30,58,138,.88)
+                );
+
+            color: white;
+            padding: 55px 5%;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            max-width: 700px;
+            margin: auto;
+            color: #cbd5e1;
+        }
+
+
+        /* =========================================================
+           MAIN LAYOUT
+        ========================================================= */
+
+        .main-container {
+            width: 92%;
+            max-width: 1250px;
+            margin: 40px auto;
+
+            display: grid;
+            grid-template-columns: 1.6fr .9fr;
+            gap: 28px;
+
+            align-items: start;
+        }
+
+
+        /* =========================================================
+           PRODUCTS SECTION
+        ========================================================= */
+
+        .products-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(15,23,42,.07);
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            color: #0f172a;
+            font-size: 25px;
+        }
+
+        .product-count {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+
+        /* =========================================================
+           SEARCH
+        ========================================================= */
+
+        .search-box {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-box input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+        }
+
+
+        /* =========================================================
+           CATEGORY FILTER
+        ========================================================= */
+
+        .categories {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .category-btn {
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #475569;
+            padding: 8px 13px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .category-btn.active {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+
+
+        /* =========================================================
+           PRODUCT GRID
+        ========================================================= */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .product-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 13px;
+            overflow: hidden;
+            background: white;
+            transition: .3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(15,23,42,.1);
+        }
+
+        .product-image {
+            height: 155px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 16px;
+        }
+
+        .product-category {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: bold;
+            color: #2563eb;
+            background: #eff6ff;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-bottom: 7px;
+        }
+
+        .product-details h3 {
+            font-size: 17px;
+            color: #0f172a;
+            margin-bottom: 5px;
+        }
+
+        .product-description {
+            color: #64748b;
+            font-size: 12px;
+            min-height: 38px;
+            margin-bottom: 10px;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-price {
+            color: #0f172a;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .add-btn {
+            border: none;
+            background: #10b981;
+            color: white;
+            padding: 9px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: #059669;
+        }
+
+
+        /* =========================================================
+           CART
+        ========================================================= */
+
+        .cart-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(15,23,42,.07);
+
+            position: sticky;
+            top: 90px;
+        }
+
+        .cart-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 15px;
+        }
+
+        .cart-title h2 {
+            font-size: 23px;
+            color: #0f172a;
+        }
+
+        .cart-number {
+            width: 28px;
+            height: 28px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+
+        /* =========================================================
+           EMPTY CART
+        ========================================================= */
+
+        .empty-cart {
+            text-align: center;
+            padding: 35px 10px;
+            color: #94a3b8;
+        }
+
+        .empty-cart-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================================================
+           CART ITEM
+        ========================================================= */
+
+        .cart-items {
+            max-height: 430px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            padding: 14px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cart-item-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .cart-item-name {
+            color: #0f172a;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .remove-btn {
+            border: none;
+            background: transparent;
+            color: #dc2626;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cart-item-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 9px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .quantity-controls button {
+            border: none;
+            background: #f8fafc;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .quantity-controls span {
+            width: 30px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cart-item-total {
+            font-weight: bold;
+            color: #2563eb;
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           TOTALS
+        ========================================================= */
+
+        .totals {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 9px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .total-row.grand-total {
+            color: #0f172a;
+            font-size: 20px;
+            font-weight: bold;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .currency {
+            color: #10b981;
+        }
+
+
+        /* =========================================================
+           CUSTOMER DETAILS
+        ========================================================= */
+
+        .customer-details {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .customer-details h3 {
+            font-size: 18px;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #334155;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,.08);
+        }
+
+        .form-group textarea {
+            min-height: 75px;
+            resize: vertical;
+        }
+
+
+        /* =========================================================
+           SUBMIT
+        ========================================================= */
+
+        .submit-order {
+            width: 100%;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: .3s;
+        }
+
+        .submit-order:hover {
+            background: #1d4ed8;
+        }
+
+        .submit-order:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================================================
+           DELIVERY NOTE
+        ========================================================= */
+
+        .delivery-note {
+            margin-top: 15px;
+            padding: 12px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            color: #166534;
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            margin-top: 50px;
+            padding: 30px 5%;
+            background: #020617;
+            color: #94a3b8;
+            text-align: center;
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media(max-width: 950px) {
+
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-section {
+                position: static;
+            }
+
+        }
+
+
+        @media(max-width: 650px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 14px 20px;
+            }
+
+            .nav-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-section,
+            .cart-section {
+                padding: 18px;
+            }
+
+            .main-container {
+                width: 94%;
+                margin-top: 25px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <div><b>RAVTO GLOBAL LTD</b></div>
-    <div>
-        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        RAVTO GLOBAL LTD
+
+        <small>
+            ELECTRICAL • SOLAR • ICT • ELECTRONICS
+        </small>
+
     </div>
-</div>
 
-<!-- ORDER FORM -->
-<div class="container">
 
-    <h2>Place Your Order</h2>
+    <div class="nav-actions">
 
-    <form method="POST" action="{{ url_for('orders') }}">
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-btn">
+            Dashboard
+        </a>
 
-        <label>Full Name</label>
-        <input type="text" name="name" required>
+        <a href="#cart"
+           class="nav-btn cart-nav">
+            🛒 Cart
+            <span id="navCartCount">0</span>
+        </a>
 
-        <label>Email</label>
-        <input type="email" name="email" required>
+    </div>
 
-        <label>Phone Number</label>
-        <input type="text" name="phone" required>
+</nav>
 
-        <label>Category</label>
-        <select name="category" required>
-            <option value="ICT">ICT Systems</option>
-            <option value="Electrical">Electrical Engineering</option>
-            <option value="Solar">Solar Systems</option>
-            <option value="Electronics">Electronics</option>
-        </select>
 
-        <label>Components / Items</label>
-        <textarea name="items" placeholder="e.g CCTV camera, solar panel, inverter..." required></textarea>
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-        <label>Quantity</label>
-        <input type="number" name="quantity" min="1" required>
+<header class="page-header">
 
-        <label>Date of Order</label>
-        <input type="date" name="order_date" required>
+    <h1>
+        Place Your Order
+    </h1>
 
-        <button type="submit">Submit Order</button>
+    <p>
+        Browse our available products and components,
+        add the items you need to your cart, review your
+        order and submit your request to RAVTO GLOBAL LTD.
+    </p>
 
-    </form>
+</header>
 
-</div>
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main-container">
+
+
+    <!-- =====================================================
+         PRODUCTS
+    ====================================================== -->
+
+    <section class="products-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Available Products
+            </h2>
+
+            <span class="product-count"
+                  id="productCount">
+                Products
+            </span>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search for solar panels, CCTV, cables, inverters..."
+                autocomplete="off">
+
+        </div>
+
+
+        <!-- CATEGORY FILTER -->
+
+        <div class="categories">
+
+            <button
+                class="category-btn active"
+                data-category="All">
+                All
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="Solar">
+                Solar
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="Electrical">
+                Electrical
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="ICT">
+                ICT
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="Electronics">
+                Electronics
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="Security">
+                Security
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             PRODUCT GRID
+
+             Replace these sample products with products
+             from your Flask database if required.
+        ================================================== -->
+
+        <div class="product-grid"
+             id="productGrid">
+
+
+            <!-- PRODUCT 1 -->
+
+            <div class="product-card"
+                 data-name="Solar Panel 550W"
+                 data-category="Solar"
+                 data-price="25000">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80"
+                        alt="550W Solar Panel">
+
+                </div>
+
+                <div class="product-details">
+
+                    <span class="product-category">
+                        SOLAR
+                    </span>
+
+                    <h3>
+                        Solar Panel 550W
+                    </h3>
+
+                    <p class="product-description">
+                        High-efficiency solar panel suitable
+                        for residential and commercial systems.
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            KSh 25,000
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Solar Panel 550W',
+                                'Solar',
+                                25000
+                            )">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 2 -->
+
+            <div class="product-card"
+                 data-name="Solar Inverter 5KW"
+                 data-category="Solar"
+                 data-price="85000">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=80"
+                        alt="Solar Inverter">
+
+                </div>
+
+                <div class="product-details">
+
+                    <span class="product-category">
+                        SOLAR
+                    </span>
+
+                    <h3>
+                        Solar Inverter 5KW
+                    </h3>
+
+                    <p class="product-description">
+                        Reliable inverter for residential and
+                        small commercial solar installations.
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            KSh 85,000
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Solar Inverter 5KW',
+                                'Solar',
+                                85000
+                            )">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 3 -->
+
+            <div class="product-card"
+                 data-name="CCTV Camera"
+                 data-category="Security"
+                 data-price="4500">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80"
+                        alt="CCTV Camera">
+
+                </div>
+
+                <div class="product-details">
+
+                    <span class="product-category">
+                        SECURITY
+                    </span>
+
+                    <h3>
+                        CCTV Camera
+                    </h3>
+
+                    <p class="product-description">
+                        HD surveillance camera for residential,
+                        office and commercial security systems.
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            KSh 4,500
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'CCTV Camera',
+                                'Security',
+                                4500
+                            )">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 4 -->
+
+            <div class="product-card"
+                 data-name="8 Channel DVR"
+                 data-category="Security"
+                 data-price="18000">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80"
+                        alt="DVR Security System">
+
+                </div>
+
+                <div class="product-details">
+
+                    <span class="product-category">
+                        SECURITY
+                    </span>
+
+                    <h3>
+                        8 Channel DVR
+                    </h3>
+
+                    <p class="product-description">
+                        Digital video recorder for multi-camera
+                        surveillance systems.
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            KSh 18,000
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                '8 Channel DVR',
+                                'Security',
+                                18000
+                            )">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 5 -->
+
+            <div class="product-card"
+                 data-name="Electrical Cable 2.5mm"
+                 data-category="Electrical"
+                 data-price="8500">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+                        alt="Electrical Cable">
+
+                </div>
+
+                <div class="product-details">
+
+                    <span class="product-category">
+                        ELECTRICAL
+                    </span>
+
+                    <h3>
+                        Electrical Cable 2.5mm
+                    </h3>
+
+                    <p class="product-description">
+                        Quality electrical cable suitable for
+                        domestic and commercial wiring.
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            KSh 8,500
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Electrical Cable 2.5mm',
+                                'Electrical',
+                                8500
+                            )">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 6 -->
+
+            <div class="product-card"
+                 data-name="LED Flood Light"
+                 data-category="Electrical"
+                 data-price="3500">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80"
+                        alt="LED Flood Light">
+
+                </div>
+
+                <div class="product-details">
+
+                    <span class="product-category">
+                        ELECTRICAL
+                    </span>
+
+                    <h3>
+                        LED Flood Light
+                    </h3>
+
+                    <p class="product-description">
+                        Energy-efficient LED lighting for
+                        homes, businesses and outdoor areas.
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            KSh 3,500
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'LED Flood Light',
+                                'Electrical',
+                                3500
+                            )">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 7 -->
+
+            <div class="product-card"
+                 data-name="Network Router"
+                 data-category="ICT"
+                 data-price="6500">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1606904825846-647eb07f5be2?auto=format&fit=crop&w=800&q=80"
+                        alt="Network Router">
+
+                </div>
+
+                <div class="product-details">
+
+                    <span class="product-category">
+                        ICT
+                    </span>
+
+                    <h3>
+                        Network Router
+                    </h3>
+
+                    <p class="product-description">
+                        Reliable network router for offices,
+                        homes and small business environments.
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            KSh 6,500
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Network Router',
+                                'ICT',
+                                6500
+                            )">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 8 -->
+
+            <div class="product-card"
+                 data-name="Cat6 Network Cable"
+                 data-category="ICT"
+                 data-price="7500">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80"
+                        alt="Network Cable">
+
+                </div>
+
+                <div class="product-details">
+
+                    <span class="product-category">
+                        ICT
+                    </span>
+
+                    <h3>
+                        Cat6 Network Cable
+                    </h3>
+
+                    <p class="product-description">
+                        High-quality network cable for structured
+                        network installations.
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            KSh 7,500
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Cat6 Network Cable',
+                                'ICT',
+                                7500
+                            )">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CART
+    ====================================================== -->
+
+    <aside class="cart-section"
+           id="cart">
+
+
+        <div class="cart-title">
+
+            <h2>
+                Your Cart
+            </h2>
+
+            <span class="cart-number"
+                  id="cartCount">
+                0
+            </span>
+
+        </div>
+
+
+        <!-- CART ITEMS -->
+
+        <div class="cart-items"
+             id="cartItems">
+
+            <div class="empty-cart">
+
+                <div class="empty-cart-icon">
+                    🛒
+                </div>
+
+                <p>
+                    Your cart is empty.
+                </p>
+
+                <small>
+                    Add products to begin your order.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOTALS -->
+
+        <div class="totals">
+
+            <div class="total-row">
+
+                <span>
+                    Items
+                </span>
+
+                <span id="itemsTotal">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span class="currency"
+                      id="subtotal">
+                    KSh 0
+                </span>
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <span class="currency"
+                      id="delivery">
+                    KSh 0
+                </span>
+
+            </div>
+
+
+            <div class="total-row grand-total">
+
+                <span>
+                    Grand Total
+                </span>
+
+                <span id="grandTotal">
+                    KSh 0
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CUSTOMER DETAILS
+        ================================================== -->
+
+        <form method="POST"
+              action="{{ url_for('orders') }}"
+              id="orderForm">
+
+
+            <!-- These hidden fields allow Flask to receive
+                 the complete shopping cart. -->
+
+            <input type="hidden"
+                   name="items"
+                   id="cartItemsInput">
+
+            <input type="hidden"
+                   name="cart_data"
+                   id="cartDataInput">
+
+            <input type="hidden"
+                   name="total_amount"
+                   id="totalAmountInput">
+
+
+            <div class="customer-details">
+
+                <h3>
+                    Customer Details
+                </h3>
+
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@email.com"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="+254 7XX XXX XXX"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Main Order Category
+                    </label>
+
+                    <select
+                        name="category"
+                        id="category"
+                        required>
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option value="Solar">
+                            Solar Systems
+                        </option>
+
+                        <option value="Electrical">
+                            Electrical Engineering
+                        </option>
+
+                        <option value="ICT">
+                            ICT Systems
+                        </option>
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                        <option value="Security">
+                            Security Systems
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="orderDate">
+                        Preferred Order Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="orderDate"
+                        name="order_date"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="notes">
+                        Additional Requirements
+                    </label>
+
+                    <textarea
+                        id="notes"
+                        name="notes"
+                        placeholder="Enter delivery instructions, specifications or any additional requirements..."></textarea>
+
+                </div>
+
+
+                <div class="delivery-note">
+
+                    <strong>
+                        Order Notice:
+                    </strong>
+
+                    Your order will be reviewed by our team.
+                    We may contact you to confirm product
+                    availability, delivery charges and final
+                    specifications before processing.
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-order"
+                    id="submitOrder"
+                    disabled>
+
+                    Submit Order
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </aside>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    © 2026 RAVTO GLOBAL LTD |
+    Electrical • Solar • ICT • Electronics • Security
+
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /* =========================================================
+       CART STORAGE
+    ========================================================= */
+
+    let cart = [];
+
+
+    /* =========================================================
+       ADD PRODUCT TO CART
+    ========================================================= */
+
+    function addToCart(name, category, price) {
+
+        const existingItem = cart.find(
+            item => item.name === name
+        );
+
+
+        if (existingItem) {
+
+            existingItem.quantity += 1;
+
+        } else {
+
+            cart.push({
+
+                name: name,
+
+                category: category,
+
+                price: Number(price),
+
+                quantity: 1
+
+            });
+
+        }
+
+
+        updateCart();
+
+        document
+            .getElementById("cart")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+    }
+
+
+    /* =========================================================
+       REMOVE ITEM
+    ========================================================= */
+
+    function removeFromCart(index) {
+
+        cart.splice(index, 1);
+
+        updateCart();
+
+    }
+
+
+    /* =========================================================
+       CHANGE QUANTITY
+    ========================================================= */
+
+    function changeQuantity(index, change) {
+
+        cart[index].quantity += change;
+
+
+        if (cart[index].quantity <= 0) {
+
+            cart.splice(index, 1);
+
+        }
+
+
+        updateCart();
+
+    }
+
+
+    /* =========================================================
+       FORMAT CURRENCY
+    ========================================================= */
+
+    function formatCurrency(amount) {
+
+        return "KSh " +
+            Number(amount).toLocaleString(
+                "en-KE",
+                {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 2
+                }
+            );
+
+    }
+
+
+    /* =========================================================
+       UPDATE CART
+    ========================================================= */
+
+    function updateCart() {
+
+        const cartItems =
+            document.getElementById("cartItems");
+
+        const cartCount =
+            document.getElementById("cartCount");
+
+        const navCartCount =
+            document.getElementById("navCartCount");
+
+        const itemsTotal =
+            document.getElementById("itemsTotal");
+
+        const subtotalElement =
+            document.getElementById("subtotal");
+
+        const deliveryElement =
+            document.getElementById("delivery");
+
+        const grandTotalElement =
+            document.getElementById("grandTotal");
+
+        const submitButton =
+            document.getElementById("submitOrder");
+
+
+        let totalQuantity = 0;
+
+        let subtotal = 0;
+
+
+        cart.forEach(item => {
+
+            totalQuantity += item.quantity;
+
+            subtotal +=
+                item.price * item.quantity;
+
+        });
+
+
+        /*
+            Delivery rule:
+
+            Free delivery for orders of KSh 50,000+
+            Otherwise estimated delivery = KSh 500.
+
+            Change this rule if your business uses
+            different delivery charges.
+        */
+
+        let delivery = 0;
+
+        if (subtotal > 0 && subtotal < 50000) {
+
+            delivery = 500;
+
+        }
+
+
+        const grandTotal =
+            subtotal + delivery;
+
+
+        /* COUNTS */
+
+        cartCount.textContent =
+            totalQuantity;
+
+        navCartCount.textContent =
+            totalQuantity;
+
+        itemsTotal.textContent =
+            totalQuantity;
+
+
+        /* TOTALS */
+
+        subtotalElement.textContent =
+            formatCurrency(subtotal);
+
+        deliveryElement.textContent =
+            formatCurrency(delivery);
+
+        grandTotalElement.textContent =
+            formatCurrency(grandTotal);
+
+
+        /* EMPTY CART */
+
+        if (cart.length === 0) {
+
+            cartItems.innerHTML = `
+
+                <div class="empty-cart">
+
+                    <div class="empty-cart-icon">
+                        🛒
+                    </div>
+
+                    <p>
+                        Your cart is empty.
+                    </p>
+
+                    <small>
+                        Add products to begin your order.
+                    </small>
+
+                </div>
+
+            `;
+
+            submitButton.disabled = true;
+
+            updateHiddenFields(
+                subtotal,
+                grandTotal
+            );
+
+            return;
+
+        }
+
+
+        /* BUILD CART */
+
+        cartItems.innerHTML = "";
+
+
+        cart.forEach((item, index) => {
+
+            const itemTotal =
+                item.price * item.quantity;
+
+
+            const cartItem =
+                document.createElement("div");
+
+            cartItem.className =
+                "cart-item";
+
+
+            cartItem.innerHTML = `
+
+                <div class="cart-item-top">
+
+                    <div>
+
+                        <div class="cart-item-name">
+                            ${escapeHtml(item.name)}
+                        </div>
+
+                        <small>
+                            ${escapeHtml(item.category)}
+                            • ${formatCurrency(item.price)}
+                        </small>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="remove-btn"
+                        onclick="removeFromCart(${index})">
+
+                        Remove
+
+                    </button>
+
+                </div>
+
+
+                <div class="cart-item-bottom">
+
+                    <div class="quantity-controls">
+
+                        <button
+                            type="button"
+                            onclick="changeQuantity(${index}, -1)">
+                            −
+                        </button>
+
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+                        <button
+                            type="button"
+                            onclick="changeQuantity(${index}, 1)">
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <div class="cart-item-total">
+
+                        ${formatCurrency(itemTotal)}
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            cartItems.appendChild(cartItem);
+
+        });
+
+
+        submitButton.disabled = false;
+
+
+        updateHiddenFields(
+            subtotal,
+            grandTotal
+        );
+
+    }
+
+
+    /* =========================================================
+       UPDATE FLASK HIDDEN FIELDS
+    ========================================================= */
+
+    function updateHiddenFields(
+        subtotal,
+        grandTotal
+    ) {
+
+        /*
+            "items" contains a readable summary.
+        */
+
+        const itemSummary =
+            cart.map(item => {
+
+                return (
+                    item.name +
+                    " x " +
+                    item.quantity +
+                    " @ " +
+                    formatCurrency(item.price)
+                );
+
+            }).join("\n");
+
+
+        document.getElementById(
+            "cartItemsInput"
+        ).value = itemSummary;
+
+
+        /*
+            "cart_data" contains structured JSON
+            that Flask can process.
+        */
+
+        document.getElementById(
+            "cartDataInput"
+        ).value =
+            JSON.stringify(cart);
+
+
+        /*
+            Final amount.
+        */
+
+        document.getElementById(
+            "totalAmountInput"
+        ).value =
+            grandTotal;
+
+    }
+
+
+    /* =========================================================
+       SEARCH PRODUCTS
+    ========================================================= */
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+    searchInput.addEventListener(
+        "input",
+        filterProducts
+    );
+
+
+    let selectedCategory = "All";
+
+
+    function filterProducts() {
+
+        const search =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+
+        const products =
+            document.querySelectorAll(
+                ".product-card"
+            );
+
+
+        let visible = 0;
+
+
+        products.forEach(product => {
+
+            const name =
+                product.dataset.name
+                    .toLowerCase();
+
+            const category =
+                product.dataset.category;
+
+
+            const matchesSearch =
+                name.includes(search);
+
+            const matchesCategory =
+                selectedCategory === "All" ||
+                category === selectedCategory;
+
+
+            if (
+                matchesSearch &&
+                matchesCategory
+            ) {
+
+                product.style.display =
+                    "block";
+
+                visible++;
+
+            } else {
+
+                product.style.display =
+                    "none";
+
+            }
+
+        });
+
+
+        document.getElementById(
+            "productCount"
+        ).textContent =
+            visible + " Products";
+
+    }
+
+
+    /* =========================================================
+       CATEGORY BUTTONS
+    ========================================================= */
+
+    document
+        .querySelectorAll(".category-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    document
+                        .querySelectorAll(
+                            ".category-btn"
+                        )
+                        .forEach(btn =>
+                            btn.classList.remove(
+                                "active"
+                            )
+                        );
+
+
+                    this.classList.add(
+                        "active"
+                    );
+
+
+                    selectedCategory =
+                        this.dataset.category;
+
+
+                    filterProducts();
+
+                }
+            );
+
+        });
+
+
+    /* =========================================================
+       ESCAPE HTML
+       Prevents product names from injecting HTML
+       into the cart.
+    ========================================================= */
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent = text;
+
+        return div.innerHTML;
+
+    }
+
+
+    /* =========================================================
+       SET TODAY AS DEFAULT ORDER DATE
+    ========================================================= */
+
+    const dateInput =
+        document.getElementById("orderDate");
+
+
+    const today =
+        new Date();
+
+
+    const year =
+        today.getFullYear();
+
+
+    const month =
+        String(
+            today.getMonth() + 1
+        ).padStart(2, "0");
+
+
+    const day =
+        String(
+            today.getDate()
+        ).padStart(2, "0");
+
+
+    dateInput.value =
+        `${year}-${month}-${day}`;
+
+
+    dateInput.min =
+        `${year}-${month}-${day}`;
+
+
+    /* =========================================================
+       FORM VALIDATION
+    ========================================================= */
+
+    document
+        .getElementById("orderForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                if (cart.length === 0) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Please add at least one product to your cart."
+                    );
+
+                    return;
+
+                }
+
+
+                const name =
+                    document.getElementById(
+                        "name"
+                    ).value.trim();
+
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    ).value.trim();
+
+
+                const phone =
+                    document.getElementById(
+                        "phone"
+                    ).value.trim();
+
+
+                const category =
+                    document.getElementById(
+                        "category"
+                    ).value;
+
+
+                if (
+                    !name ||
+                    !email ||
+                    !phone ||
+                    !category
+                ) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Please complete all required customer details."
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                    Make sure the latest cart is submitted.
+                */
+
+                updateCart();
+
+            }
+        );
+
+
+    /* =========================================================
+       INITIALIZE
+    ========================================================= */
+
+    filterProducts();
+
+    updateCart();
+
+</script>
+
 
 </body>
 </html>
+
