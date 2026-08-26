@@ -163,8 +163,6 @@ class NeedAssistant(db.Model):
         nullable=False
     )
 
-    # New fields from updated assistant page
-
     request_type = db.Column(
         db.String(100),
         default="Technical Assistance"
@@ -312,20 +310,6 @@ class Order(db.Model):
         nullable=True
     )
 
-    # JSON representation of cart items
-    #
-    # Example:
-    #
-    # [
-    #   {
-    #       "id": 1,
-    #       "name": "Solar Panel",
-    #       "price": 15000,
-    #       "quantity": 2,
-    #       "subtotal": 30000
-    #   }
-    # ]
-
     items = db.Column(
         db.Text,
         nullable=False
@@ -366,12 +350,84 @@ class Order(db.Model):
 
 
 # ============================================================
-# DATABASE CREATION
+# DATABASE CREATION + SAFE SCHEMA FIX
 # ============================================================
 
 with app.app_context():
 
+    # Create tables that don't already exist
     db.create_all()
+
+    # --------------------------------------------------------
+    # SAFE DATABASE MIGRATION
+    # --------------------------------------------------------
+    #
+    # IMPORTANT:
+    #
+    # db.create_all() does NOT add newly-created columns to
+    # tables that already exist.
+    #
+    # These statements safely add the created_at column to
+    # existing Render PostgreSQL tables if it is missing.
+    #
+    # IF NOT EXISTS prevents errors when the column already
+    # exists.
+    #
+    # Existing data is NOT deleted.
+    # --------------------------------------------------------
+
+    try:
+
+        # USER TABLE
+        db.session.execute(
+            db.text(
+                'ALTER TABLE "user" '
+                'ADD COLUMN IF NOT EXISTS created_at '
+                'TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+            )
+        )
+
+        # NEED ASSISTANT TABLE
+        db.session.execute(
+            db.text(
+                'ALTER TABLE need_assistant '
+                'ADD COLUMN IF NOT EXISTS created_at '
+                'TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+            )
+        )
+
+        # PRODUCT TABLE
+        db.session.execute(
+            db.text(
+                'ALTER TABLE product '
+                'ADD COLUMN IF NOT EXISTS created_at '
+                'TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+            )
+        )
+
+        # ORDER TABLE
+        db.session.execute(
+            db.text(
+                'ALTER TABLE "order" '
+                'ADD COLUMN IF NOT EXISTS created_at '
+                'TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+            )
+        )
+
+        db.session.commit()
+
+        print(
+            "DATABASE SCHEMA: verification completed successfully."
+        )
+
+    except Exception as error:
+
+        db.session.rollback()
+
+        print(
+            "DATABASE SCHEMA WARNING:",
+            error
+        )
 
 
 # ============================================================
@@ -576,7 +632,9 @@ def register():
             password=hashed_password
         )
 
-        db.session.add(new_user)
+        db.session.add(
+            new_user
+        )
 
         db.session.commit()
 
@@ -804,9 +862,9 @@ def assistant():
             )
         )
 
-        # --------------------------------------------
+        # ----------------------------------------------------
         # VALIDATION
-        # --------------------------------------------
+        # ----------------------------------------------------
 
         if not fullname:
 
@@ -858,10 +916,9 @@ def assistant():
                 url_for("assistant")
             )
 
-
-        # --------------------------------------------
+        # ----------------------------------------------------
         # ATTACHMENT
-        # --------------------------------------------
+        # ----------------------------------------------------
 
         attachment_name = None
 
@@ -897,10 +954,9 @@ def assistant():
                 file_path
             )
 
-
-        # --------------------------------------------
+        # ----------------------------------------------------
         # CREATE REQUEST
-        # --------------------------------------------
+        # ----------------------------------------------------
 
         new_request = NeedAssistant(
 
@@ -941,7 +997,6 @@ def assistant():
 
         )
 
-
         try:
 
             db.session.add(
@@ -967,11 +1022,9 @@ def assistant():
                 "Unable to submit your request. Please try again."
             )
 
-
         return redirect(
             url_for("assistant")
         )
-
 
     return render_template(
         "assistant.html"
@@ -980,9 +1033,6 @@ def assistant():
 
 # ============================================================
 # PRODUCTS API
-#
-# This allows your order page to retrieve products/prices
-# from the database.
 # ============================================================
 
 @app.route("/api/products")
@@ -1030,8 +1080,6 @@ def api_products():
 
 # ============================================================
 # ORDERS
-#
-# Supports the NEW shopping-cart order page.
 # ============================================================
 
 @app.route(
@@ -1045,7 +1093,6 @@ def orders():
         return redirect(
             url_for("login")
         )
-
 
     # ========================================================
     # POST ORDER
@@ -1077,26 +1124,8 @@ def orders():
             )
         )
 
-
         # ----------------------------------------------------
         # CART DATA
-        # ----------------------------------------------------
-        #
-        # The new order page should send:
-        #
-        # cart_data
-        #
-        # Example:
-        #
-        # [
-        #   {
-        #       "id": 1,
-        #       "name": "Solar Panel",
-        #       "price": 15000,
-        #       "quantity": 2
-        #   }
-        # ]
-        #
         # ----------------------------------------------------
 
         cart_data = request.form.get(
@@ -1104,13 +1133,8 @@ def orders():
             ""
         )
 
-
         # ----------------------------------------------------
         # BACKWARD COMPATIBILITY
-        # ----------------------------------------------------
-        #
-        # If an older order form is still used, accept the
-        # old items/quantity fields.
         # ----------------------------------------------------
 
         if not cart_data:
@@ -1171,7 +1195,6 @@ def orders():
 
                 cart = []
 
-
         # ----------------------------------------------------
         # VALIDATE CUSTOMER
         # ----------------------------------------------------
@@ -1186,7 +1209,6 @@ def orders():
                 url_for("orders")
             )
 
-
         if not phone:
 
             flash(
@@ -1196,7 +1218,6 @@ def orders():
             return redirect(
                 url_for("orders")
             )
-
 
         # ----------------------------------------------------
         # VALIDATE CART
@@ -1215,12 +1236,8 @@ def orders():
                 url_for("orders")
             )
 
-
         # ----------------------------------------------------
         # SERVER-SIDE TOTAL CALCULATION
-        #
-        # Never trust the total sent by JavaScript.
-        # Prices are checked against the database.
         # ----------------------------------------------------
 
         validated_items = []
@@ -1228,7 +1245,6 @@ def orders():
         total_quantity = 0
 
         subtotal = 0.0
-
 
         for cart_item in cart:
 
@@ -1244,7 +1260,6 @@ def orders():
             ):
 
                 continue
-
 
             try:
 
@@ -1262,26 +1277,21 @@ def orders():
 
                 requested_quantity = 1
 
-
             if requested_quantity < 1:
 
                 continue
-
 
             product = Product.query.get(
                 product_id
             )
 
-
             if not product:
 
                 continue
 
-
             if not product.active:
 
                 continue
-
 
             # ------------------------------------------------
             # STOCK CHECK
@@ -1298,17 +1308,14 @@ def orders():
                     url_for("orders")
                 )
 
-
             unit_price = float(
                 product.price or 0
             )
-
 
             item_subtotal = (
                 unit_price
                 * requested_quantity
             )
-
 
             validated_items.append({
 
@@ -1326,16 +1333,13 @@ def orders():
 
             })
 
-
             total_quantity += (
                 requested_quantity
             )
 
-
             subtotal += (
                 item_subtotal
             )
-
 
         # ----------------------------------------------------
         # MAKE SURE VALID ITEMS EXIST
@@ -1351,13 +1355,11 @@ def orders():
                 url_for("orders")
             )
 
-
         # ----------------------------------------------------
         # TOTAL
         # ----------------------------------------------------
 
         total = subtotal
-
 
         # ----------------------------------------------------
         # ORDER DATE
@@ -1368,7 +1370,6 @@ def orders():
             order_date = datetime.now().strftime(
                 "%Y-%m-%d"
             )
-
 
         # ----------------------------------------------------
         # ORDER CATEGORY
@@ -1388,15 +1389,13 @@ def orders():
                 categories
             )
 
-
         # ----------------------------------------------------
         # CREATE ORDER
         # ----------------------------------------------------
 
         new_order = Order(
 
-            order_number=
-                generate_order_number(),
+            order_number=generate_order_number(),
 
             name=name,
 
@@ -1428,13 +1427,11 @@ def orders():
 
         )
 
-
         try:
 
             db.session.add(
                 new_order
             )
-
 
             # ------------------------------------------------
             # REDUCE STOCK
@@ -1452,21 +1449,15 @@ def orders():
                         item["quantity"]
                     )
 
-
             db.session.commit()
-
 
             flash(
                 f"Order {new_order.order_number} placed successfully."
             )
 
-
             return redirect(
-                url_for(
-                    "orders"
-                )
+                url_for("orders")
             )
-
 
         except Exception as error:
 
@@ -1485,7 +1476,6 @@ def orders():
                 url_for("orders")
             )
 
-
     # ========================================================
     # GET ORDERS
     # ========================================================
@@ -1498,7 +1488,6 @@ def orders():
         Order.created_at.desc()
     ).all()
 
-
     # ========================================================
     # AVAILABLE PRODUCTS
     # ========================================================
@@ -1509,7 +1498,6 @@ def orders():
         Product.category.asc(),
         Product.name.asc()
     ).all()
-
 
     return render_template(
 
@@ -1537,7 +1525,6 @@ def admin_products():
         return redirect(
             url_for("admin_login")
         )
-
 
     if request.method == "POST":
 
@@ -1568,7 +1555,6 @@ def admin_products():
 
             price = 0
 
-
         try:
 
             stock = int(
@@ -1582,7 +1568,6 @@ def admin_products():
 
             stock = 0
 
-
         if not name or not category:
 
             flash(
@@ -1592,7 +1577,6 @@ def admin_products():
             return redirect(
                 url_for("admin_products")
             )
-
 
         product = Product(
 
@@ -1610,28 +1594,23 @@ def admin_products():
 
         )
 
-
         db.session.add(
             product
         )
 
         db.session.commit()
 
-
         flash(
             "Product added successfully."
         )
-
 
         return redirect(
             url_for("admin_products")
         )
 
-
     products = Product.query.order_by(
         Product.created_at.desc()
     ).all()
-
 
     return render_template(
         "admin-products.html",
@@ -1662,7 +1641,6 @@ def admin_login():
             ""
         )
 
-
         # ----------------------------------------------------
         # ADMIN 1
         # ----------------------------------------------------
@@ -1670,7 +1648,6 @@ def admin_login():
         admin1_username = "kutosi"
 
         admin1_password = "extravaganza"
-
 
         # ----------------------------------------------------
         # ADMIN 2
@@ -1680,29 +1657,20 @@ def admin_login():
 
         admin2_password = "extraordinary"
 
-
         if (
 
             (
-                username
-                == admin1_username
-
+                username == admin1_username
                 and
-
-                password
-                == admin1_password
+                password == admin1_password
             )
 
             or
 
             (
-                username
-                == admin2_username
-
+                username == admin2_username
                 and
-
-                password
-                == admin2_password
+                password == admin2_password
             )
 
         ):
@@ -1713,11 +1681,9 @@ def admin_login():
                 username
             )
 
-
             flash(
                 "Admin login successful."
             )
-
 
             return redirect(
                 url_for(
@@ -1725,18 +1691,15 @@ def admin_login():
                 )
             )
 
-
         flash(
             "Invalid admin credentials."
         )
-
 
         return redirect(
             url_for(
                 "admin_login"
             )
         )
-
 
     return render_template(
         "admin-login.html"
@@ -1764,26 +1727,21 @@ def admin_dashboard():
             )
         )
 
-
     users = User.query.order_by(
         User.created_at.desc()
     ).all()
-
 
     requests = NeedAssistant.query.order_by(
         NeedAssistant.created_at.desc()
     ).all()
 
-
     orders = Order.query.order_by(
         Order.created_at.desc()
     ).all()
 
-
     products = Product.query.order_by(
         Product.created_at.desc()
     ).all()
-
 
     # --------------------------------------------------------
     # STATISTICS
@@ -1797,21 +1755,17 @@ def admin_dashboard():
 
     total_products = Product.query.count()
 
-
     pending_requests = NeedAssistant.query.filter_by(
         status="Pending"
     ).count()
-
 
     pending_orders = Order.query.filter_by(
         status="Pending"
     ).count()
 
-
     completed_orders = Order.query.filter_by(
         status="Completed"
     ).count()
-
 
     total_order_value = sum(
 
@@ -1822,7 +1776,6 @@ def admin_dashboard():
         for order in orders
 
     )
-
 
     return render_template(
 
@@ -1875,11 +1828,9 @@ def delete_request(
             )
         )
 
-
     req = NeedAssistant.query.get_or_404(
         request_id
     )
-
 
     # Delete attachment if it exists
 
@@ -1909,18 +1860,15 @@ def delete_request(
 
                 pass
 
-
     db.session.delete(
         req
     )
 
     db.session.commit()
 
-
     flash(
         "Assistant request deleted successfully."
     )
-
 
     return redirect(
         url_for(
@@ -1949,11 +1897,9 @@ def delete_order(
             )
         )
 
-
     order = Order.query.get_or_404(
         order_id
     )
-
 
     db.session.delete(
         order
@@ -1961,11 +1907,9 @@ def delete_order(
 
     db.session.commit()
 
-
     flash(
         "Order deleted successfully."
     )
-
 
     return redirect(
         url_for(
@@ -1994,18 +1938,15 @@ def update_order_status(
             )
         )
 
-
     order = Order.query.get_or_404(
         order_id
     )
-
 
     new_status = clean(
         request.form.get(
             "status"
         )
     )
-
 
     allowed_statuses = [
 
@@ -2023,7 +1964,6 @@ def update_order_status(
 
     ]
 
-
     if new_status not in allowed_statuses:
 
         flash(
@@ -2036,17 +1976,13 @@ def update_order_status(
             )
         )
 
-
     order.status = new_status
 
-
     db.session.commit()
-
 
     flash(
         f"Order {order.order_number or order.id} updated to {new_status}."
     )
-
 
     return redirect(
         url_for(
@@ -2075,18 +2011,15 @@ def update_request_status(
             )
         )
 
-
     req = NeedAssistant.query.get_or_404(
         request_id
     )
-
 
     new_status = clean(
         request.form.get(
             "status"
         )
     )
-
 
     allowed_statuses = [
 
@@ -2102,7 +2035,6 @@ def update_request_status(
 
     ]
 
-
     if new_status not in allowed_statuses:
 
         flash(
@@ -2115,17 +2047,13 @@ def update_request_status(
             )
         )
 
-
     req.status = new_status
 
-
     db.session.commit()
-
 
     flash(
         "Assistant request status updated."
     )
-
 
     return redirect(
         url_for(
@@ -2188,7 +2116,6 @@ if __name__ == "__main__":
             5000
         )
     )
-
 
     app.run(
 
