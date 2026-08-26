@@ -226,6 +226,809 @@ class NeedAssistant(db.Model):
     )
 
 
+
+
+
+# ============================================================
+# RECEIPT GENERATOR
+# ============================================================
+
+@app.route("/receipts")
+def receipts():
+
+    # Only logged-in administrators can create receipts
+    if not admin_required():
+
+        flash(
+            "Admin login required."
+        )
+
+        return redirect(
+            url_for("admin_login")
+        )
+
+    return render_template(
+        "receipts.html"
+    )
+
+
+# ============================================================
+# DOWNLOAD RECEIPT AS PDF
+# ============================================================
+
+@app.route(
+    "/receipts/pdf",
+    methods=["POST"]
+)
+def receipt_pdf():
+
+    # --------------------------------------------------------
+    # ADMIN SECURITY
+    # --------------------------------------------------------
+
+    if not admin_required():
+
+        flash(
+            "Admin login required."
+        )
+
+        return redirect(
+            url_for("admin_login")
+        )
+
+
+    # --------------------------------------------------------
+    # GET FORM DATA
+    # --------------------------------------------------------
+
+    receipt_type = clean(
+        request.form.get(
+            "receipt_type"
+        )
+    ) or "Purchase Receipt"
+
+
+    receipt_number = clean(
+        request.form.get(
+            "receipt_number"
+        )
+    )
+
+
+    receipt_date = clean(
+        request.form.get(
+            "date"
+        )
+    )
+
+
+    customer_name = clean(
+        request.form.get(
+            "customer_name"
+        )
+    )
+
+
+    customer_phone = clean(
+        request.form.get(
+            "customer_phone"
+        )
+    )
+
+
+    customer_email = clean(
+        request.form.get(
+            "customer_email"
+        )
+    )
+
+
+    item_description = clean(
+        request.form.get(
+            "item_description"
+        )
+    )
+
+
+    quantity_text = clean(
+        request.form.get(
+            "quantity"
+        )
+    ) or "1"
+
+
+    unit_price_text = clean(
+        request.form.get(
+            "unit_price"
+        )
+    ) or "0"
+
+
+    notes = clean(
+        request.form.get(
+            "notes"
+        )
+    )
+
+
+    # --------------------------------------------------------
+    # DEFAULT DATE
+    # --------------------------------------------------------
+
+    if not receipt_date:
+
+        receipt_date = datetime.now().strftime(
+            "%Y-%m-%d"
+        )
+
+
+    # --------------------------------------------------------
+    # GENERATE RECEIPT NUMBER
+    # --------------------------------------------------------
+
+    if not receipt_number:
+
+        receipt_number = (
+            "RAVTO-"
+            +
+            datetime.now().strftime(
+                "%Y%m%d%H%M%S"
+            )
+        )
+
+
+    # --------------------------------------------------------
+    # VALIDATE QUANTITY
+    # --------------------------------------------------------
+
+    try:
+
+        quantity = float(
+            quantity_text
+        )
+
+    except (
+        ValueError,
+        TypeError
+    ):
+
+        quantity = 1
+
+
+    if quantity <= 0:
+
+        quantity = 1
+
+
+    # --------------------------------------------------------
+    # VALIDATE UNIT PRICE
+    # --------------------------------------------------------
+
+    try:
+
+        unit_price = float(
+            unit_price_text
+        )
+
+    except (
+        ValueError,
+        TypeError
+    ):
+
+        unit_price = 0
+
+
+    if unit_price < 0:
+
+        unit_price = 0
+
+
+    # --------------------------------------------------------
+    # CALCULATE TOTAL
+    # --------------------------------------------------------
+
+    total = (
+        quantity
+        *
+        unit_price
+    )
+
+
+    # --------------------------------------------------------
+    # CREATE PDF IN MEMORY
+    # --------------------------------------------------------
+
+    buffer = BytesIO()
+
+
+    document = SimpleDocTemplate(
+
+        buffer,
+
+        pagesize=A4,
+
+        rightMargin=40,
+
+        leftMargin=40,
+
+        topMargin=35,
+
+        bottomMargin=35,
+
+        title=(
+            f"{receipt_type} "
+            f"{receipt_number}"
+        ),
+
+        author="RAVTO GLOBAL LTD"
+
+    )
+
+
+    # --------------------------------------------------------
+    # PDF STYLES
+    # --------------------------------------------------------
+
+    styles = getSampleStyleSheet()
+
+
+    company_style = ParagraphStyle(
+
+        "CompanyStyle",
+
+        parent=styles["Normal"],
+
+        alignment=TA_CENTER,
+
+        fontSize=11,
+
+        leading=15
+
+    )
+
+
+    title_style = ParagraphStyle(
+
+        "TitleStyle",
+
+        parent=styles["Title"],
+
+        alignment=TA_CENTER,
+
+        fontSize=20,
+
+        leading=24,
+
+        spaceAfter=5
+
+    )
+
+
+    receipt_type_style = ParagraphStyle(
+
+        "ReceiptTypeStyle",
+
+        parent=styles["Normal"],
+
+        alignment=TA_CENTER,
+
+        fontSize=14,
+
+        leading=18,
+
+        spaceBefore=10,
+
+        spaceAfter=12
+
+    )
+
+
+    normal_style = ParagraphStyle(
+
+        "NormalReceiptStyle",
+
+        parent=styles["Normal"],
+
+        fontSize=9,
+
+        leading=13
+
+    )
+
+
+    right_style = ParagraphStyle(
+
+        "RightStyle",
+
+        parent=styles["Normal"],
+
+        alignment=TA_RIGHT,
+
+        fontSize=9,
+
+        leading=13
+
+    )
+
+
+    # --------------------------------------------------------
+    # PDF CONTENT
+    # --------------------------------------------------------
+
+    story = []
+
+
+    # COMPANY NAME
+
+    story.append(
+        Paragraph(
+            "RAVTO GLOBAL LTD",
+            title_style
+        )
+    )
+
+
+    # COMPANY SERVICES
+
+    story.append(
+        Paragraph(
+            "Borehole Drilling & Equipping | "
+            "Solarisation & Solar Systems | "
+            "Electrical Installation | "
+            "Water Pumping Systems | "
+            "Tank & Tower Installation",
+            company_style
+        )
+    )
+
+
+    story.append(
+        Spacer(
+            1,
+            12
+        )
+    )
+
+
+    # RECEIPT TYPE
+
+    story.append(
+        Paragraph(
+            receipt_type.upper(),
+            receipt_type_style
+        )
+    )
+
+
+    # --------------------------------------------------------
+    # RECEIPT NUMBER AND DATE
+    # --------------------------------------------------------
+
+    receipt_info = Table(
+
+        [[
+
+            Paragraph(
+                f"<b>Receipt No:</b> "
+                f"{receipt_number}",
+                normal_style
+            ),
+
+            Paragraph(
+                f"<b>Date:</b> "
+                f"{receipt_date}",
+                right_style
+            )
+
+        ]],
+
+        colWidths=[
+            280,
+            190
+        ]
+
+    )
+
+
+    receipt_info.setStyle(
+
+        TableStyle([
+
+            (
+                "VALIGN",
+                (0, 0),
+                (-1, -1),
+                "TOP"
+            ),
+
+            (
+                "BOTTOMPADDING",
+                (0, 0),
+                (-1, -1),
+                8
+            )
+
+        ])
+
+    )
+
+
+    story.append(
+        receipt_info
+    )
+
+
+    # --------------------------------------------------------
+    # CUSTOMER DETAILS
+    # --------------------------------------------------------
+
+    customer_table = Table(
+
+        [
+
+            [
+                Paragraph(
+                    "<b>CUSTOMER DETAILS</b>",
+                    normal_style
+                ),
+                ""
+            ],
+
+            [
+                "Name",
+                customer_name or "N/A"
+            ],
+
+            [
+                "Phone",
+                customer_phone or "N/A"
+            ],
+
+            [
+                "Email",
+                customer_email or "N/A"
+            ]
+
+        ],
+
+        colWidths=[
+            110,
+            360
+        ]
+
+    )
+
+
+    customer_table.setStyle(
+
+        TableStyle([
+
+            (
+                "SPAN",
+                (0, 0),
+                (1, 0)
+            ),
+
+            (
+                "BACKGROUND",
+                (0, 0),
+                (1, 0),
+                colors.lightgrey
+            ),
+
+            (
+                "GRID",
+                (0, 0),
+                (-1, -1),
+                0.5,
+                colors.grey
+            ),
+
+            (
+                "FONTNAME",
+                (0, 0),
+                (-1, 0),
+                "Helvetica-Bold"
+            ),
+
+            (
+                "FONTSIZE",
+                (0, 0),
+                (-1, -1),
+                9
+            ),
+
+            (
+                "LEFTPADDING",
+                (0, 0),
+                (-1, -1),
+                7
+            ),
+
+            (
+                "RIGHTPADDING",
+                (0, 0),
+                (-1, -1),
+                7
+            ),
+
+            (
+                "TOPPADDING",
+                (0, 0),
+                (-1, -1),
+                6
+            ),
+
+            (
+                "BOTTOMPADDING",
+                (0, 0),
+                (-1, -1),
+                6
+            )
+
+        ])
+
+    )
+
+
+    story.append(
+        customer_table
+    )
+
+
+    story.append(
+        Spacer(
+            1,
+            15
+        )
+    )
+
+
+    # --------------------------------------------------------
+    # ITEM TABLE
+    # --------------------------------------------------------
+
+    item_table = Table(
+
+        [
+
+            [
+
+                "Description",
+
+                "Qty",
+
+                "Unit Price",
+
+                "Amount"
+
+            ],
+
+            [
+
+                item_description
+                or
+                "Item / Service",
+
+                f"{quantity:g}",
+
+                f"KES {unit_price:,.2f}",
+
+                f"KES {total:,.2f}"
+
+            ],
+
+            [
+
+                "",
+
+                "",
+
+                "TOTAL",
+
+                f"KES {total:,.2f}"
+
+            ]
+
+        ],
+
+        colWidths=[
+
+            260,
+
+            55,
+
+            75,
+
+            80
+
+        ]
+
+    )
+
+
+    item_table.setStyle(
+
+        TableStyle([
+
+            (
+                "BACKGROUND",
+                (0, 0),
+                (-1, 0),
+                colors.HexColor(
+                    "#123c66"
+                )
+            ),
+
+            (
+                "TEXTCOLOR",
+                (0, 0),
+                (-1, 0),
+                colors.white
+            ),
+
+            (
+                "FONTNAME",
+                (0, 0),
+                (-1, 0),
+                "Helvetica-Bold"
+            ),
+
+            (
+                "FONTNAME",
+                (2, 2),
+                (-1, 2),
+                "Helvetica-Bold"
+            ),
+
+            (
+                "ALIGN",
+                (1, 0),
+                (-1, -1),
+                "RIGHT"
+            ),
+
+            (
+                "ALIGN",
+                (0, 0),
+                (0, -1),
+                "LEFT"
+            ),
+
+            (
+                "GRID",
+                (0, 0),
+                (-1, -1),
+                0.5,
+                colors.grey
+            ),
+
+            (
+                "BACKGROUND",
+                (0, 2),
+                (-1, 2),
+                colors.whitesmoke
+            ),
+
+            (
+                "FONTSIZE",
+                (0, 0),
+                (-1, -1),
+                9
+            ),
+
+            (
+                "TOPPADDING",
+                (0, 0),
+                (-1, -1),
+                8
+            ),
+
+            (
+                "BOTTOMPADDING",
+                (0, 0),
+                (-1, -1),
+                8
+            )
+
+        ])
+
+    )
+
+
+    story.append(
+        item_table
+    )
+
+
+    # --------------------------------------------------------
+    # NOTES
+    # --------------------------------------------------------
+
+    if notes:
+
+        story.append(
+            Spacer(
+                1,
+                12
+            )
+        )
+
+        story.append(
+            Paragraph(
+                f"<b>Notes:</b> {notes}",
+                normal_style
+            )
+        )
+
+
+    # --------------------------------------------------------
+    # FOOTER
+    # --------------------------------------------------------
+
+    story.append(
+        Spacer(
+            1,
+            30
+        )
+    )
+
+
+    story.append(
+        Paragraph(
+            "Thank you for choosing RAVTO GLOBAL LTD.",
+            company_style
+        )
+    )
+
+
+    # --------------------------------------------------------
+    # BUILD PDF
+    # --------------------------------------------------------
+
+    document.build(
+        story
+    )
+
+
+    buffer.seek(0)
+
+
+    # --------------------------------------------------------
+    # SAFE FILE NAME
+    # --------------------------------------------------------
+
+    safe_type = (
+        receipt_type
+        .replace(" ", "_")
+        .replace("/", "_")
+        .replace("\\", "_")
+    )
+
+
+    filename = (
+        f"{safe_type}_"
+        f"{receipt_number}.pdf"
+    )
+
+
+    # --------------------------------------------------------
+    # DOWNLOAD PDF
+    # --------------------------------------------------------
+
+    return send_file(
+
+        buffer,
+
+        mimetype="application/pdf",
+
+        as_attachment=True,
+
+        download_name=filename
+
+    )
+
+
 # ============================================================
 # PRODUCT MODEL
 # ============================================================
