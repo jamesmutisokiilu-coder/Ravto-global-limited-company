@@ -1,5 +1,6 @@
 import os
 import json
+import uuid
 from datetime import datetime
 
 from flask import (
@@ -14,6 +15,8 @@ from flask import (
 )
 
 from flask_sqlalchemy import SQLAlchemy
+
+from sqlalchemy import inspect, text
 
 from werkzeug.security import (
     generate_password_hash,
@@ -39,17 +42,18 @@ app.secret_key = os.environ.get(
 
 database_url = os.environ.get("DATABASE_URL")
 
-# Render PostgreSQL compatibility
 if database_url:
 
+    # Render may provide postgres://
     if database_url.startswith("postgres://"):
 
         database_url = database_url.replace(
             "postgres://",
-            "postgresql://",
+            "postgresql+psycopg2://",
             1
         )
 
+    # Convert standard PostgreSQL URL to psycopg2
     elif database_url.startswith("postgresql://"):
 
         database_url = database_url.replace(
@@ -66,7 +70,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# File upload configuration
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
 
 app.config["UPLOAD_FOLDER"] = os.path.join(
@@ -94,6 +97,8 @@ os.makedirs(
 # ============================================================
 
 class User(db.Model):
+
+    __tablename__ = "user"
 
     id = db.Column(
         db.Integer,
@@ -127,6 +132,8 @@ class User(db.Model):
 # ============================================================
 
 class NeedAssistant(db.Model):
+
+    __tablename__ = "need_assistant"
 
     id = db.Column(
         db.Integer,
@@ -225,6 +232,8 @@ class NeedAssistant(db.Model):
 
 class Product(db.Model):
 
+    __tablename__ = "product"
+
     id = db.Column(
         db.Integer,
         primary_key=True
@@ -278,6 +287,8 @@ class Product(db.Model):
 # ============================================================
 
 class Order(db.Model):
+
+    __tablename__ = "order"
 
     id = db.Column(
         db.Integer,
@@ -350,74 +361,303 @@ class Order(db.Model):
 
 
 # ============================================================
-# DATABASE CREATION + SAFE SCHEMA FIX
+# DATABASE SCHEMA MIGRATION
+# ============================================================
+#
+# IMPORTANT:
+#
+# db.create_all() creates missing tables but does NOT add
+# columns to tables that already exist.
+#
+# This function checks the existing database and adds missing
+# columns without deleting existing information.
+#
+# This specifically fixes:
+#
+# psycopg2.errors.UndefinedColumn:
+# column order.order_number does not exist
+#
 # ============================================================
 
-with app.app_context():
-
-    # Create tables that don't already exist
-    db.create_all()
-
-    # --------------------------------------------------------
-    # SAFE DATABASE MIGRATION
-    # --------------------------------------------------------
-    #
-    # IMPORTANT:
-    #
-    # db.create_all() does NOT add newly-created columns to
-    # tables that already exist.
-    #
-    # These statements safely add the created_at column to
-    # existing Render PostgreSQL tables if it is missing.
-    #
-    # IF NOT EXISTS prevents errors when the column already
-    # exists.
-    #
-    # Existing data is NOT deleted.
-    # --------------------------------------------------------
+def migrate_database():
 
     try:
 
-        # USER TABLE
-        db.session.execute(
-            db.text(
-                'ALTER TABLE "user" '
-                'ADD COLUMN IF NOT EXISTS created_at '
-                'TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
-            )
-        )
+        inspector = inspect(db.engine)
 
-        # NEED ASSISTANT TABLE
-        db.session.execute(
-            db.text(
-                'ALTER TABLE need_assistant '
-                'ADD COLUMN IF NOT EXISTS created_at '
-                'TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
-            )
-        )
-
-        # PRODUCT TABLE
-        db.session.execute(
-            db.text(
-                'ALTER TABLE product '
-                'ADD COLUMN IF NOT EXISTS created_at '
-                'TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
-            )
-        )
-
-        # ORDER TABLE
-        db.session.execute(
-            db.text(
-                'ALTER TABLE "order" '
-                'ADD COLUMN IF NOT EXISTS created_at '
-                'TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
-            )
-        )
-
-        db.session.commit()
+        existing_tables = inspector.get_table_names()
 
         print(
-            "DATABASE SCHEMA: verification completed successfully."
+            "DATABASE TABLES:",
+            existing_tables
+        )
+
+        # ----------------------------------------------------
+        # TABLE DEFINITIONS
+        # ----------------------------------------------------
+
+        required_columns = {
+
+            "user": {
+
+                "created_at":
+                    "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+
+            },
+
+            "need_assistant": {
+
+                "request_type":
+                    "VARCHAR(100)",
+
+                "priority":
+                    "VARCHAR(50) DEFAULT 'Normal'",
+
+                "budget":
+                    "VARCHAR(100)",
+
+                "project_type":
+                    "VARCHAR(100)",
+
+                "preferred_date":
+                    "VARCHAR(30)",
+
+                "preferred_time":
+                    "VARCHAR(50)",
+
+                "contact_method":
+                    "VARCHAR(50) DEFAULT 'Phone'",
+
+                "additional_details":
+                    "TEXT",
+
+                "attachment":
+                    "VARCHAR(255)",
+
+                "status":
+                    "VARCHAR(50) DEFAULT 'Pending'",
+
+                "created_at":
+                    "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+
+            },
+
+            "product": {
+
+                "description":
+                    "TEXT",
+
+                "price":
+                    "FLOAT DEFAULT 0",
+
+                "stock":
+                    "INTEGER DEFAULT 0",
+
+                "image":
+                    "VARCHAR(255)",
+
+                "active":
+                    "BOOLEAN DEFAULT TRUE",
+
+                "created_at":
+                    "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+
+            },
+
+            "order": {
+
+                "order_number":
+                    "VARCHAR(50)",
+
+                "category":
+                    "VARCHAR(100)",
+
+                "items":
+                    "TEXT",
+
+                "quantity":
+                    "INTEGER DEFAULT 1",
+
+                "subtotal":
+                    "FLOAT DEFAULT 0",
+
+                "total":
+                    "FLOAT DEFAULT 0",
+
+                "order_date":
+                    "VARCHAR(30)",
+
+                "status":
+                    "VARCHAR(50) DEFAULT 'Pending'",
+
+                "created_at":
+                    "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+
+            }
+
+        }
+
+        # ----------------------------------------------------
+        # ADD MISSING COLUMNS
+        # ----------------------------------------------------
+
+        for table_name, columns in required_columns.items():
+
+            if table_name not in existing_tables:
+
+                print(
+                    f"DATABASE: table '{table_name}' "
+                    f"does not exist yet. db.create_all() will create it."
+                )
+
+                continue
+
+            inspector = inspect(db.engine)
+
+            existing_columns = {
+                column["name"]
+                for column in inspector.get_columns(
+                    table_name
+                )
+            }
+
+            for column_name, column_definition in columns.items():
+
+                if column_name in existing_columns:
+
+                    continue
+
+                print(
+                    f"DATABASE: adding missing column "
+                    f"{table_name}.{column_name}"
+                )
+
+                # ------------------------------------------------
+                # PostgreSQL
+                # ------------------------------------------------
+
+                if db.engine.dialect.name == "postgresql":
+
+                    if table_name in [
+                        "user",
+                        "order"
+                    ]:
+
+                        quoted_table = (
+                            f'"{table_name}"'
+                        )
+
+                    else:
+
+                        quoted_table = table_name
+
+                    sql = (
+                        f"ALTER TABLE {quoted_table} "
+                        f"ADD COLUMN IF NOT EXISTS "
+                        f'"{column_name}" '
+                        f"{column_definition}"
+                    )
+
+                    db.session.execute(
+                        text(sql)
+                    )
+
+                # ------------------------------------------------
+                # SQLite
+                # ------------------------------------------------
+
+                elif db.engine.dialect.name == "sqlite":
+
+                    sql = (
+                        f'ALTER TABLE "{table_name}" '
+                        f'ADD COLUMN "{column_name}" '
+                        f'{column_definition}'
+                    )
+
+                    try:
+
+                        db.session.execute(
+                            text(sql)
+                        )
+
+                    except Exception as error:
+
+                        print(
+                            "SQLITE COLUMN WARNING:",
+                            error
+                        )
+
+            db.session.commit()
+
+        # ----------------------------------------------------
+        # REFRESH INSPECTOR
+        # ----------------------------------------------------
+
+        inspector = inspect(db.engine)
+
+        # ----------------------------------------------------
+        # MAKE SURE EXISTING ORDERS HAVE ORDER NUMBERS
+        # ----------------------------------------------------
+
+        if "order" in inspector.get_table_names():
+
+            orders_without_numbers = Order.query.filter(
+                db.or_(
+                    Order.order_number.is_(None),
+                    Order.order_number == ""
+                )
+            ).all()
+
+            if orders_without_numbers:
+
+                print(
+                    f"DATABASE: assigning numbers to "
+                    f"{len(orders_without_numbers)} existing orders."
+                )
+
+                for old_order in orders_without_numbers:
+
+                    old_order.order_number = (
+                        f"RAVTO-{old_order.id:06d}"
+                    )
+
+                db.session.commit()
+
+        # ----------------------------------------------------
+        # CREATE UNIQUE INDEX FOR ORDER NUMBERS
+        # ----------------------------------------------------
+        #
+        # The model says unique=True. Existing databases may
+        # not automatically receive the constraint when the
+        # column is added manually.
+        #
+        # ----------------------------------------------------
+
+        if db.engine.dialect.name == "postgresql":
+
+            try:
+
+                db.session.execute(
+                    text(
+                        'CREATE UNIQUE INDEX IF NOT EXISTS '
+                        'ix_order_order_number_unique '
+                        'ON "order" (order_number)'
+                    )
+                )
+
+                db.session.commit()
+
+            except Exception as error:
+
+                db.session.rollback()
+
+                print(
+                    "ORDER NUMBER INDEX WARNING:",
+                    error
+                )
+
+        print(
+            "DATABASE SCHEMA: migration completed successfully."
         )
 
     except Exception as error:
@@ -425,7 +665,33 @@ with app.app_context():
         db.session.rollback()
 
         print(
-            "DATABASE SCHEMA WARNING:",
+            "DATABASE MIGRATION ERROR:",
+            error
+        )
+
+
+# ============================================================
+# INITIALIZE DATABASE
+# ============================================================
+
+with app.app_context():
+
+    try:
+
+        # Create missing tables
+        db.create_all()
+
+        print(
+            "DATABASE: tables verified/created."
+        )
+
+        # Add missing columns
+        migrate_database()
+
+    except Exception as error:
+
+        print(
+            "DATABASE INITIALIZATION ERROR:",
             error
         )
 
@@ -446,11 +712,12 @@ def admin_required():
 
 def generate_order_number():
 
-    timestamp = datetime.utcnow().strftime(
-        "%Y%m%d%H%M%S"
-    )
+    # Use UUID so two customers placing orders at the same
+    # second do not receive the same order number.
 
-    return f"RAVTO-{timestamp}"
+    unique_part = uuid.uuid4().hex[:8].upper()
+
+    return f"RAVTO-{unique_part}"
 
 
 def get_current_user():
@@ -458,14 +725,19 @@ def get_current_user():
     user_id = session.get("user_id")
 
     if not user_id:
+
         return None
 
-    return User.query.get(user_id)
+    return db.session.get(
+        User,
+        user_id
+    )
 
 
 def clean(value):
 
     if value is None:
+
         return ""
 
     return str(value).strip()
@@ -586,11 +858,15 @@ def register():
     if request.method == "POST":
 
         fullname = clean(
-            request.form.get("fullname")
+            request.form.get(
+                "fullname"
+            )
         )
 
         email = clean(
-            request.form.get("email")
+            request.form.get(
+                "email"
+            )
         ).lower()
 
         password = request.form.get(
@@ -632,19 +908,38 @@ def register():
             password=hashed_password
         )
 
-        db.session.add(
-            new_user
-        )
+        try:
 
-        db.session.commit()
+            db.session.add(
+                new_user
+            )
 
-        flash(
-            "Registration successful. You can now login."
-        )
+            db.session.commit()
 
-        return redirect(
-            url_for("login")
-        )
+            flash(
+                "Registration successful. You can now login."
+            )
+
+            return redirect(
+                url_for("login")
+            )
+
+        except Exception as error:
+
+            db.session.rollback()
+
+            print(
+                "REGISTRATION ERROR:",
+                error
+            )
+
+            flash(
+                "Registration failed. Please try again."
+            )
+
+            return redirect(
+                url_for("register")
+            )
 
     return render_template(
         "register.html"
@@ -664,7 +959,9 @@ def login():
     if request.method == "POST":
 
         email = clean(
-            request.form.get("email")
+            request.form.get(
+                "email"
+            )
         ).lower()
 
         password = request.form.get(
@@ -789,11 +1086,15 @@ def assistant():
     if request.method == "POST":
 
         fullname = clean(
-            request.form.get("fullname")
+            request.form.get(
+                "fullname"
+            )
         )
 
         phone = clean(
-            request.form.get("phone")
+            request.form.get(
+                "phone"
+            )
         )
 
         email = session.get(
@@ -807,11 +1108,15 @@ def assistant():
         )
 
         location = clean(
-            request.form.get("location")
+            request.form.get(
+                "location"
+            )
         )
 
         message = clean(
-            request.form.get("message")
+            request.form.get(
+                "message"
+            )
         )
 
         request_type = clean(
@@ -1101,11 +1406,15 @@ def orders():
     if request.method == "POST":
 
         name = clean(
-            request.form.get("name")
+            request.form.get(
+                "name"
+            )
         )
 
         phone = clean(
-            request.form.get("phone")
+            request.form.get(
+                "phone"
+            )
         )
 
         email = session.get(
@@ -1156,7 +1465,10 @@ def orders():
                     old_quantity
                 )
 
-            except ValueError:
+            except (
+                ValueError,
+                TypeError
+            ):
 
                 old_quantity = 1
 
@@ -1248,6 +1560,13 @@ def orders():
 
         for cart_item in cart:
 
+            if not isinstance(
+                cart_item,
+                dict
+            ):
+
+                continue
+
             try:
 
                 product_id = int(
@@ -1281,7 +1600,8 @@ def orders():
 
                 continue
 
-            product = Product.query.get(
+            product = db.session.get(
+                Product,
                 product_id
             )
 
@@ -1329,7 +1649,10 @@ def orders():
 
                 "quantity": requested_quantity,
 
-                "subtotal": item_subtotal
+                "subtotal": round(
+                    item_subtotal,
+                    2
+                )
 
             })
 
@@ -1342,7 +1665,7 @@ def orders():
             )
 
         # ----------------------------------------------------
-        # MAKE SURE VALID ITEMS EXIST
+        # VALID ITEMS
         # ----------------------------------------------------
 
         if not validated_items:
@@ -1439,7 +1762,8 @@ def orders():
 
             for item in validated_items:
 
-                product = Product.query.get(
+                product = db.session.get(
+                    Product,
                     item["id"]
                 )
 
@@ -1511,7 +1835,7 @@ def orders():
 
 
 # ============================================================
-# PRODUCT ADMIN / TEST ROUTE
+# ADMIN PRODUCTS
 # ============================================================
 
 @app.route(
@@ -1529,11 +1853,15 @@ def admin_products():
     if request.method == "POST":
 
         name = clean(
-            request.form.get("name")
+            request.form.get(
+                "name"
+            )
         )
 
         category = clean(
-            request.form.get("category")
+            request.form.get(
+                "category"
+            )
         )
 
         description = clean(
@@ -1551,7 +1879,10 @@ def admin_products():
                 )
             )
 
-        except ValueError:
+        except (
+            ValueError,
+            TypeError
+        ):
 
             price = 0
 
@@ -1564,7 +1895,18 @@ def admin_products():
                 )
             )
 
-        except ValueError:
+        except (
+            ValueError,
+            TypeError
+        ):
+
+            stock = 0
+
+        if price < 0:
+
+            price = 0
+
+        if stock < 0:
 
             stock = 0
 
@@ -1594,15 +1936,30 @@ def admin_products():
 
         )
 
-        db.session.add(
-            product
-        )
+        try:
 
-        db.session.commit()
+            db.session.add(
+                product
+            )
 
-        flash(
-            "Product added successfully."
-        )
+            db.session.commit()
+
+            flash(
+                "Product added successfully."
+            )
+
+        except Exception as error:
+
+            db.session.rollback()
+
+            print(
+                "PRODUCT ERROR:",
+                error
+            )
+
+            flash(
+                "Unable to add product."
+            )
 
         return redirect(
             url_for("admin_products")
@@ -1832,8 +2189,6 @@ def delete_request(
         request_id
     )
 
-    # Delete attachment if it exists
-
     if req.attachment:
 
         file_path = os.path.join(
@@ -1860,15 +2215,30 @@ def delete_request(
 
                 pass
 
-    db.session.delete(
-        req
-    )
+    try:
 
-    db.session.commit()
+        db.session.delete(
+            req
+        )
 
-    flash(
-        "Assistant request deleted successfully."
-    )
+        db.session.commit()
+
+        flash(
+            "Assistant request deleted successfully."
+        )
+
+    except Exception as error:
+
+        db.session.rollback()
+
+        print(
+            "DELETE REQUEST ERROR:",
+            error
+        )
+
+        flash(
+            "Unable to delete request."
+        )
 
     return redirect(
         url_for(
@@ -1901,15 +2271,30 @@ def delete_order(
         order_id
     )
 
-    db.session.delete(
-        order
-    )
+    try:
 
-    db.session.commit()
+        db.session.delete(
+            order
+        )
 
-    flash(
-        "Order deleted successfully."
-    )
+        db.session.commit()
+
+        flash(
+            "Order deleted successfully."
+        )
+
+    except Exception as error:
+
+        db.session.rollback()
+
+        print(
+            "DELETE ORDER ERROR:",
+            error
+        )
+
+        flash(
+            "Unable to delete order."
+        )
 
     return redirect(
         url_for(
@@ -1976,13 +2361,29 @@ def update_order_status(
             )
         )
 
-    order.status = new_status
+    try:
 
-    db.session.commit()
+        order.status = new_status
 
-    flash(
-        f"Order {order.order_number or order.id} updated to {new_status}."
-    )
+        db.session.commit()
+
+        flash(
+            f"Order {order.order_number or order.id} "
+            f"updated to {new_status}."
+        )
+
+    except Exception as error:
+
+        db.session.rollback()
+
+        print(
+            "ORDER STATUS ERROR:",
+            error
+        )
+
+        flash(
+            "Unable to update order status."
+        )
 
     return redirect(
         url_for(
@@ -2047,13 +2448,28 @@ def update_request_status(
             )
         )
 
-    req.status = new_status
+    try:
 
-    db.session.commit()
+        req.status = new_status
 
-    flash(
-        "Assistant request status updated."
-    )
+        db.session.commit()
+
+        flash(
+            "Assistant request status updated."
+        )
+
+    except Exception as error:
+
+        db.session.rollback()
+
+        print(
+            "REQUEST STATUS ERROR:",
+            error
+        )
+
+        flash(
+            "Unable to update request status."
+        )
 
     return redirect(
         url_for(
@@ -2091,6 +2507,23 @@ def logout():
 )
 def health():
 
+    try:
+
+        db.session.execute(
+            text("SELECT 1")
+        )
+
+        database_status = "connected"
+
+    except Exception as error:
+
+        database_status = "error"
+
+        print(
+            "HEALTH DATABASE ERROR:",
+            error
+        )
+
     return jsonify({
 
         "status": "ok",
@@ -2098,10 +2531,92 @@ def health():
         "application":
             "RAVTO GLOBAL LTD",
 
+        "database":
+            database_status,
+
         "time":
             datetime.utcnow().isoformat()
 
     })
+
+
+# ============================================================
+# DATABASE STATUS
+# ============================================================
+#
+# This route is useful for checking the actual columns on
+# Render while troubleshooting.
+#
+# It is protected by admin login.
+#
+# ============================================================
+
+@app.route(
+    "/admin/database-status"
+)
+def database_status():
+
+    if not admin_required():
+
+        return redirect(
+            url_for(
+                "admin_login"
+            )
+        )
+
+    try:
+
+        inspector = inspect(
+            db.engine
+        )
+
+        result = {}
+
+        for table_name in [
+            "user",
+            "need_assistant",
+            "product",
+            "order"
+        ]:
+
+            if table_name in inspector.get_table_names():
+
+                result[table_name] = [
+
+                    column["name"]
+
+                    for column in inspector.get_columns(
+                        table_name
+                    )
+
+                ]
+
+            else:
+
+                result[table_name] = []
+
+        return jsonify({
+
+            "status": "success",
+
+            "database":
+                db.engine.dialect.name,
+
+            "tables":
+                result
+
+        })
+
+    except Exception as error:
+
+        return jsonify({
+
+            "status": "error",
+
+            "message":
+                str(error)
+
+        }), 500
 
 
 # ============================================================
